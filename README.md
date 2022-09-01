@@ -1,3 +1,7 @@
+
+
+
+
 # Backend and Frontend Template
 
 Latest version: https://git.ita.chalmers.se/courses/dit341/group-00-web (public Github [mirror](https://github.com/dit341/group-00-web))
@@ -60,13 +64,14 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 ## System Definition (MS0)
 
 ### Purpose
-
-2-5 sentences describing what the system does
+The purpose of this website will be to create a platform where users can both rent and publish listings for items. Therefore the content on the website will be primarily user generated. The problem that we aim to solve with this website is to minimize unecessary purchases of items which would otherwise not be used regularly, thereby combatting consumerism and reducing waste.
 
 ### Pages
-
-* Home: 1-3 sentences describing what the page displays and what a user can do
-* Shopping cart: ...
+* Home: From here the user will be able to search for items, view and navigate directly to top rated items and view the catagories. 
+* Account: This is where the user gets a overview of their published listings, account details and renting history and is able to change account information.  
+* Search Result: Shows the user relevent listings based on search result or category. The user can filter based on price, rating and catagories. The listings will be presented by image boxes with some item information like price, overall rating.  
+* Item: Here is where the user can get a more detailed discription of a listing, the listing has a image of the item, textual discription, price, rating, reviews from previous renters and location of the item.  
+* Create-Listing: Here the user can create their own listings, the user will be asked to fill in the necessary information about the item before publishing.   
 
 ### Entity-Relationship (ER) Diagram
 
