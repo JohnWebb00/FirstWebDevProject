@@ -1,6 +1,5 @@
 
 
-
 # Backend and Frontend Template
 
 Latest version: https://git.ita.chalmers.se/courses/dit341/group-00-web (public Github [mirror](https://github.com/dit341/group-00-web))
@@ -74,7 +73,7 @@ The purpose of this website will be to create a platform where users can both re
 
 ### Entity-Relationship (ER) Diagram
 
-![ER Diagram](./images/ER_Diagram_group_32.png)
+![ER Diagram](./images/ER_Diagram_updated2.png)
 
 
 ## Teaser (MS3)
