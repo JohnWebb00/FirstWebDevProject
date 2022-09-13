@@ -8,14 +8,15 @@ const bodyParser = require('body-parser');
 
 var User = require('./models/user')
 var userController = require('./controllers/users');
-
+var itemController = require('./controllers/items');
+var reviewController = require('./controllers/reviews');
 
 // Create Express app
 var app = express();
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
-//var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+//var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -50,6 +51,9 @@ app.use('/api/*', function (req, res) {
 
 
 app.use(userController);
+app.use(itemController);
+app.use(reviewController);
+
 
 // Configuration for serving frontend in production mode
 // Support Vuejs HTML 5 history mode

@@ -11,14 +11,14 @@ router.post('/users', function(req, res, next){
         res.status(201).json(user);
     })
 });
-    
+
 //Get all users
     router.get('/users', (req, res, next) => {
         User.find((err, users) => {
             if(err){return next(err);}
             res.json({"users": users});
         });
-    }); 
+    });
 
 //Get user by id
     router.get('/users/:id', function(req, res, next) {
@@ -31,7 +31,7 @@ router.post('/users', function(req, res, next){
             res.json(user);
         });
     });
-    
+
 //Delete all users
 router.delete('/users', function(req, res, next){
     User.deleteMany((err, users) => {
