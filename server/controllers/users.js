@@ -4,7 +4,7 @@ var router = express.Router();
 var User = require('../models/user');
 
 //Create a user
-router.post('/create-user', function(req, res, next){
+router.post('/users', function(req, res, next){
     var user = new User(req.body);
     user.save(function(err) {
         if (err) { return next(err); }
@@ -13,7 +13,7 @@ router.post('/create-user', function(req, res, next){
 });
     
 //Get all users
-    router.get('/get-users', (req, res, next) => {
+    router.get('/users', (req, res, next) => {
         User.find((err, users) => {
             if(err){return next(err);}
             res.json({"users": users});
@@ -21,7 +21,7 @@ router.post('/create-user', function(req, res, next){
     }); 
 
 //Get user by id
-    router.get('/get-user/:id', function(req, res, next) {
+    router.get('/users/:id', function(req, res, next) {
         var id = req.params.id
         User.findById(id, function(err, user) {
             if (err) { return next(err); }
@@ -33,7 +33,7 @@ router.post('/create-user', function(req, res, next){
     });
     
 //Delete all users
-router.delete('/delete-users', function(req, res, next){
+router.delete('/users', function(req, res, next){
     User.deleteMany((err, users) => {
         if(err){return next(err);}
         res.json({"users": users});
@@ -41,7 +41,7 @@ router.delete('/delete-users', function(req, res, next){
 })
 
 //Delete user by id
-router.delete('/delete-user/:id', function(req, res, next) {
+router.delete('/users/:id', function(req, res, next) {
     var id = req.params.id
     User.findByIdAndDelete(id, function(err, user) {
         if (err) { return next(err); }
