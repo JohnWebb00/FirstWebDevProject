@@ -32,6 +32,7 @@ router.post('/users', function(req, res, next){
         });
     });
 
+
 //Delete all users
 router.delete('/users', function(req, res, next){
     User.deleteMany((err, users) => {
@@ -51,6 +52,41 @@ router.delete('/users/:id', function(req, res, next) {
         res.json(user);
     });
 });
+
+router.put('/users/:id', function(req, res, next) {
+    var id = req.params.id;
+    User.findById(id, function(err, user) {
+        if (err) { return next(err); }
+        if (user == null) {
+            return res.status(404).json({"message": "User not found"});
+        }
+        user.fullName = req.body.fullName
+        user.userName = req.body.userName
+        user.userPass = req.body.userPass
+        user.phoneNumber = req.body.phoneNumber
+        user.location = req.body.location
+        user.email = req.body.email
+        user.save();
+        res.json(user);
+    });
+});
+
+router.patch('/users/:id', function(req, res, next) {
+    var id = req.params.id;
+    User.findById(id, function(err, user) {
+        if (err) { return next(err); }
+        if (user == null) {
+            return res.status(404).json({"message": "User not found"});
+        }
+        user.fullName = (req.body.fullName || user.fullName)
+        user.userName = (req.body.userName || user.userName)
+        user.userPass = (req.body.userPass || user.userPass)
+        user.phoneNumber = (req.body.phoneNumber || user.phoneNumber)
+        user.location = (req.body.location || user.location)
+        user.email = (req.body.email || user.email)
+        user.save();
+        res.json(user);
+    });
+});
+
 module.exports = router;
-
-
