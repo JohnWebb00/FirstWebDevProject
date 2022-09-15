@@ -75,10 +75,10 @@ router.patch('/items/:id', function(req, res) {
         "itemName": (req.body.itemName || item.itemName),
         "rentPrice": (req.body.rentPrice || item.rentPrice),
         "duration": (req.body.duration || item.duration),
-        "discription": (req.body.discription || item.discription)
-
+        "description": (req.body.description || item.description)
     };
     Item[id] = updated_item;
+
     res.json(updated_item);
 });
 
