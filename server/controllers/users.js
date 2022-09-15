@@ -18,7 +18,7 @@ router.post('/users', function(req, res, next){
             res.json({"users": users});
         });
     });
-
+        
 //Get user by id
     router.get('/users/:id', function(req, res, next) {
         var id = req.params.id
@@ -60,7 +60,7 @@ router.put('/users/:id', function(req, res, next) {
             return res.status(404).json({"message": "User not found"});
         }
         user.fullName = req.body.fullName
-        user.userName = req.body.userName
+        user.username = req.body.username
         user.userPass = req.body.userPass
         user.phoneNumber = req.body.phoneNumber
         user.location = req.body.location
@@ -78,7 +78,7 @@ router.patch('/users/:id', function(req, res, next) {
             return res.status(404).json({"message": "User not found"});
         }
         user.fullName = (req.body.fullName || user.fullName)
-        user.userName = (req.body.userName || user.userName)
+        user.username = (req.body.username || user.username)
         user.userPass = (req.body.userPass || user.userPass)
         user.phoneNumber = (req.body.phoneNumber || user.phoneNumber)
         user.location = (req.body.location || user.location)

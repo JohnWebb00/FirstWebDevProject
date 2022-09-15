@@ -4,7 +4,7 @@ var Admin = require('../models/admin');
 
 //Create a admin
 router.post('/admins', function(req, res, next){
-    var admin = new admin(req.body);
+    var admin = new Admin(req.body);
     admin.save(function(err) {
         if (err) { return next(err); }
         res.status(201).json(admin);

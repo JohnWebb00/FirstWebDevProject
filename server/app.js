@@ -6,8 +6,8 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 const bodyParser = require('body-parser');
 
-var User = require('./models/user')
 var userController = require('./controllers/users');
+var adminController = require('./controllers/admins')
 var itemController = require('./controllers/items');
 var reviewController = require('./controllers/reviews');
 
@@ -51,6 +51,7 @@ app.use('/api/*', function (req, res) {
 
 
 app.use(userController);
+app.use(adminController);
 app.use(itemController);
 app.use(reviewController);
 

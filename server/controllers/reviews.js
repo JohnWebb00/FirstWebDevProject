@@ -1,14 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var Review = require('../models/review');
+var Item = require('../models/item')
 
 
 
 
 //Create a review
-router.post('/reviews', function(req, res, next){
+router.post('/items/:item_id/:userId/reviews', function(req, res, next){
     var review = new Review(req.body);
-    review.save(function(err, review) {
+    review.author = req.params.userId
+    review.item_id = req.params.item_id
+    review.save(function(err) {
         if (err) { return next(err); }
         res.status(201).json(review);
     })
@@ -22,6 +25,19 @@ router.get('/reviews', function(req, res, next) {
         res.json({"reviews": reviews });
     });
 });
+
+//Get all reviews for a particular item
+router.get('/items/:item_id/reviews', function (req, res, next)  {
+    var itemId = req.params.item_id
+    Review.find({'item_id' : itemId}, function(err, review) {
+        if (err) { return next(err); }
+        if (review === null) {
+            return res.status(404).json({'message': 'Item not found!'});
+        }
+        res.json(review);
+    });
+});
+
 
 // Get review by ID
 router.get('/reviews/:id', function(req, res, next) {
