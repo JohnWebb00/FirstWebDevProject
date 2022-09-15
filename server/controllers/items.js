@@ -6,7 +6,7 @@ var Item = require('../models/item');
 
 
 //Create a item
-router.post('/create_item', function(req, res, next){
+router.post('/items', function(req, res, next){
     var item = new Item(req.body);
     item.save(function(err, item) {
         if (err) { return next(err); }
@@ -16,7 +16,7 @@ router.post('/create_item', function(req, res, next){
 
 
 //Get all item
-router.get('/get_items', function(req, res, next) {
+router.get('/items', function(req, res, next) {
     Item.find(function(err, items) {
         if (err) { return next(err); }
         res.json({"items": items });
@@ -24,7 +24,7 @@ router.get('/get_items', function(req, res, next) {
 });
 
 // Get Item by ID
-router.get('/get_item/:id', function(req, res, next) {
+router.get('/items/:id', function(req, res, next) {
     var id = req.params.id;
     Item.findById(id, function(err, item) {
         if (err) { return next(err); }
@@ -35,7 +35,7 @@ router.get('/get_item/:id', function(req, res, next) {
     });
 });
 //Delete all Item
-router.delete('/delet_Items', function(req, res, next){
+router.delete('/items', function(req, res, next){
     Item.deleteMany((err, items) => {
         if(err){return next(err);}
         res.json({"users": items});
@@ -43,7 +43,7 @@ router.delete('/delet_Items', function(req, res, next){
 })
 
 //Delete Item by id
-router.delete('/delete_item/:id', function(req, res, next) {
+router.delete('/items/:id', function(req, res, next) {
     var id = req.params.id;
     Item.findOneAndDelete({_id: id}, function(err, item) {
         if (err) { return next(err); }
@@ -54,7 +54,7 @@ router.delete('/delete_item/:id', function(req, res, next) {
     });
 });
 
-router.put('/update_item/:id', function(req, res) {
+router.put('/items/:id', function(req, res) {
     var id = req.params.id;
     var updated_item = {
         "_id": id,
@@ -67,7 +67,7 @@ router.put('/update_item/:id', function(req, res) {
 });
 
 // Partially update Item by ID
-router.patch('/change_item/:id', function(req, res) {
+router.patch('/items/:id', function(req, res) {
     var id = req.params.id;
     var item = Item[id];
     var updated_item = {

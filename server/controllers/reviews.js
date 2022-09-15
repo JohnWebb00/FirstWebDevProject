@@ -6,7 +6,7 @@ const Item = require('../models/item')
 
 
 //Create a review
-router.post('/create_reviews', function(req, res, next){
+router.post('/reviews', function(req, res, next){
     var review = new Review(req.body);
     review.save(function(err, review) {
         if (err) { return next(err); }
@@ -15,7 +15,7 @@ router.post('/create_reviews', function(req, res, next){
 });
 
 //Get all reviews
-router.get('/get_reviews', function(req, res, next) {
+router.get('/reviews', function(req, res, next) {
     Review.find(function(err, reviews) {
         if (err) { return next(err); }
         res.json({"reviews": reviews });
@@ -23,7 +23,7 @@ router.get('/get_reviews', function(req, res, next) {
 });
 
 // Get review by ID
-router.get('/get_reviews/:id', function(req, res, next) {
+router.get('/reviews/:id', function(req, res, next) {
     var id = req.params.id;
     Review.findById(id, function(err, review) {
         if (err) { return next(err); }
@@ -34,7 +34,7 @@ router.get('/get_reviews/:id', function(req, res, next) {
     });
 });
 //Delete all reviews
-router.delete('/delet_reviews', function(req, res, next){
+router.delete('/reviews', function(req, res, next){
     Review.deleteMany((err, reviews) => {
         if(err){return next(err);}
         res.json({"users": reviews});
@@ -42,7 +42,7 @@ router.delete('/delet_reviews', function(req, res, next){
 })
 
 //Delete review by id
-router.delete('/delete_reviews/:id', function(req, res, next) {
+router.delete('/reviews/:id', function(req, res, next) {
     var id = req.params.id;
     Review.findOneAndDelete({_id: id}, function(err, review) {
         if (err) { return next(err); }
@@ -53,7 +53,7 @@ router.delete('/delete_reviews/:id', function(req, res, next) {
     });
 });
 
-router.put('/update_review/:id', function(req, res) {
+router.put('/reviews/:id', function(req, res) {
     var id = req.params.id;
     var updated_review = {
         "_id": id,
@@ -68,6 +68,18 @@ router.put('/update_review/:id', function(req, res) {
 
 
 // Partially update review by ID
+<<<<<<< HEAD
+=======
+router.patch('/reviews/:id', function(req, res) {
+    var id = req.params.id;
+    var review = Review[id];
+    var updated_review = {
+        "_id": id,
+        "title": (req.body.title || review.title),
+        "comment": (req.body.comment || review.comment),
+        "rating": (req.body.rating || review.rating)
+    };
+>>>>>>> e884b089e7ca171a61b7d45c2cfb02a656dd8138
 
 router.patch('/change_review/:id', function(req, res, next) {
     var id = req.params.id;
