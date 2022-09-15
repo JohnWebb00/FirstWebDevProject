@@ -1,4 +1,5 @@
 var express = require('express');
+const review = require('../models/review');
 var router = express.Router();
 var Review = require('../models/review');
 var Item = require('../models/item')
@@ -16,7 +17,6 @@ router.post('/items/:item_id/:userId/reviews', function(req, res, next){
         res.status(201).json(review);
     })
 });
-
 
 //Get all reviews
 router.get('/reviews', function(req, res, next) {
@@ -84,21 +84,22 @@ router.put('/reviews/:id', function(req, res) {
 });
 
 
-// Partially update review by ID
-router.patch('/reviews/:id', function(req, res) {
+router.patch('/reviews/:id', function(req, res, next) {
     var id = req.params.id;
-    var review = Review[id];
-    var updated_review = {
-        "_id": id,
-        "title": (req.body.title || review.title),
-        "comment": (req.body.comment || review.comment),
-        "rating": (req.body.rating || review.rating)
-    };
+        Review.findById(id, function (err, review) {
+        if (err){ return next(err); }
+        if (review == null) {
+            return res.status(404).json({"message": "not found"})
+        }
 
-    Review[id] = updated_review;
-    res.json(updated_review);
+        Review.id = id;
+        Review.title = (req.body.title || review.title);
+        Review.comment = (req.body.comment || review.comment);
+        Review.rating = (req.body.rating || review.rating);
+
+    review.save();
+    res.json(review);
+    });
 });
-
-
 
 module.exports = router;

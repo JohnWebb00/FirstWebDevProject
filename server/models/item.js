@@ -5,7 +5,7 @@ var itemSchema = new Schema({
     itemName: {type: String, required: true},
     rentPrice: {type: String, required: true}, //SEK
     duration: {type: String, required: true},
-    description: {type: String, required: true},
+    description: {type: String, required: true}
    // review: [{ type: Schema.Types.ObjectId, ref: 'review' }],
     });
 
