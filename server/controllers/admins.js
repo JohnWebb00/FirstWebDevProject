@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 var Admin = require('../models/admin');
 
+
 //Create a admin
-router.post('/admins', function(req, res, next){
+router.post('/', function(req, res, next){
     var admin = new Admin(req.body);
     admin.save(function(err) {
         if (err) { return next(err); }
@@ -12,7 +13,7 @@ router.post('/admins', function(req, res, next){
 });
 
 //Get all admins
-    router.get('/admins', (req, res, next) => {
+    router.get('/', (req, res, next) => {
         Admin.find((err, admins) => {
             if(err){return next(err);}
             res.json({"admins": admins});
@@ -20,7 +21,7 @@ router.post('/admins', function(req, res, next){
     });
 
 //Get admin by id
-    router.get('/admins/:id', function(req, res, next) {
+    router.get('/:id', function(req, res, next) {
         var id = req.params.id
         Admin.findById(id, function(err, admin) {
             if (err) { return next(err); }
@@ -33,7 +34,7 @@ router.post('/admins', function(req, res, next){
 
 
 //Delete all admins
-router.delete('/admins', function(req, res, next){
+router.delete('/', function(req, res, next){
     Admin.deleteMany((err, admins) => {
         if(err){return next(err);}
         res.json({"admins": admins});
@@ -41,7 +42,7 @@ router.delete('/admins', function(req, res, next){
 })
 
 //Delete admin by id
-router.delete('/admins/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     var id = req.params.id
     Admin.findByIdAndDelete(id, function(err, admin) {
         if (err) { return next(err); }
@@ -52,7 +53,7 @@ router.delete('/admins/:id', function(req, res, next) {
     });
 });
 
-router.put('/admins/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     var id = req.params.id;
     Admin.findById(id, function(err, admin) {
         if (err) { return next(err); }
@@ -67,7 +68,7 @@ router.put('/admins/:id', function(req, res, next) {
     });
 });
 
-router.patch('/admins/:id', function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
     var id = req.params.id;
     Admin.findById(id, function(err, admin) {
         if (err) { return next(err); }

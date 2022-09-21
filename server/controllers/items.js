@@ -6,7 +6,7 @@ var Item = require('../models/item');
 
 
 //Create a item
-router.post('/items', function(req, res, next){
+router.post('/', function(req, res, next){
     var item = new Item(req.body);
     item.save(function(err, item) {
         if (err) { return next(err); }
@@ -16,7 +16,7 @@ router.post('/items', function(req, res, next){
 
 
 //Get all item
-router.get('/items', function(req, res, next) {
+router.get('/', function(req, res, next) {
     Item.find(function(err, items) {
         if (err) { return next(err); }
         res.json({"items": items });
@@ -24,7 +24,7 @@ router.get('/items', function(req, res, next) {
 });
 
 // Get Item by ID
-router.get('/items/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     var id = req.params.id;
     Item.findById(id, function(err, item) {
         if (err) { return next(err); }
@@ -34,8 +34,32 @@ router.get('/items/:id', function(req, res, next) {
         res.json(item);
     });
 });
+
+//Create a review for an item
+router.post('/:item_id/:userId/reviews', function(req, res, next){
+    var review = new Review(req.body);
+    review.author = req.params.userId
+    review.item_id = req.params.item_id
+    review.save(function(err) {
+        if (err) { return next(err); }
+        res.status(201).json(review);
+    })
+});
+
+//Get all reviews for a particular item
+router.get('/:item_id/reviews', function (req, res, next)  {
+    var itemId = req.params.item_id
+    Review.find({'item_id' : itemId}, function(err, review) {
+        if (err) { return next(err); }
+        if (review === null) {
+            return res.status(404).json({'message': 'Item not found!'});
+        }
+        res.json(review);
+    });
+});
+
 //Delete all Item
-router.delete('/items', function(req, res, next){
+router.delete('/', function(req, res, next){
     Item.deleteMany((err, items) => {
         if(err){return next(err);}
         res.json({"users": items});
@@ -43,7 +67,7 @@ router.delete('/items', function(req, res, next){
 })
 
 //Delete Item by id
-router.delete('/items/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     var id = req.params.id;
     Item.findOneAndDelete({_id: id}, function(err, item) {
         if (err) { return next(err); }
@@ -54,7 +78,7 @@ router.delete('/items/:id', function(req, res, next) {
     });
 });
 
-router.put('/items/:id', function(req, res) {
+router.put('/:id', function(req, res) {
     var id = req.params.id;
     var updated_item = {
         "_id": id,
@@ -67,7 +91,7 @@ router.put('/items/:id', function(req, res) {
 });
 
 // Partially update Item by ID
-router.patch('/items/:id', function(req, res) {
+router.patch('/:id', function(req, res) {
     var id = req.params.id;
     var item = Item[id];
     var updated_item = {

@@ -6,41 +6,17 @@ var Item = require('../models/item')
 
 
 
-
-//Create a review
-router.post('/items/:item_id/:userId/reviews', function(req, res, next){
-    var review = new Review(req.body);
-    review.author = req.params.userId
-    review.item_id = req.params.item_id
-    review.save(function(err) {
-        if (err) { return next(err); }
-        res.status(201).json(review);
-    })
-});
-
 //Get all reviews
-router.get('/reviews', function(req, res, next) {
+router.get('/', function(req, res, next) {
     Review.find(function(err, reviews) {
         if (err) { return next(err); }
         res.json({"reviews": reviews });
     });
 });
 
-//Get all reviews for a particular item
-router.get('/items/:item_id/reviews', function (req, res, next)  {
-    var itemId = req.params.item_id
-    Review.find({'item_id' : itemId}, function(err, review) {
-        if (err) { return next(err); }
-        if (review === null) {
-            return res.status(404).json({'message': 'Item not found!'});
-        }
-        res.json(review);
-    });
-});
-
 
 // Get review by ID
-router.get('/reviews/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     var id = req.params.id;
     Review.findById(id, function(err, review) {
         if (err) { return next(err); }
@@ -51,7 +27,7 @@ router.get('/reviews/:id', function(req, res, next) {
     });
 });
 //Delete all reviews
-router.delete('/reviews', function(req, res, next){
+router.delete('/', function(req, res, next){
     Review.deleteMany((err, reviews) => {
         if(err){return next(err);}
         res.json({"users": reviews});
@@ -59,7 +35,7 @@ router.delete('/reviews', function(req, res, next){
 })
 
 //Delete review by id
-router.delete('/reviews/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     var id = req.params.id;
     Review.findOneAndDelete({_id: id}, function(err, review) {
         if (err) { return next(err); }
@@ -70,7 +46,7 @@ router.delete('/reviews/:id', function(req, res, next) {
     });
 });
 
-router.put('/reviews/:id', function(req, res) {
+router.put('/:id', function(req, res) {
     var id = req.params.id;
     var updated_review = {
         "_id": id,
@@ -84,7 +60,7 @@ router.put('/reviews/:id', function(req, res) {
 });
 
 
-router.patch('/reviews/:id', function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
     var id = req.params.id;
         Review.findById(id, function (err, review) {
         if (err){ return next(err); }

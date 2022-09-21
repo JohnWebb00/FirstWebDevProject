@@ -50,10 +50,10 @@ app.use('/api/*', function (req, res) {
 });
 
 
-app.use(userController);
-app.use(adminController);
-app.use(itemController);
-app.use(reviewController);
+app.use('/api/v1/users', userController);
+app.use('/api/v1/admins', adminController);
+app.use('/api/v1/items', itemController);
+app.use('/api/v1/reviews', reviewController);
 
 
 // Configuration for serving frontend in production mode
