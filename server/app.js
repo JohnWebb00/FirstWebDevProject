@@ -4,7 +4,6 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
-const bodyParser = require('body-parser');
 
 var userController = require('./controllers/users');
 var adminController = require('./controllers/admins')
@@ -14,9 +13,12 @@ var reviewController = require('./controllers/reviews');
 // Create Express app
 var app = express();
 
+
+
+
 // Variables
-//var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
+//var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -30,9 +32,17 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
 });
 
 
+
+
 // Parse requests of content-type 'application/json'
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use('/api/v1/users', userController);
+app.use('/api/v1/admins', adminController);
+app.use('/api/v1/items', itemController);
+app.use('/api/v1/reviews', reviewController);
+
 // HTTP request logger
 app.use(morgan('dev'));
 // Enable cross-origin resource sharing for frontend must be registered before api
@@ -50,10 +60,7 @@ app.use('/api/*', function (req, res) {
 });
 
 
-app.use(userController);
-app.use(adminController);
-app.use(itemController);
-app.use(reviewController);
+
 
 
 // Configuration for serving frontend in production mode

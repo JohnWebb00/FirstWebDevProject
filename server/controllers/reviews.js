@@ -1,6 +1,5 @@
 var express = require('express');
-const review = require('../models/review');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 var Review = require('../models/review');
 var Item = require('../models/item')
 
@@ -70,7 +69,7 @@ router.get('/items/:item_id/reviews', function (req, res, next)  {
 
 
 // Get review by ID
-router.get('/reviews/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     var id = req.params.id;
     Review.findById(id, function(err, review) {
         if (err) { return next(err); }
@@ -81,7 +80,7 @@ router.get('/reviews/:id', function(req, res, next) {
     });
 });
 //Delete all reviews
-router.delete('/reviews', function(req, res, next){
+router.delete('/', function(req, res, next){
     Review.deleteMany((err, reviews) => {
         if(err){return next(err);}
         res.json({"users": reviews});
@@ -89,7 +88,7 @@ router.delete('/reviews', function(req, res, next){
 })
 
 //Delete review by id
-router.delete('/reviews/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     var id = req.params.id;
     Review.findOneAndDelete({_id: id}, function(err, review) {
         if (err) { return next(err); }
@@ -100,7 +99,7 @@ router.delete('/reviews/:id', function(req, res, next) {
     });
 });
 
-router.put('/reviews/:id', function(req, res) {
+router.put('/:id', function(req, res) {
     var id = req.params.id;
     var updated_review = {
         "_id": id,
@@ -114,7 +113,7 @@ router.put('/reviews/:id', function(req, res) {
 });
 
 
-router.patch('/reviews/:id', function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
     var id = req.params.id;
         Review.findById(id, function (err, review) {
         if (err){ return next(err); }

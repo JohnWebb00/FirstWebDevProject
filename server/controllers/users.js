@@ -1,9 +1,10 @@
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 var User = require('../models/user');
 
 //Create a user
-router.post('/users', function(req, res, next){
+router.post('/', function(req, res, next){
+    console.log(req.body)
     var user = new User(req.body);
     user.save(function(err) {
         if (err) { return next(err); }
@@ -12,7 +13,7 @@ router.post('/users', function(req, res, next){
 });
 
 //Get all users
-    router.get('/users', (req, res, next) => {
+    router.get('/', (req, res, next) => {
         User.find((err, users) => {
             if(err){return next(err);}
             res.json({"users": users});
@@ -20,7 +21,7 @@ router.post('/users', function(req, res, next){
     });
 
 //Get user by id
-    router.get('/users/:id', function(req, res, next) {
+    router.get('/:id', function(req, res, next) {
         var id = req.params.id
         User.findById(id, function(err, user) {
             if (err) { return next(err); }
@@ -33,7 +34,7 @@ router.post('/users', function(req, res, next){
 
 
 //Delete all users
-router.delete('/users', function(req, res, next){
+router.delete('/', function(req, res, next){
     User.deleteMany((err, users) => {
         if(err){return next(err);}
         res.json({"users": users});
@@ -41,7 +42,7 @@ router.delete('/users', function(req, res, next){
 })
 
 //Delete user by id
-router.delete('/users/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     var id = req.params.id
     User.findByIdAndDelete(id, function(err, user) {
         if (err) { return next(err); }
@@ -52,7 +53,7 @@ router.delete('/users/:id', function(req, res, next) {
     });
 });
 
-router.put('/users/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     var id = req.params.id;
     User.findById(id, function(err, user) {
         if (err) { return next(err); }
@@ -70,7 +71,7 @@ router.put('/users/:id', function(req, res, next) {
     });
 });
 
-router.patch('/users/:id', function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
     var id = req.params.id;
     User.findById(id, function(err, user) {
         if (err) { return next(err); }
