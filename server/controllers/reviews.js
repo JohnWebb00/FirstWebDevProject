@@ -5,9 +5,7 @@ var Review = require('../models/review');
 var Item = require('../models/item')
 
 
-
-
-//Create a review
+//Create a review for a item
 router.post('/items/:item_id/:userId/reviews', function(req, res, next){
     var review = new Review(req.body);
     review.author = req.params.userId
@@ -18,15 +16,47 @@ router.post('/items/:item_id/:userId/reviews', function(req, res, next){
     })
 });
 
-//Get all reviews
+//Get all reviews of an item // Duplicate
+router.get('/item/:item_id/reviews', function(req, res){
+    review.find({item_id: req.params.item_id})
+    .populate('reviews')
+    .exec(function ( err, reviews){
+        if(err) {
+            return res.status(500).send(err);
+        }
+        return res.status(200).json(reviews);
+    });
+});
+
+//Delete a item and all reviews connected to it
+router.delete('/items/:item_id/review/:review_id', function (req,res,next){
+    Review.findOneAndDelete({_id: req.params.review_id}, function(err, review){
+        if(err){
+            return next(err);
+        }
+        if (review == null){
+            return res.status(404).json({'message': 'No review found'})
+        }
+        Item.findByIdAndUpdate({_id: req.params.item_id}, {$pull: {reviews : req.params.review_id}}, function (err, item){
+        if (err){
+            return next(err);
+        }return res.status(200).json(review);
+        });
+    });
+});
+
+
+/*
+//Get all reviews // may be used in the future
 router.get('/reviews', function(req, res, next) {
     Review.find(function(err, reviews) {
         if (err) { return next(err); }
         res.json({"reviews": reviews });
     });
 });
+*/
 
-//Get all reviews for a particular item
+//Get all reviews for a particular item // Duplicate
 router.get('/items/:item_id/reviews', function (req, res, next)  {
     var itemId = req.params.item_id
     Review.find({'item_id' : itemId}, function(err, review) {
@@ -89,16 +119,29 @@ router.patch('/reviews/:id', function(req, res, next) {
         Review.findById(id, function (err, review) {
         if (err){ return next(err); }
         if (review == null) {
-            return res.status(404).json({"message": "not found"})
+            return res.status(404).json({"message": "Review not found"})
         }
+        review.title = (req.body.title || review.title)
+        review.comment = (req.body.comment || review.comment)
+        review.rating = (req.body.rating || review.rating)
+        review.save();
+        res.json(review);
+    });
+});
 
-        Review.id = id;
-        Review.title = (req.body.title || review.title);
-        Review.comment = (req.body.comment || review.comment);
-        Review.rating = (req.body.rating || review.rating);
-
-    review.save();
-    res.json(review);
+//Filtering ratings if values in postman for example is left empty all reviews will be retrived.
+router.get("api/v1/reviews", function (req, res, next) {
+    //Change casting string to number (Changing variabel type)
+    const rating = Number.parseInt(req.query.rating);
+    //"?" Is like a if statement, if there are no rating we do else ":" which means "else"
+    Review.find(rating ? { rating: { $eq: rating } } : {})
+    .populate('reviews')
+    .exec(function (err, reviews)
+    {
+    if (err) {
+        return res.status(500).send(err);
+    }
+    return res.status(200).json(reviews);
     });
 });
 

@@ -67,6 +67,7 @@ router.put('/items/:id', function(req, res) {
 });
 
 // Partially update Item by ID
+/*
 router.patch('/items/:id', function(req, res) {
     var id = req.params.id;
     var item = Item[id];
@@ -81,5 +82,22 @@ router.patch('/items/:id', function(req, res) {
 
     res.json(updated_item);
 });
+*/
 
+router.patch('/items/:id', function(req, res, next) {
+    var id = req.params.id;
+        Item.findById(id, function (err, item) {
+        if (err){
+            return next(err);
+        } if (item == null) {
+            return res.status(404).json({"message": "Item not found"})
+        }
+        item.itemName = (req.body.itemName || item.itemName)
+        item.rentPrice = (req.body.rentPrice || item.rentPrice)
+        item.duration = (req.body.duration || item.duration)
+        item.description = (req.body.description || item.description)
+        item.save();
+        res.json(item);
+    });
+});
 module.exports = router;

@@ -3,10 +3,15 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
     fullName : {type: String},
-    username : {type: String, required: true, unique: true},
+    userName : {type: String, required: true, unique: true},
     userPass : {type: String, required: true},
     phoneNumber : {type: String},
-    location: [{city: String, postNr: String, streetAddress: String}],
+    location:
+    [{
+        city: String,
+        postNr: String,
+        streetAddress: String
+    }],
     email: {type : String, required : true}
 });
 

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "5a83035e-592d-48c6-98c1-28622c756fbb",
-		"name": "server",
+		"_postman_id": "dbc81e09-bb6c-4b87-b9e3-9ca01bbcaffd",
+		"name": "server Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23100753"
+		"_exporter_id": "23100799"
 	},
 	"item": [
 		{
@@ -11,12 +11,25 @@
 			"item": [
 				{
 					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([201,404]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fullName\": \"John Webb\",\n    \"userName\": \"JWebbs\",\n    \"userPass\": \"Password123\",\n    \"phoneNumber\": \"072296742\",\n    \"location\": {\n        \"city\": \"Gothenburg\",\n        \"postNr\": \"45899\",\n        \"streetAddress\": \"lindholmen\"\n    },\n    \"email\": \"JohnS@gmail.com\"\n}",
+							"raw": "{\n    \"fullName\": \"John Webb\",\n    \"userName\": \"JWebbs\",\n    \"userPass\": \"Password123\",\n    \"phoneNumber\": \"072296742\",\n    \"location\": {\n        \"city\": \"Gothenburg\",\n        \"postNr\": \"45899\",\n        \"streetAddress\": \"lindholmen\"\n    },\n    \"email\": \"JohnS@gmail.com\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,11 +37,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/users",
+							"raw": "{{host}}/api/v1/users",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"users"
 							]
 						}
@@ -41,11 +56,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/users",
+							"raw": "{{host}}/api/v1/users",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"users"
 							]
 						}
@@ -58,11 +75,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/users",
+							"raw": "{{host}}/api/v1/users",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"users"
 							]
 						}
@@ -75,11 +94,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/users/:id",
+							"raw": "{{host}}/api/v1/users/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"users",
 								":id"
 							],
@@ -99,11 +120,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/users/:id",
+							"raw": "{{host}}/api/v1/users/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"users",
 								":id"
 							],
@@ -123,11 +146,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/users/:id",
+							"raw": "{{host}}/api/v1/users/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"users",
 								":id"
 							],
@@ -156,11 +181,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/users/:id",
+							"raw": "{{host}}/api/v1/users/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"users",
 								":id"
 							],
@@ -180,11 +207,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/users?username=:username",
+							"raw": "{{host}}/api/v1/users?username=:username",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"users"
 							],
 							"query": [
@@ -209,7 +238,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"adminName\" : \"Jeff\",\n    \"adminUsername\" : \"Notjeff\",\n    \"adminPass\" : \"Jeffrocks123\"\n}",
+							"raw": "{\n    \"adminName\" : \"Bob\",\n    \"adminUsername\" : \"Freddy\",\n    \"adminPass\" : \"Jeffrocks133333\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,11 +246,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/admins",
+							"raw": "{{host}}/api/v1/admins",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"admins"
 							]
 						}
@@ -234,12 +265,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/users",
+							"raw": "{{host}}/api/v1/admins",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"users"
+								"api",
+								"v1",
+								"admins"
 							]
 						}
 					},
@@ -251,11 +284,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/admins",
+							"raw": "{{host}}/api/v1/admins",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"admins"
 							]
 						}
@@ -268,11 +303,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/admins/:id",
+							"raw": "{{host}}/api/v1/admins/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"admins",
 								":id"
 							],
@@ -292,11 +329,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/admins/:id",
+							"raw": "{{host}}/api/v1/admins/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"admins",
 								":id"
 							],
@@ -316,11 +355,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/admins/:id",
+							"raw": "{{host}}/api/v1/admins/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"admins",
 								":id"
 							],
@@ -349,11 +390,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/admins/:id",
+							"raw": "{{host}}/api/v1/admins/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"admins",
 								":id"
 							],
@@ -379,7 +422,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fullName\": \"Jeff Stevensson\",\n    \"userName\": \"JefftheMan\",\n    \"userPass\": \"Mywifetookthekids123\",\n    \"phoneNumber\": \"754405320\",\n    \"location\": {\n        \"city\": \"Gothenburg\",\n        \"postNr\": \"02377\",\n        \"streetAddress\": \"pooplane 22\"\n    },\n    \"email\": \"JeffS@gmail.com\"\n}",
+							"raw": "{\n    \"itemName\": \"fries\",\n    \"rentPrice\": \"10 SEK\",\n    \"duration\": \"day\",\n    \"description\": \"desc\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -387,11 +430,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/items",
+							"raw": "{{host}}/api/v1/items",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"items"
 							]
 						}
@@ -404,11 +449,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/items",
+							"raw": "{{host}}/api/v1/items",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"items"
 							]
 						}
@@ -421,11 +468,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/items",
+							"raw": "{{host}}/api/v1/items",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"items"
 							]
 						}
@@ -438,11 +487,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/items/:id",
+							"raw": "{{host}}/api/v1/items/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"items",
 								":id"
 							],
@@ -462,11 +513,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/items/:id",
+							"raw": "{{host}}/api/v1/items/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"items",
 								":id"
 							],
@@ -486,11 +539,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/items/:id",
+							"raw": "{{host}}/api/v1/items/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"items",
 								":id"
 							],
@@ -511,7 +566,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fullName\": \"Jeff Stevensson\",\n    \"userName\": \"Jeff the best Man\",\n    \"userPass\": \"Mywifetookthekids123\",\n    \"phoneNumber\": \"754405320\",\n    \"location\": {\n        \"city\": \"Gothenburg\",\n        \"postNr\": \"02377\",\n        \"streetAddress\": \"Big and Grand street 22\"\n    },\n    \"email\": \"JeffS@gmail.com\"\n}",
+							"raw": "{\n    \"itemName\": \"Post-it stamps\",\n    \"rentPrice\": \"95 SEK\",\n    \"duration\": \"2 days\",\n    \"description\": \"desc\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -519,11 +574,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/items/:id",
+							"raw": "{{host}}/api/v1/items/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"items",
 								":id"
 							],
@@ -557,11 +614,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/items/:item_id/:userId/reviews",
+							"raw": "{{host}}/api/v1/items/:item_id/:userId/reviews",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"items",
 								":item_id",
 								":userId",
@@ -594,11 +653,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/reviews",
+							"raw": "{{host}}/api/v1/reviews",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"reviews"
 							]
 						}
@@ -611,11 +672,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/items/:item_id/reviews",
+							"raw": "{{host}}/api/v1/items/:item_id/reviews",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"items",
 								":item_id",
 								"reviews"
@@ -636,11 +699,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/reviews",
+							"raw": "{{host}}/api/v1/reviews",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"reviews"
 							]
 						}
@@ -653,11 +718,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/reviews/:id",
+							"raw": "{{host}}/api/v1/reviews/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"reviews",
 								":id"
 							],
@@ -677,11 +744,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/reviews/:id",
+							"raw": "{{host}}/api/v1/reviews/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"reviews",
 								":id"
 							],
@@ -701,11 +770,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/reviews/:id",
+							"raw": "{{host}}/api/v1/reviews/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"reviews",
 								":id"
 							],
@@ -734,11 +805,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/reviews/:id",
+							"raw": "{{host}}/api/v1/reviews/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
+								"v1",
 								"reviews",
 								":id"
 							],
