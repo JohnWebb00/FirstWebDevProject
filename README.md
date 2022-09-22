@@ -70,6 +70,7 @@ The purpose of this website will be to create a platform where users can both re
 * Search Result: Shows the user relevent listings based on search result or category. The user can filter based on price, rating and catagories. The listings will be presented by image boxes with some item information like price, overall rating.  
 * Item: Here is where the user can get a more detailed discription of a listing, the listing has a image of the item, textual discription, price, rating, reviews from previous renters and location of the item.  
 * Create-Listing: Here the user can create their own listings, the user will be asked to fill in the necessary information about the item before publishing.   
+*Create-Account: Shows the sign up form from which a prospective user may create an account.
 
 ### Entity-Relationship (ER) Diagram
 
