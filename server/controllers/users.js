@@ -4,6 +4,7 @@ var User = require('../models/user');
 
 //Create a user
 router.post('/', function(req, res, next){
+    console.log(req.body)
     var user = new User(req.body);
     user.save(function(err) {
         if (err) { return next(err); }
