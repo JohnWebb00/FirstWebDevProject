@@ -32,14 +32,17 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
 });
 
 
+
+
+// Parse requests of content-type 'application/json'
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use('/api/v1/users', userController);
 app.use('/api/v1/admins', adminController);
 app.use('/api/v1/items', itemController);
 app.use('/api/v1/reviews', reviewController);
 
-// Parse requests of content-type 'application/json'
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 // HTTP request logger
 app.use(morgan('dev'));
 // Enable cross-origin resource sharing for frontend must be registered before api
