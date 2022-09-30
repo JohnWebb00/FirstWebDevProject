@@ -129,7 +129,7 @@ router.patch('/:id', function(req, res, next) {
 });
 
 //Filtering ratings if values in postman for example is left empty all reviews will be retrived.
-router.get("api/v1/reviews", function (req, res, next) {
+router.get("/", function (req, res, next) {
     //Change casting string to number (Changing variabel type)
     const rating = Number.parseInt(req.query.rating);
     //"?" Is like a if statement, if there are no rating we do else ":" which means "else"
