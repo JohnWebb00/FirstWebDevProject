@@ -1,0 +1,27 @@
+
+        [
+        {
+            "_id": "632c70c97470dc0c85022929",
+            "itemName": "BoxingBag",
+            "rentPrice": "599 SEK",
+            "duration": "Month",
+            "description": "Cobra Kai yeah boi",
+            "__v": 0
+        },
+        {
+            "_id": "63320d175cbae6abf187a479",
+            "itemName": "Hoverboard",
+            "rentPrice": "100 SEK",
+            "duration": "day",
+            "description": "Newest model hoverborard, marty its about your kids!",
+            "__v": 0
+        },
+        {
+            "_id": "63320d4f5cbae6abf187a47b",
+            "itemName": "RacerBike",
+            "rentPrice": "299 SEK",
+            "duration": "day",
+            "description": "10 speed gravel bike, fun ride, bike rack included",
+            "__v": 0
+        }
+    ]
