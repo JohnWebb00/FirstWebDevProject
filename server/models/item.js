@@ -6,8 +6,8 @@ var itemSchema = new Schema({
     rentPrice: {type: String, required: true}, //SEK
     duration: {type: String, required: true},
     description: {type: String, required: true},
-    approved: {type: boolean, default: false},
-    category: {type: string, required: true}
+    approved: {type: Boolean, default: false},
+    category: {type: String, required: true}
    // review: [{ type: Schema.Types.ObjectId, ref: 'review' }],
     });
 
