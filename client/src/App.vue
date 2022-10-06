@@ -11,11 +11,11 @@
       <div class="navbar-right">
         <b-button id='button' to="/login">Login</b-button>
         <b-button id='button' to="/">My Account</b-button>
+        <b-button id='button' to="/review-card">Review card</b-button>
       </div>
     </div>
     <!-- Render the content of the current page view -->
     <router-view/>
-    <footer>Footer</footer>
   </div>
 </template>
 
@@ -23,7 +23,6 @@
 
 export default {
   components: {
-    // Define the name of the component here
 
   }
 }

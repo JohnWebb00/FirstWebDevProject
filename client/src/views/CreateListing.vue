@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p style="margin-top: 30px">
+    <h2 class="instructions">
       Enter the details for your item, along with a photo and you're good to go!
-    </p>
+    </h2>
     <b-row>
       <b-col id="col1">
         <form class="itemDetails" @submit.prevent="createListing">
@@ -56,7 +56,7 @@
             <option value="Cooking">Cooking</option>
           </select>
 
-          <button>Submit</button>
+          <b-button variant=primary>Submit</b-button>
         </form>
       </b-col>
     </b-row>
@@ -64,6 +64,10 @@
 </template>
 
 <style scoped>
+.instructions{
+  margin-top: 30px;
+  font-size: 20px;
+}
 .itemDetails{
     width: 600px;
     margin: 30px auto;

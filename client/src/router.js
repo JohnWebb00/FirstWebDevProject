@@ -8,6 +8,9 @@ import CreateListing from './views/CreateListing.vue'
 import Catagory from './views/Catagory.vue'
 import Listings from './views/Listings.vue'
 import PendingListings from './views/pendingListings.vue'
+// import AccountCreation from './views/accountCreation.vue'
+// import myAccount from './views/myAccount.vue'
+import ReviewCard from './components/ReviewCard.vue'
 
 Vue.use(Router)
 
@@ -20,6 +23,25 @@ export default new Router({
       name: 'home',
       component: Home
     },
+
+    {
+      path: '/review-card',
+      name: 'review card',
+      component: ReviewCard
+    },
+    /*
+        {
+          path: '/',
+          name: 'create account',
+          component: AccountCreation
+        },
+
+        {
+          path: '/',
+          name: 'my account',
+          component: myAccount
+        },
+        */
 
     {
       path: '/login',
