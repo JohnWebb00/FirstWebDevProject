@@ -1,8 +1,40 @@
 var express = require('express');
 var router = express.Router({mergeParams: true});
+var JWT = require('jsonwebtoken');
 var User = require('../models/user');
+var bcrypt = require('bcryptjs')
 
 //Create a user
+router.post('/login', async (req, res) => {
+    const { email, userPass } = req.body
+
+    if(!(email && userPass)){
+        return res.status(401).json({'message': 'Must enter an email and password'});
+    }
+
+    const user = User.findOne({ email: email });
+
+    if (!user){
+        return res.status(404).json({'message': 'User account not found'});
+    }
+
+    if (!await bcrypt.compare(req.body.userPass, user.userPass)) {
+        return res.status(400).send({'message': 'invalid credentials'})
+    }
+
+    const token = JWT.sign({_id: user._id}, "secret")
+
+    res.cookie('jwt', token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000
+    })
+
+    res.send({message: 'success'})
+
+});
+
+
+
 router.post('/', function(req, res, next){
     console.log(req.body)
     var user = new User(req.body);

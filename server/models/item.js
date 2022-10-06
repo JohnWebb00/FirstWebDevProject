@@ -7,8 +7,8 @@ var itemSchema = new Schema({
     duration: {type: String, required: true},
     description: {type: String, required: true},
     approved: {type: Boolean, default: false},
-    category: {type: String, required: true}
-   // review: [{ type: Schema.Types.ObjectId, ref: 'review' }],
+    category: {type: String, required: true},
+    itemAuthor: { type: Schema.Types.ObjectId, ref: 'User' },
     });
 
 var Item = mongoose.model('items', itemSchema);
