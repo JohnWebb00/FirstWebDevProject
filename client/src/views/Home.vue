@@ -1,14 +1,14 @@
 <template>
   <div>
     <div>
-      <b-nav align="right">
+      <b-nav text-align="right">
         <b-nav-item active>Profile</b-nav-item>
       </b-nav>
     </div>
     <!--Main Navigation-->
 
     <div>
-      <b-nav tabs align="center">
+      <b-nav tabs text-align="center">
         <b-nav-item>How it works</b-nav-item>
         <b-nav-item href="http://localhost:8080/listings"
           >Another Link</b-nav-item
