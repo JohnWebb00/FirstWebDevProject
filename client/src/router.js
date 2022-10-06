@@ -8,8 +8,8 @@ import CreateListing from './views/CreateListing.vue'
 import Catagory from './views/Catagory.vue'
 import Listings from './views/Listings.vue'
 import PendingListings from './views/pendingListings.vue'
-// import AccountCreation from './views/accountCreation.vue'
-// import myAccount from './views/myAccount.vue'
+import AccountCreation from './views/AccountCreation.vue'
+import MyAccount from './views/MyAccount.vue'
 import ReviewCard from './components/ReviewCard.vue'
 
 Vue.use(Router)
@@ -29,19 +29,18 @@ export default new Router({
       name: 'review card',
       component: ReviewCard
     },
-    /*
-        {
-          path: '/',
-          name: 'create account',
-          component: AccountCreation
-        },
 
-        {
-          path: '/',
-          name: 'my account',
-          component: myAccount
-        },
-        */
+    {
+      path: '/create-account',
+      name: 'create account',
+      component: AccountCreation
+    },
+
+    {
+      path: '/my-account',
+      name: 'my account',
+      component: MyAccount
+    },
 
     {
       path: '/login',
