@@ -7,8 +7,10 @@ var Review = require('../models/review');
 
 
 //Create a item
-router.post('/', function(req, res, next){
-    var item = new Item(req.body);
+router.post('/:user_id/items', function(req, res, next){
+    var item = new Item(req.body)
+    item.itemAuthor = req.params.user_id;
+
     item.save(function(err, item) {
         if (err) { return next(err); }
         res.status(201).json(item);

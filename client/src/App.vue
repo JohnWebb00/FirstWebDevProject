@@ -15,6 +15,7 @@
     </div>
     <!-- Render the content of the current page view -->
     <router-view/>
+    <footer>Footer</footer>
   </div>
 </template>
 

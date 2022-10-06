@@ -7,7 +7,7 @@
         <input type="email" v-model="email" required />
 
         <label>Password:</label>
-        <input type="password" v-model="password" required />
+        <input type="password" v-model="userPass" required />
         <b-button v-on:click="login" id="login" pill variant="dark"
           >Log-in</b-button
         >
@@ -62,34 +62,36 @@ input {
 </style>
 
 <script>
-import axios from 'axios'
+// import { Api } from '@/Api'
 
 export default {
   name: 'Login',
   data() {
     return {
       email: '',
-      password: ''
+      userPass: ''
     }
-  },
+  }
+/*
   methods: {
     async login() {
-      const result = await axios.get(
-        `http://localhost:3000/api/v1/users?email=${this.email}&userPass=${this.password}`
+      const result = await Api.post(
+        `v1/users?email=${this.email}&userPass=${this.userPass}`
       )
       console.warn(result)
-      // eslint-disable-next-line eqeqeq
-      if (result.status == 200 && result.data.length > 0) {
-        localStorage.setItem('user-details', JSON.stringify(result.data[1]))
-        this.$router.push({ name: 'Home' })
+
+      if (result.status === 200 && result.data.users.length > 0) {
+        localStorage.setItem('user-details', JSON.stringify(result.data.users[0]))
+        this.$router.push('/')
       }
     }
   },
   mounted() {
     const user = localStorage.getItem('user-details')
     if (user) {
-      this.$router.push({ name: 'Home' })
+      this.$router.push('/')
     }
   }
+  */
 }
 </script>

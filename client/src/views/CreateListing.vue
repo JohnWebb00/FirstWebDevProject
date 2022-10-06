@@ -1,7 +1,6 @@
 <template>
   <div>
-    <header>Create an item listing</header>
-    <p>
+    <p style="margin-top: 30px">
       Enter the details for your item, along with a photo and you're good to go!
     </p>
     <b-row>
