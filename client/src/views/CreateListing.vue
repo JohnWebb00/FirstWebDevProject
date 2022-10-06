@@ -5,51 +5,171 @@
       Enter the details for your item, along with a photo and you're good to go!
     </p>
     <b-row>
-      <b-col class="col1">
-        <p>Add item details</p>
-        <form class="itemDetails">
+      <b-col id="col1">
+        <form class="itemDetails" @submit.prevent="createListing">
+          <label>Item name</label>
           <input
+            id="itemName"
             type="text"
             placeholder="Enter a name for your item"
+            v-model="formData.itemName"
             required
           />
-
-          <input type="number" placeholder="Enter price" required />
-
-          <select placeholder="Select a item category" required>
-            <option value="Option 1">Option 1</option>
-            <option value="Option 2">Option 2</option>
-            <option value="Option 3">Option 3</option>
-            <option value="Option 4">Option 4</option>
+  <label>Rent fee</label>
+          <b-input-group id = 'currency' append="SEK">
+            <b-form-input
+              id="rentPrice"
+              placeholder="Enter the renting price for your item"
+              v-model="formData.rentPrice"
+              required
+            ></b-form-input>
+          </b-input-group>
+          <label>Rent fee is charged every:</label>
+          <select
+            id="duration"
+            placeholder="Select a duration"
+            required
+            v-model="formData.duration"
+          >
+            <option value="Day">Day</option>
+            <option value="Week">Week</option>
+            <option value="Month">Month</option>
           </select>
+<label>Item description</label>
+          <b-form-textarea
+            id="description"
+            type="text"
+            v-model="formData.description"
+            placeholder="Tell us about your item!"
+            rows="3"
+            max-rows="6"
+          ></b-form-textarea>
+
+<label>Category</label>
+          <select
+            id="category"
+            placeholder="Select a category"
+            v-model="formData.category"
+            required
+          >
+            <option value="Sports">Sports</option>
+            <option value="Home improvement">Home Improvement</option>
+            <option value="Cooking">Cooking</option>
+          </select>
+
+          <button>Submit</button>
         </form>
-      </b-col>
-      <b-col
-        >Upload a photo
-        <b-form-file
-          v-model="file1"
-          :state="Boolean(file1)"
-          placeholder="Choose a file or drop it here..."
-          drop-placeholder="Drop file here..."
-        ></b-form-file>
-        <div class="mt-3">Selected file: {{ file1 ? file1.name : '' }}</div>
       </b-col>
     </b-row>
   </div>
 </template>
 
-<style>
-input {
-  margin-bottom: 15px;
+<style scoped>
+.itemDetails{
+    width: 600px;
+    margin: 30px auto;
+    background: #eee;
+    text-align: left;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+label {
+    color: #aaa;
+    display: inline-block;
+    margin: 25px 0 15px;
+    font-size: 0.6em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+header {
+  margin-top: 30px;
+}
+
+#col1 {
+  width: 1200px;
+  display: flex;
+  justify-content: center;
+}
+
+#itemName {
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+}
+
+#rentPrice {
+    display: block;
+    padding: 10px 6px;
+    width: 75%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+}
+
+#duration {
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+}
+
+#description {
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+}
+
+#category{
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+}
+
+button{
+  margin-top: 25px;
 }
 </style>
 
 <script>
+import axios from 'axios'
 export default {
+  name: 'CreateListing',
   data() {
     return {
-      file1: null,
-      file2: null
+      formData: {
+        itemName: '',
+        rentPrice: '',
+        duration: '',
+        description: '',
+        category: ''
+      }
+    }
+  },
+  methods: {
+    createListing() {
+      axios
+        .post('http://localhost:3000/api/v1/items', this.formData)
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error))
     }
   }
 }
