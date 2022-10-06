@@ -1,6 +1,6 @@
 <template>
     <div class = 'div1'>
-<header>Sign-in</header>
+<header>Admin Sign-in</header>
 <body>
     <form>
 <label>Username:</label>
@@ -15,7 +15,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 form {
     max-width: 420px;
     margin: 30px auto;
@@ -49,7 +49,7 @@ body{
     background: #aaa;
 }
 
-header{
+#h1{
     font-size: 2em;
     color: black;
     text-transform: uppercase;
@@ -62,3 +62,17 @@ header{
     text-align: right;
 }
 </style>
+
+<!--
+<script>
+import axios from 'axios'
+export default {
+    name: 'admin login',
+    data(){
+        return{
+            adminUsername:'',
+            adminPass:''
+
+}
+</script>
+-->

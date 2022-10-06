@@ -2,14 +2,15 @@
   <div id="app">
     <div class ="navbar">
       <div class="navbar-left">
-      <router-link to="/">Home</router-link>
-      <router-link to="/">My Account</router-link>
-      <router-link to="/">Search</router-link>
-      <router-link to="/">Listings</router-link>
-      <router-link to="/login">Login</router-link>
-      <router-link to="/list-item">Post an Item</router-link>
+      <b-button id='button' to="/">Home</b-button>
+      <b-button id='button' to="/">Search</b-button>
+      <b-button id='button' to="/">Listings</b-button>
+      <b-button id='button' to="/list-item">Post an Item</b-button>
+      <b-button id='button' to="/view-item">Item view</b-button>
       </div>
       <div class="navbar-right">
+        <b-button id='button' to="/login">Login</b-button>
+        <b-button id='button' to="/">My Account</b-button>
       </div>
     </div>
     <!-- Render the content of the current page view -->
@@ -33,7 +34,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #a01d8c;
 }
 
 .navbar {
@@ -42,10 +42,21 @@ export default {
   flex-wrap: wrap;
   flex-direction: wrap;
   align-content: center;
+  color: white;
   background-color: midnightblue;
   padding: 10px;
 }
 
+#button{
+  color: white;
+  background-color: midnightblue;
+  border: none;
+  margin: 10px;
+}
+
+#button:active{
+  border: none;
+}
 .navbar-left{
   display: flex;
   align-items: center;
