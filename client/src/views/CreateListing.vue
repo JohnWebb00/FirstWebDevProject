@@ -1,8 +1,10 @@
 <template>
   <div>
+    <div class = "div1">
     <h2 class="instructions">
       Enter the details for your item, along with a photo and you're good to go!
     </h2>
+    </div>
     <b-row>
       <b-col id="col1">
         <form class="itemDetails" @submit.prevent="createListing">
@@ -64,9 +66,21 @@
 </template>
 
 <style scoped>
+.div1{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 600px;
+}
+
 .instructions{
-  margin-top: 30px;
+  background-color: #00428c;
   font-size: 20px;
+  color: white;
+  margin: 40px;
+  opacity: 0.9;
+  padding: 15px;
+  max-width: 600px;
 }
 .itemDetails{
     width: 600px;

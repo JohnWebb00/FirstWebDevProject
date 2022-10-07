@@ -8,8 +8,8 @@ import CreateListing from './views/CreateListing.vue'
 import Catagory from './views/Catagory.vue'
 import Listings from './views/Listings.vue'
 import PendingListings from './views/pendingListings.vue'
-import AccountCreation from './views/AccountCreation.vue'
-import MyAccount from './views/MyAccount.vue'
+import AccountCreation from './views/accountCreation.vue'
+import MyAccount from './views/myAccount.vue'
 import ReviewCard from './components/ReviewCard.vue'
 
 Vue.use(Router)

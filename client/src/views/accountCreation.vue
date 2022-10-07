@@ -92,7 +92,7 @@
     </form>
   </div>
 </template>
-<style>
+<style scoped>
 .first-line {
   color: white;
   background-color: #00428c;

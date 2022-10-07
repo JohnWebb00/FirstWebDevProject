@@ -16,7 +16,6 @@
       </b-nav>
     </div>
     <!--SearchBar-->
-    <h2>Welcome, {{ user.userName }}</h2>
     <div>
       <b-form-input
         class="searchbar"

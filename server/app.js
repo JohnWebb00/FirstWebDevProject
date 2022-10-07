@@ -4,6 +4,7 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
+var cookieParser = require('cookie-parser');
 
 var userController = require('./controllers/users');
 var adminController = require('./controllers/admins')
@@ -13,12 +14,12 @@ var reviewController = require('./controllers/reviews');
 // Create Express app
 var app = express();
 
-
+app.use(cookieParser());
 
 
 // Variables
-// var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
+//var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB

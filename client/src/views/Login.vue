@@ -1,6 +1,8 @@
 <template>
-  <div class="div1">
+  <div>
+    <div class="div1">
     <header id="h1">Sign-in</header>
+    </div>
     <body>
       <form id="loginForm">
         <label>Email:</label>
@@ -18,6 +20,13 @@
 </template>
 
 <style scoped>
+.div1{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 420px;
+  background-color: #00428c;
+}
 #loginForm {
   max-width: 420px;
   margin: 30px auto;
@@ -49,9 +58,11 @@ input {
 
 #h1 {
   font-size: 2em;
-  color: black;
-  text-transform: uppercase;
+  color: white;
   margin: 40px;
+  opacity: 0.9;
+  padding: 15px;
+  max-width: 420px;
 }
 
 #login {
