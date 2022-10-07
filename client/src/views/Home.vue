@@ -15,44 +15,55 @@
     </div>
     <!--SearchBar-->
 
-    <div>
-      <b-form-input class="searchbar" placeholder="Search" style="
+    <b-row>
+      <b-col>
+        <b-form-input class="searchbar" placeholder="Search" style="
     border-radius: 30px;
     border: 2px solid #609;
     padding: 20px;
-    width: 600px;
+    width: 80%;
     height: 50px;
-    margin: 40px 600px;
+    margin: 2rem;
     position: relative;">
-      </b-form-input>
-    </div>
+        </b-form-input>
+      </b-col>
+    </b-row>
+
     <!--Cards Nav-->
-
-    <div>
-      <b-card-group deck class="cardDeck" style="position: relative;">
-        <b-card title="Listings" img-src="https://cdn.pixabay.com/photo/2015/05/29/19/18/bicycle-789648_1280.jpg"
-          img-alt="Image" img-top img-height="400" img-width="400" tag="article" class="navCard">
-          <b-card-text>
-          </b-card-text>
-          <a href="http://localhost:8080/listings" class="stretched-link"></a>
-        </b-card>
-
-        <b-card title="Create your own listing"
-          img-src="https://cdn.pixabay.com/photo/2017/11/27/21/31/computer-2982270_1280.jpg" img-alt="Image" img-top
-          img-height="400" img-width="400" tag="article" class="navCard">
-          <b-card-text>
-          </b-card-text>
-          <a href="https://www.google.com/" class="stretched-link"></a>
-        </b-card>
-
-        <b-card title="Catagories" img-src="https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_1280.jpg"
-          img-alt="Image" img-top img-height="400" img-width="400" tag="article" class="navCard">
-          <b-card-text>
-          </b-card-text>
-          <a href="http://localhost:8080/catagory" class="stretched-link"></a>
-        </b-card>
-      </b-card-group>
-    </div>
+    <b-container fluid style="width: 100%" class="bv-example-row">
+      <b-row cols="*">
+        <b-col cols="*">
+          <b-card title="Listings"
+          fluid img-src="https://cdn.pixabay.com/photo/2015/05/29/19/18/bicycle-789648_1280.jpg"
+          img-alt="Image"
+          img-top
+          max-width="100%"
+          height="auto" tag="article" class="navCard">
+            <a href="http://localhost:8080/listings" class="stretched-link"></a>
+          </b-card>
+        </b-col>
+        <b-col cols="*">
+          <b-card title="Create your own listing"
+          fluid img-src="https://cdn.pixabay.com/photo/2017/11/27/21/31/computer-2982270_1280.jpg"
+            img-alt="Image"
+            img-width="100%" height="auto"
+            tag="article" class="navCard">
+            <a href="https://www.google.com/" class="stretched-link"></a>
+          </b-card>
+        </b-col>
+        <b-col cols="*">
+          <b-card title="Catagories"
+            fluid img-src="https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_1280.jpg"
+            img-alt="Image"
+            img-top
+            img-width="100%"
+            height="auto"
+            tag="article" class="navCard">
+            <a href="http://localhost:8080/catagory" class="stretched-link"></a>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
 
   </div>
 
@@ -77,7 +88,8 @@ export default {
 
 .navCard {
   border: 20px;
-  margin: 100px;
+  margin: 5rem;
+  margin-bottom: 10px;
   margin: 0 auto;
   position: absolute;
 
