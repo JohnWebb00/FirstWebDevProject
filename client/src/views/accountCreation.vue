@@ -58,7 +58,7 @@
         <br />
         <label for="City">City:</label>
         <input
-          v-model="location.city"
+          v-model="city"
           type="text"
           placeholder="Enter city"
           name="City"
@@ -68,7 +68,7 @@
         <br />
         <label for="PostNr">Postal code:</label>
         <input
-          v-model="location.postNr"
+          v-model="postNr"
           type="text"
           placeholder="Enter postal code"
           name="PostNr"
@@ -78,7 +78,7 @@
         <br />
         <label for="Address">Street address:</label>
         <input
-          v-model="location.streetAddress"
+          v-model="streetAddress"
           type="text"
           placeholder="Enter street name and number"
           name="Address"

@@ -87,7 +87,7 @@ jwt.verify(refreshToken, 'privateKey', (err, user) => {
 })
 
 function createAccessToken(user){
-return jwt.sign({ _id: user._id }, "privateKey", {expiresIn: '45m'})
+return jwt.sign({ _id: user._id }, "privateKey"/*, {expiresIn: '45m'}*/)
 }
 
 
@@ -100,7 +100,7 @@ router.post('/', function (req, res, next) {
     })
 });
 
-//Get all users
+//Get authenticated user
 router.get('/', authenticateToken, (req, res, next) => {
     User.find((err, users) => {
         if (err) { return next(err); }

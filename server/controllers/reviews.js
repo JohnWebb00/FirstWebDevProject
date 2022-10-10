@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 var Review = require('../models/review');
 var Item = require('../models/item')
+var jwt = require('jsonwebtoken');
 
 //Used to authenticate the current user
 function authenticateToken(req, res, next) {
@@ -18,7 +19,7 @@ function authenticateToken(req, res, next) {
     }
 
 //Create a review for a item
-router.post('/items/:item_id/:userId/reviews', authenticateToken, function(req, res, next){
+router.post('/items/:item_id/:userId/reviews', function(req, res, next){
     var review = new Review(req.body);
     review.author = req.user.userId
     review.item_id = req.params.item_id
@@ -42,7 +43,7 @@ router.get('/item/:item_id/reviews', function(req, res){
 */
 
 //Delete a item and all reviews connected to it
-router.delete('/items/:item_id/review/:review_id', authenticateToken, function (req,res,next){
+router.delete('/items/:item_id/review/:review_id', function (req,res,next){
     Review.findOneAndDelete({_id: req.params.review_id}, function(err, review){
         if(err){
             return next(err);
@@ -83,7 +84,7 @@ router.get('/items/:item_id/reviews', function (req, res, next)  {
 
 
 // Get review by ID
-router.get('/:id', authenticateToken, function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     var id = req.params.id;
     Review.findById(id, function(err, review) {
         if (err) { return next(err); }
@@ -94,7 +95,7 @@ router.get('/:id', authenticateToken, function(req, res, next) {
     });
 });
 //Delete all reviews
-router.delete('/', authenticateToken, function(req, res, next){
+router.delete('/', function(req, res, next){
     Review.deleteMany((err, reviews) => {
         if(err){return next(err);}
         res.json({"users": reviews});
@@ -102,7 +103,7 @@ router.delete('/', authenticateToken, function(req, res, next){
 })
 
 //Delete review by id
-router.delete('/:id', authenticateToken, function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     var id = req.params.id;
     Review.findOneAndDelete({_id: id}, function(err, review) {
         if (err) { return next(err); }
@@ -113,7 +114,7 @@ router.delete('/:id', authenticateToken, function(req, res, next) {
     });
 });
 
-router.put('/:id', authenticateToken, function(req, res) {
+router.put('/:id', function(req, res) {
     var id = req.params.id;
     var updated_review = {
         "_id": id,
@@ -127,7 +128,7 @@ router.put('/:id', authenticateToken, function(req, res) {
 });
 
 
-router.patch('/:id', authenticateToken, function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
     var id = req.params.id;
         Review.findById(id, function (err, review) {
         if (err){ return next(err); }

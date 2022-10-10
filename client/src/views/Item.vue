@@ -1,41 +1,50 @@
 <template>
-    <div>
-<b-row>
-    <b-col class = 'userDiv'>
-    <img src="https://images.timberland.com/is/image/TimberlandEU/10061713-hero" alt="boot">
-    </b-col>
-    <b-col class = 'iteminfo'>
-        <h5>Item Name</h5>
+  <div>
+    <b-row>
+      <b-col class="userDiv">
+        <img
+          src="https://images.timberland.com/is/image/TimberlandEU/10061713-hero"
+          alt="boot"
+        />
+      </b-col>
+      <b-col class="iteminfo">
+        <h5>{{ item.itemName }}</h5>
         <body>
-          <h6>Price/duration</h6>
-          <p>This is the item description lorem ipulsum expleliarmus This is the item description lorem ipulsum expleliarmusThis is the item description lorem ipulsum expleliarmusThis is the item description lorem ipulsum expleliarmusThis is the item description lorem ipulsum expleliarmus</p>
+          <h6>{{ item.rentPrice }} SEK <b>per</b> {{ item.duration }}</h6>
+          <p>{{ item.description }}</p>
           <div>
-            <body id = 'userBox'>
-            <h5 text-align='center'>Posted by:</h5>
-            <p>Username: </p>
-            <p>Location:</p>
+            <body id="userBox">
+              <h5 text-align="center">Posted by: {{ user.userName }}</h5>
+              <p>Username: {{ user.email }}</p>
+              <p>Location: {{ user.location.city }}</p>
             </body>
           </div>
         </body>
-    </b-col>
-</b-row>
-<b-row>
-<b-col id = "reviews">
-<h5>Reviews for {itemName}:</h5>
-<div id = "review_section">
-  <review-card v-for="review in reviews" :key="review._id" :title="review.title" :rating="review.rating" :comment="review.comment"></review-card>
-</div>
-</b-col>
-</b-row>
-    </div>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col id="reviews">
+        <h5>Reviews for {{ item.itemName }}:</h5>
+        <div id="review_section">
+          <review-card
+            v-for="review in reviews"
+            :key="review._id"
+            :title="review.title"
+            :rating="review.rating"
+            :comment="review.comment"
+          ></review-card>
+        </div>
+      </b-col>
+    </b-row>
+  </div>
 </template>
 
 <style scoped>
-#review_section{
+#review_section {
   display: flex;
   justify-content: center;
 }
-#userBox{
+#userBox {
   padding: 10px;
   border: 1px solid;
   text-align: left;
@@ -44,12 +53,12 @@
 }
 
 .userDiv {
-    margin: 40px;
-    max-width: 25%;
+  margin: 40px;
+  max-width: 25%;
 }
 
-#userbox{
-    text-align: left;
+#userbox {
+  text-align: left;
 }
 
 .iteminfo {
@@ -59,12 +68,12 @@
   max-width: 60%;
 }
 
-img{
-    align-content: center;
-    border: 1px solid;
+img {
+  align-content: center;
+  border: 1px solid;
 }
 
-#reviews{
+#reviews {
   width: 50%;
   margin: auto;
   margin-top: 20px;
@@ -77,23 +86,58 @@ import axios from 'axios'
 import ReviewCard from '@/components/ReviewCard.vue'
 
 export default {
-  name: 'Items',
+  name: 'Item',
   components: { 'review-card': ReviewCard },
-  mounted() {
-    this.getItems()
+  async mounted() {
+    await this.getItem()
+    await this.getUser()
+    await this.getReviews()
   },
-
   data() {
     return {
-      items: [],
+      user: {
+        fullName: '',
+        userName: '',
+        userPass: '',
+        phoneNumber: '',
+        location: {
+          city: '',
+          postNr: '',
+          streetAddress: ''
+        },
+        email: ''
+      },
+      item: [],
       reviews: []
     }
   },
   methods: {
-    async getItems() {
+    async getItem() {
+      const id = this.$route.params.id
+      console.log(id)
       try {
-        const response = axios.get('/v1/items')
-          .then(response => (this.items = response.data))
+        const response = await axios
+          .get(`http://localhost:3000/api/v1/items/${this.$route.params.id}`)
+          .then((response) => (this.item = response.data))
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async getUser() {
+      const token = localStorage.getItem('token')
+      const config = {
+        headers: {
+          authorization: 'Bearer ' + token
+        }
+      }
+      try {
+        const response = await axios
+          .get(
+            `http://localhost:3000/api/v1/users/${this.item.itemAuthor}`,
+            config
+          )
+          .then((response) => (this.user = response.data))
         console.log(response)
       } catch (error) {
         console.log(error)
@@ -101,8 +145,11 @@ export default {
     },
     async getReviews() {
       try {
-        const response = axios.get(`/v1/items/:${this.item._id}/reviews`)
-          .then(response => (this.reviews = response.data))
+        const response = await axios
+          .get(
+            `http://localhost:3000/api/v1/items/${this.$route.params.id}/reviews`
+          )
+          .then((response) => (this.reviews = response.data))
         console.log(response)
       } catch (error) {
         console.log(error)

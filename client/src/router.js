@@ -37,7 +37,7 @@ export default new Router({
     },
 
     {
-      path: '/my-account',
+      path: '/my-account/:id',
       name: 'my account',
       component: MyAccount
     },
@@ -61,7 +61,7 @@ export default new Router({
     },
 
     {
-      path: '/view-item',
+      path: '/view-item/:id',
       name: 'view item',
       component: Item
     },
