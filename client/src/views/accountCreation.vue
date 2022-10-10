@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form action="action_page.php">
+    <form @submit.prevent="handleRegistration" action="action_page.php">
       <div class="container center">
         <h1 class="first-line center">Create A New Account</h1>
         <p><b> Please enter your information below:</b></p>
@@ -8,6 +8,7 @@
 
         <label for="FullName">Full name:</label>
         <input
+          v-model="fullName"
           type="text"
           placeholder="Enter first and last name"
           name="FullName"
@@ -17,6 +18,7 @@
         <br />
         <label for="UserName">Username:</label>
         <input
+          v-model="userName"
           type="text"
           placeholder="Enter username"
           name="UserName"
@@ -26,6 +28,7 @@
         <br />
         <label for="UserPassword">Password:</label>
         <input
+          v-model="userPass"
           type="password"
           placeholder="Enter password"
           name="UserPassword"
@@ -35,6 +38,7 @@
         <br />
         <label for="Email">Email:</label>
         <input
+          v-model="email"
           type="email"
           placeholder="Enter email"
           name="Email"
@@ -44,6 +48,7 @@
         <br />
         <label for="PhoneNumber">Phone number:</label>
         <input
+          v-model="phoneNumber"
           type="text"
           placeholder="Enter phone number"
           name="PhoneNumber"
@@ -53,6 +58,7 @@
         <br />
         <label for="City">City:</label>
         <input
+          v-model="location.city"
           type="text"
           placeholder="Enter city"
           name="City"
@@ -62,6 +68,7 @@
         <br />
         <label for="PostNr">Postal code:</label>
         <input
+          v-model="location.postNr"
           type="text"
           placeholder="Enter postal code"
           name="PostNr"
@@ -71,6 +78,7 @@
         <br />
         <label for="Address">Street address:</label>
         <input
+          v-model="location.streetAddress"
           type="text"
           placeholder="Enter street name and number"
           name="Address"
@@ -92,6 +100,53 @@
     </form>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+export default {
+  name: 'Register',
+  data() {
+    return {
+      fullName: '',
+      userName: '',
+      userPass: '',
+      phoneNumber: '',
+      location: {
+        city: '',
+        postNr: '',
+        streetAddress: ''
+      },
+      email: ''
+    }
+  },
+  methods: {
+    async handleRegistration() {
+      try {
+        const response = await axios.post(
+          'http://localhost:3000/api/v1/users/register',
+          {
+            fullName: this.fullName,
+            userName: this.userName,
+            userPass: this.userPass,
+            phoneNumber: this.phoneNumber,
+            location: {
+              city: this.city,
+              postNr: this.postNr,
+              streetAddress: this.streetAddress
+            },
+            email: this.email
+          }
+        )
+
+        console.log(response)
+        this.$router.push('/login')
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+}
+</script>
 <style scoped>
 .first-line {
   color: white;

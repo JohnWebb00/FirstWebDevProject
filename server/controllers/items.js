@@ -2,14 +2,30 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 var Item = require('../models/item');
 var Review = require('../models/review');
+var jwt = require('jsonwebtoken');
 
+//Used to authenticate the current user
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
 
-
+    console.log(req.headers)
+    
+    if(token == null) {return res.send({message: 'no token'})}
+    
+    jwt.verify(token, 'privateKey', (err, user) => {
+    if(err){ return res.sendStatus(403) }
+    req.user = user
+    next()
+    })
+    }
 
 //Create a item
-router.post('/:user_id/items', function(req, res, next){
+router.post('/user_id/items', authenticateToken, function(req, res, next){
     var item = new Item(req.body)
-    item.itemAuthor = req.params.user_id;
+    item.itemAuthor = req.user._id;
+
+    console.log(req.user._id)
 
     item.save(function(err, item) {
         if (err) { return next(err); }
@@ -27,7 +43,7 @@ router.get('/', function(req, res, next) {
 });
 
 // Get Item by ID
-router.get('/:id', function(req, res, next) {
+router.get('/:id', authenticateToken, function(req, res, next) {
     var id = req.params.id;
     Item.findById(id, function(err, item) {
         if (err) { return next(err); }
@@ -39,9 +55,9 @@ router.get('/:id', function(req, res, next) {
 });
 
 //Create a review for an item
-router.post('/:item_id/:userId/reviews', function(req, res, next){
+router.post('/:item_id/:userId/reviews', authenticateToken, function(req, res, next){
     var review = new Review(req.body);
-    review.author = req.params.userId
+    review.author = req.user.userId
     review.item_id = req.params.item_id
     review.save(function(err) {
         if (err) { return next(err); }
@@ -50,7 +66,7 @@ router.post('/:item_id/:userId/reviews', function(req, res, next){
 });
 
 //Get all reviews for a particular item
-router.get('/:item_id/reviews', function (req, res, next)  {
+router.get('/:item_id/reviews', authenticateToken, function (req, res, next)  {
     var itemId = req.params.item_id
     Review.find({'item_id' : itemId}, function(err, review) {
         if (err) { return next(err); }
@@ -62,7 +78,7 @@ router.get('/:item_id/reviews', function (req, res, next)  {
 });
 
 //Delete all Item
-router.delete('/', function(req, res, next){
+router.delete('/', authenticateToken, function(req, res, next){
     Item.deleteMany((err, items) => {
         if(err){return next(err);}
         res.json({"items": items});
@@ -70,7 +86,7 @@ router.delete('/', function(req, res, next){
 })
 
 //Delete Item by id
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', authenticateToken, function(req, res, next) {
     var id = req.params.id;
     Item.findOneAndDelete({_id: id}, function(err, item) {
         if (err) { return next(err); }
@@ -81,7 +97,7 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', authenticateToken, function(req, res, next) {
     var id = req.params.id;
     Item.findById(id, function(err, item) {
         if (err) { return next(err); }
@@ -117,7 +133,7 @@ router.patch('/items/:id', function(req, res) {
 });
 */
 
-router.patch('/items/:id', function(req, res, next) {
+router.patch('/items/:id', authenticateToken, function(req, res, next) {
     var id = req.params.id;
         Item.findById(id, function (err, item) {
         if (err){

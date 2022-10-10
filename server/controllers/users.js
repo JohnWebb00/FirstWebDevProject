@@ -1,8 +1,22 @@
 var express = require('express');
 var router = express.Router({ mergeParams: true });
-var JWT = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var bcrypt = require('bcryptjs')
+
+//Used to authenticate the current user
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    
+    if(token == null) {return res.send({message: 'no token'})}
+    
+    jwt.verify(token, 'privateKey', (err, user) => {
+    if(err){ return res.sendStatus(403) }
+    req.user = user
+    next()
+    })
+    }
 
 //Register a user
 router.post('/register', async (req, res) => {
@@ -15,7 +29,11 @@ router.post('/register', async (req, res) => {
             userName: req.body.userName,
             userPass: hashPass,
             phoneNumber: req.body.phoneNumber,
-            location: req.body.location,
+            location: {
+                city: req.body.city,
+                postNr: req.body.postNr,
+                streetAddress: req.body.streetAddress
+            },
             email: req.body.email
         })
         const result = await user.save();
@@ -23,14 +41,14 @@ router.post('/register', async (req, res) => {
         const { userPass, ...data } = await result.toJSON();
 
         res.send(data)
+        res.send({message: 'Registration successful'})
     } catch (error) {
-        return res.status(err)
+        return res.status(error)
     }
 
 });
 
 router.post('/login', async (req, res) => {
-    try {
 
         const { email, userPass } = req.body
 
@@ -48,50 +66,29 @@ router.post('/login', async (req, res) => {
             return res.status(400).send({ 'message': 'invalid credentials' })
         }
 
-        const token = JWT.sign({ _id: user._id }, "privateKey")
-
-        res.cookie('jwt', token, {
-            httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000
-        })
-
-        res.send({ message: 'login successful' })
-    } catch (error) {
-        res.send(error)
-    }
-
+        const accessToken = createAccessToken(user);
+        const refreshToken = jwt.sign(user.toJSON(), "privateKey")
+        
+        res.json({ accessToken: accessToken, refreshToken: refreshToken })
 });
 
-router.get('/authenticate', async (req, res) => {
-    try {
-const cookie = req.cookies['jwt']
-
-const claims = JWT.verify(cookie, "privateKey")
-
-     if(!claims){
-        return res.status(401).send({ 'message': 'Authentication Failed' })
-     }
-
-     const user = await User.findOne({ _id: claims._id })
-
-     const {password, ...data} = await user.toJSON()
-
-     res.send(data)
-    } catch (error) {
-        res.send(error)
+router.post('/token', (req, res) => {
+    const refreshToken = req.body.token
+    if (refreshToken == null){
+        return res.sendStatus(401)
     }
-});
-
-router.post('/logout', async (req, res) => {
-    try {
-        res.cookie('jwt','',{maxAge:0})
-
-     res.send({message: 'Log-out successful'})
-    } catch (error) {
-        res.send(error)
+    if (!refreshToken.includes(refreshToken)){
+        return res.sendStatus(403)
     }
-});
+jwt.verify(refreshToken, 'privateKey', (err, user) => {
+    if (err) return sendStatus(403)
+    const accessToken = createAccessToken(user)
+})
+})
 
+function createAccessToken(user){
+return jwt.sign({ _id: user._id }, "privateKey", {expiresIn: '45m'})
+}
 
 
 router.post('/', function (req, res, next) {
@@ -104,7 +101,7 @@ router.post('/', function (req, res, next) {
 });
 
 //Get all users
-router.get('/', (req, res, next) => {
+router.get('/', authenticateToken, (req, res, next) => {
     User.find((err, users) => {
         if (err) { return next(err); }
         res.json({ "users": users });

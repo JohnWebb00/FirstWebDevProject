@@ -31,7 +31,7 @@ export default new Router({
     },
 
     {
-      path: '/create-account',
+      path: '/register',
       name: 'create account',
       component: AccountCreation
     },

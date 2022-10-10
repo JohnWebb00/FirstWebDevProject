@@ -73,7 +73,7 @@ img{
 </style>
 
 <script>
-import { Api } from '@/Api'
+import axios from 'axios'
 import ReviewCard from '@/components/ReviewCard.vue'
 
 export default {
@@ -86,15 +86,13 @@ export default {
   data() {
     return {
       items: [],
-      item: { itemName: '', rentPrice: '', duration: '', description: '' },
-      reviews: [],
-      review: { title: 'stinky', comment: 'smelled really bad', rating: '1' }
+      reviews: []
     }
   },
   methods: {
     async getItems() {
       try {
-        const response = Api.get('/v1/items')
+        const response = axios.get('/v1/items')
           .then(response => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -103,7 +101,7 @@ export default {
     },
     async getReviews() {
       try {
-        const response = Api.get(`/v1/items/:${this.item._id}/reviews`)
+        const response = axios.get(`/v1/items/:${this.item._id}/reviews`)
           .then(response => (this.reviews = response.data))
         console.log(response)
       } catch (error) {
