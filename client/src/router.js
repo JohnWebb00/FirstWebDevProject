@@ -37,7 +37,7 @@ export default new Router({
     },
 
     {
-      path: '/my-account/:id',
+      path: '/my-account',
       name: 'my account',
       component: MyAccount
     },
