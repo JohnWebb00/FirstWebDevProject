@@ -13,6 +13,7 @@ var itemSchema = new Schema({
         img2: String, required: false,
         img3: String, required: false,
     }],
+    itemAuthor: {type: String, required: true}
     });
 
 var Item = mongoose.model('items', itemSchema);

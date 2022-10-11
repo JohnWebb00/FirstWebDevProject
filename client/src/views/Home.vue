@@ -1,16 +1,18 @@
 <template>
   <div>
     <div>
-      <b-nav align="right">
+      <b-nav text-align="right">
         <b-nav-item active>Profile</b-nav-item>
       </b-nav>
     </div>
     <!--Main Navigation-->
 
     <div>
-      <b-nav tabs align="center">
+      <b-nav tabs text-align="center">
         <b-nav-item>How it works</b-nav-item>
-        <b-nav-item href="http://localhost:8080/listings">Another Link</b-nav-item>
+        <b-nav-item href="http://localhost:8080/listings"
+          >Another Link</b-nav-item
+        >
       </b-nav>
     </div>
     <!--SearchBar-->
@@ -66,16 +68,27 @@
     </b-container>
 
   </div>
-
 </template>
 
 <script>
 // @ is an alias to /src
 
 export default {
-  name: 'home'
+  name: 'home',
+  data() {
+    return {
+      user: ''
+    }
+  },
+  methods: {
+    assign() {
+      this.user = localStorage.getItem('user-details')
+    }
+  },
+  async created() {
+    await this.assign()
+  }
 }
-
 </script>
 
 <style>
@@ -83,7 +96,6 @@ export default {
   position: center;
   margin: 0 auto;
   position: relative;
-
 }
 
 .navCard {
@@ -92,7 +104,6 @@ export default {
   margin-bottom: 10px;
   margin: 0 auto;
   position: absolute;
-
 }
 
 .searchbar {

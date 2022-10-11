@@ -14,7 +14,7 @@ router.post('/items/:item_id/:userId/reviews', function(req, res, next){
         res.status(201).json(review);
     })
 });
-
+/*
 //Get all reviews of an item // Duplicate
 router.get('/item/:item_id/reviews', function(req, res){
     review.find({item_id: req.params.item_id})
@@ -26,6 +26,7 @@ router.get('/item/:item_id/reviews', function(req, res){
         return res.status(200).json(reviews);
     });
 });
+*/
 
 //Delete a item and all reviews connected to it
 router.delete('/items/:item_id/review/:review_id', function (req,res,next){

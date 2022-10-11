@@ -4,6 +4,7 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
+var cookieParser = require('cookie-parser');
 
 var userController = require('./controllers/users');
 var adminController = require('./controllers/admins')
@@ -13,7 +14,7 @@ var reviewController = require('./controllers/reviews');
 // Create Express app
 var app = express();
 
-
+app.use(cookieParser());
 
 
 // Variables
@@ -42,7 +43,11 @@ app.use(express.json());
 app.use(morgan('dev'));
 // Enable cross-origin resource sharing for frontend must be registered before api
 app.options('*', cors());
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: ['http://localhost:3000','http://localhost:8080']
+}));
+
 // Has to be below cors
 app.use('/api/v1/users', userController);
 app.use('/api/v1/admins', adminController);
