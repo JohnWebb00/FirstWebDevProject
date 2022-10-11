@@ -1,6 +1,8 @@
+// https://www.youtube.com/watch?v=IYuMBejxXUo video that might be helpful
+
 <template>
   <div>
-      <div>
+      <div class="container center">
             <h1 class="first-line">My Account - "Username"</h1>
         <br>
         <img src="https://tinyurl.com/4sk8sjxj" alt="profilePic" class="image-cropper">
@@ -10,7 +12,7 @@
         </h2>
         <br>
             <h3>
-              Account details
+              Account Details
         </h3>
         <p>
           <b>Full name:</b> [fullName] <br>
@@ -20,16 +22,24 @@
           <b>Street:</b> [street] <br>
         </p>
 
-        <p2 class="details-button">
-          <b>EDIT DETAILS</b>
-        </p2>
+          <b>
+            <button class="details-button">Edit Account Information</button>
+            <br>
+
+            <b-button pill v-b-modal.modal-1 variant="outline-danger">Remove Account</b-button>
+             <b-modal id="modal-1" title="Leaving already?">
+             <p class="my-4">Are you sure you want to delete your account? This action is permanent and will delete all your data from Rent-It.</p>
+             </b-modal>
+
+          </b>
 
         </div>
-
+<hr>
       <div2>
         <h4>
           My Listings:
         </h4>
+        <br>
       <p4>
         LIST OF LISTINGS
       </p4>
@@ -40,9 +50,13 @@
 
 <style>
 
+.container {
+  padding: 20px;
+}
+
 hr {
-  border: 1px solid #00428c;
-  margin-bottom: 10px;
+  border: 3px solid #00428c;
+  margin-bottom: 30px;
 }
 
 a {
@@ -64,6 +78,7 @@ p2 {
 
   h2 {
     text-align: center;
+    margin: 20 20 20 20;
   }
 
   h3 {
@@ -124,20 +139,12 @@ p2 {
 
   .details-button {
   opacity: 0.6;
-  color: black;
-  padding: 6px 6px;
-  margin: 0 400 0 400;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  border: solid;
-  border-color: black;
+  padding: 5px;
+  margin: 20px 0;
   }
 
   .details-button:hover {
     opacity: 1;
-    background: #f1f1f1;
   }
 
   p {
