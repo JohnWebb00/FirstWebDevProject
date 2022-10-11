@@ -9,7 +9,7 @@ import Catagory from './views/Catagory.vue'
 import Listings from './views/Listings.vue'
 import PendingListings from './views/pendingListings.vue'
 import AccountCreation from './views/accountCreation.vue'
-import MyAccount from './views/myAccount.vue'
+import MyAccount from './views/MyAccount.vue'
 import ReviewCard from './components/ReviewCard.vue'
 
 Vue.use(Router)

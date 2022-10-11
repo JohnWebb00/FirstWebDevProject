@@ -16,8 +16,8 @@ var app = express();
 
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
-//var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+//var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -31,10 +31,11 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
 });
 
 
+
+
 // Parse requests of content-type 'application/json'
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 // HTTP request logger
 app.use(morgan('dev'));
@@ -51,7 +52,6 @@ app.use('/api/v1/users', userController);
 app.use('/api/v1/admins', adminController);
 app.use('/api/v1/items', itemController);
 app.use('/api/v1/reviews', reviewController);
-
 // Import routes
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});

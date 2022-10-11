@@ -31,14 +31,29 @@ router.post('/user_id/items', authenticateToken, function(req, res, next){
     })
 });
 
+// Filtering out items that hasn't been approved
+router.get("/", function (req, res, next) {
+    const approved = req.query.approved;
+    //"?" Is like a if statement, if there are no rating we do else ":" which means "else"
+    Item.find(approved ? { approved: { $eq: approved } } : {})
+    .populate('items')
+    .exec(function (err, items)
+    {
+    if (err) {
+        return res.status(500).send(err);
+    }
+    return res.status(200).json(items);
+    });
+});
 
+/*
 //Get all item
 router.get('/', function(req, res, next) {
     Item.find(function(err, items) {
         if (err) { return next(err); }
         res.json({"items": items });
     });
-});
+}); */
 
 // Get Item by ID
 router.get('/:id', function(req, res, next) {
@@ -131,7 +146,7 @@ router.patch('/items/:id', function(req, res) {
 });
 */
 
-router.patch('/items/:id', function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
     var id = req.params.id;
         Item.findById(id, function (err, item) {
         if (err){
@@ -140,6 +155,7 @@ router.patch('/items/:id', function(req, res, next) {
             return res.status(404).json({"message": "Item not found"})
         }
         item.itemName = (req.body.itemName || item.itemName)
+        item.approved = (req.body.approved || item.approved)
         item.rentPrice = (req.body.rentPrice || item.rentPrice)
         item.duration = (req.body.duration || item.duration)
         item.description = (req.body.description || item.description)
@@ -149,4 +165,5 @@ router.patch('/items/:id', function(req, res, next) {
         res.json(item);
     });
 });
+
 module.exports = router;

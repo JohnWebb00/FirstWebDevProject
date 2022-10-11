@@ -1,18 +1,14 @@
 <template>
   <div>
-    <b-row>
-      <listing-card v-for="item in items" :key="item._id" :title="item.itemName" :footer="item.rentPrice"></listing-card>
-      <div>
-        <pre>{{ items }}</pre>
-      </div>
-
+    <b-row align-v="center">
+      <listing-card v-for="item in items" :key="item._id" :name="item.itemName"
+        :price="item.rentPrice + ' ' + item.duration" :image="item.Image.img1">
+      </listing-card>
     </b-row>
   </div>
 </template>
 
 <script>
-
-// https://www.youtube.com/watch?v=-DyKeMa5tYY
 import { Api } from '@/Api'
 
 import ListingCard from '@/components/ListingCard.vue'
@@ -26,14 +22,13 @@ export default {
 
   data() {
     return {
-      items: [],
-      item: { itemName: '', rentPrice: '', duration: '' }
+      items: {}
     }
   },
   methods: {
     async getItems() {
       try {
-        const response = Api.get('http://localhost:8080/api/v1/items')
+        const response = Api.get('http://localhost:3000/api/v1/items')
           .then(response => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -46,12 +41,5 @@ export default {
 </script>
 
 <style>
-.listing-card {
-  font-size: 40px;
-  width: 400px;
-  height: 400px;
-  border-radius: 30px;
-  margin: 10px;
-  color: red;
-}
+
 </style>

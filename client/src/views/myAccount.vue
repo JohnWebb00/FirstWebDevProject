@@ -1,29 +1,49 @@
+// https://www.youtube.com/watch?v=IYuMBejxXUo video that might be helpful
+
 <template>
   <div>
-    <div>
-      <h1 class="first-line">My Account - "Username"</h1>
-      <br />
-      <img
-        src="https://tinyurl.com/4sk8sjxj"
-        alt="profilePic"
-        class="image-cropper"
-      />
-      <br />
-      <h2 class="pic-button">CHANGE PICTURE</h2>
-      <br />
-      <h3>Account details</h3>
-      <b-col>
-        <p>Full name: {{ users.fullName[0] }} </p> <br />
-        <b>City:</b> {{ users[0].city }} <br />
-        <b>Email:</b> {{ users[0].email }} <br >
-        <b>Zip code:</b> {{ users[0].postNr }} <br />
-        <b>Street:</b> {{ users[0].streetAddress }} <br />
-      </b-col>
+      <div class="container center">
+            <h1 class="first-line">My Account - "Username"</h1>
+        <br>
+        <img src="https://tinyurl.com/4sk8sjxj" alt="profilePic" class="image-cropper">
+        <br>
+        <h2 class="pic-button">
+         CHANGE PICTURE
+        </h2>
+        <br>
+            <h3>
+              Account Details
+        </h3>
+        <p>
+          <b>Full name:</b> [fullName] <br>
+          <b>City:</b> [city] <br>
+          <b>Email:</b> [email] <br>
+          <b>Zip code:</b> [postalCode] <br>
+          <b>Street:</b> [street] <br>
+        </p>
 
-      <p class="details-button">
-        <b>EDIT DETAILS</b>
-      </p>
-    </div>
+          <b>
+            <button class="details-button">Edit Account Information</button>
+            <br>
+
+            <b-button pill v-b-modal.modal-1 variant="outline-danger">Remove Account</b-button>
+             <b-modal id="modal-1" title="Leaving already?">
+             <p class="my-4">Are you sure you want to delete your account? This action is permanent and will delete all your data from Rent-It.</p>
+             </b-modal>
+
+          </b>
+
+        </div>
+<hr>
+      <div2>
+        <h4>
+          My Listings:
+        </h4>
+        <br>
+      <p4>
+        LIST OF LISTINGS
+      </p4>
+      </div2>
 
     <div>
       <h4>My Listings:</h4>
@@ -78,9 +98,13 @@ export default {
 </script>
 
 <style>
+.container {
+  padding: 20px;
+}
+
 hr {
-  border: 1px solid #00428c;
-  margin-bottom: 10px;
+  border: 3px solid #00428c;
+  margin-bottom: 30px;
 }
 
 a {
@@ -100,9 +124,10 @@ h1 {
   text-align: center;
 }
 
-h2 {
-  text-align: center;
-}
+  h2 {
+    text-align: center;
+    margin: 20 20 20 20;
+  }
 
 h3 {
   background: #f1f1f1;
@@ -143,23 +168,11 @@ h4 {
   border-radius: 30%;
 }
 
-.pic-button {
-  background-color: #00428c;
-  opacity: 0.6;
-  color: white;
-  padding: 10px 10px;
-  margin: 30 0 -20;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-}
-
 .pic-button:hover {
   opacity: 1;
 }
 
-.details-button {
+.picture-button {
   opacity: 0.6;
   color: black;
   padding: 6px 6px;
@@ -176,6 +189,21 @@ h4 {
   opacity: 1;
   background: #f1f1f1;
 }
+
+.details-button {
+  opacity: 0.6;
+  padding: 5px;
+  margin: 20px 0;
+  }
+
+  .details-button:hover {
+    opacity: 1;
+  }
+
+  p {
+    padding-left: 400;
+    font-size: 18;
+  }
 
 p {
   padding-left: 400;
