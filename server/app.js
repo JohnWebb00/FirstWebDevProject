@@ -14,8 +14,6 @@ var reviewController = require('./controllers/reviews');
 // Create Express app
 var app = express();
 
-app.use(cookieParser());
-
 
 // Variables
 //var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
@@ -43,6 +41,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 // Enable cross-origin resource sharing for frontend must be registered before api
 app.options('*', cors());
+app.use(cookieParser());
 app.use(cors({
     credentials: true,
     origin: ['http://localhost:3000','http://localhost:8080']

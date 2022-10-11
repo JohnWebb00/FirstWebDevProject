@@ -58,7 +58,7 @@
             <option value="Cooking">Cooking</option>
           </select>
 
-          <b-button variant=primary>Submit</b-button>
+          <b-button variant="primary" type="submit">Submit</b-button>
         </form>
       </b-col>
     </b-row>
@@ -183,8 +183,13 @@ export default {
   },
   methods: {
     createListing() {
-      axios
-        .post('http://localhost:3000/api/v1/items', this.formData)
+      const token = localStorage.getItem('token')
+      const config = {
+        headers: {
+          authorization: 'Bearer ' + token
+        }
+      }
+      axios.post('http://localhost:3000/api/v1/items/user_id/items', this.formData, config)
         .then((response) => console.log(response))
         .catch((error) => console.log(error))
     }

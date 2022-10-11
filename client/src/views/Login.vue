@@ -1,26 +1,27 @@
 <template>
   <div>
     <div class="div1">
-    <header id="h1">Sign-in</header>
+      <header id="h1">Sign-in</header>
     </div>
     <body>
-      <form id="loginForm">
+      <form id="loginForm" @submit.prevent="handleLogin">
         <label>Email:</label>
         <input type="email" v-model="email" required />
 
         <label>Password:</label>
         <input type="password" v-model="userPass" required />
-        <b-button v-on:click="login" id="login" pill variant="dark"
-          >Log-in</b-button
-        >
+        <b-button type="submit" id="login" pill variant="dark">Log-in</b-button>
       </form>
     </body>
-    <div>Can't remember your password?</div>
+    <div>
+      Don't have an account yet?
+      <a href="http://localhost:8080/register">Click here</a>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.div1{
+.div1 {
   display: flex;
   justify-content: center;
   margin: auto;
@@ -74,7 +75,7 @@ input {
 
 <script>
 // import { Api } from '@/Api'
-
+import axios from 'axios'
 export default {
   name: 'Login',
   data() {
@@ -82,27 +83,24 @@ export default {
       email: '',
       userPass: ''
     }
-  }
-/*
+  },
   methods: {
-    async login() {
-      const result = await Api.post(
-        `v1/users?email=${this.email}&userPass=${this.userPass}`
-      )
-      console.warn(result)
-
-      if (result.status === 200 && result.data.users.length > 0) {
-        localStorage.setItem('user-details', JSON.stringify(result.data.users[0]))
+    async handleLogin() {
+      try {
+        const reponse = await axios.post(
+          'http://localhost:3000/api/v1/users/login',
+          {
+            email: this.email,
+            userPass: this.userPass
+          }
+        )
+        const token = reponse.data.accessToken
+        localStorage.setItem('token', token)
         this.$router.push('/')
+      } catch (err) {
+        console.log(err)
       }
     }
-  },
-  mounted() {
-    const user = localStorage.getItem('user-details')
-    if (user) {
-      this.$router.push('/')
-    }
   }
-  */
 }
 </script>

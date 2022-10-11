@@ -2,12 +2,26 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 var Review = require('../models/review');
 var Item = require('../models/item')
+var jwt = require('jsonwebtoken');
 
+//Used to authenticate the current user
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    
+    if(token == null) {return res.send({message: 'no token'})}
+    
+    jwt.verify(token, 'privateKey', (err, user) => {
+    if(err){ return res.sendStatus(403) }
+    user = req.user
+    next()
+    })
+    }
 
 //Create a review for a item
 router.post('/items/:item_id/:userId/reviews', function(req, res, next){
     var review = new Review(req.body);
-    review.author = req.params.userId
+    review.author = req.user.userId
     review.item_id = req.params.item_id
     review.save(function(err) {
         if (err) { return next(err); }

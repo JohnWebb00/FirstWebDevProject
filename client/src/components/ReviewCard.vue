@@ -1,10 +1,10 @@
 <template>
   <div>
     <b-card class="rev-card">
-      <h5>:title</h5>
-      <h6>Rating: :rating/5</h6>
+      <h5>{{ title }}</h5>
+      <h6>Rating: {{ rating }}/5</h6>
       <body>
-        <p>{comment}</p>
+        <p>{{ comment }}</p>
       </body>
     </b-card>
   </div>
@@ -23,5 +23,6 @@ export default {
 .rev-card {
   width: 500px;
   height: 175px;
+  margin: 20px;
 }
 </style>

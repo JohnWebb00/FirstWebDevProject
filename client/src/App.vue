@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <div class ="navbar">
+    <div class ="navbar" v-if="!['login', 'register'].includes(this.$route.name)">
       <div class="navbar-left">
       <b-button id='button' to="/">Home</b-button>
       <b-button id='button' to="/">Search</b-button>
       <b-button id='button' to="/">Listings</b-button>
       <b-button id='button' to="/list-item">Post an Item</b-button>
-      <b-button id='button' to="/view-item">Item view</b-button>
+      <b-button id='button' to="/view-item/634412cc13ca91fe31a0c8d9">Item view</b-button>
       </div>
       <div class="navbar-right">
         <b-button id='button' to="/login">Login</b-button>
-        <b-button id='button' to="/create-account">Register New Account</b-button>
+        <b-button id='button' to="/register">Register New Account</b-button>
         <b-button id='button' to="/my-account">My Account</b-button>
         <b-button id='button' to="/review-card">Review card</b-button>
       </div>
