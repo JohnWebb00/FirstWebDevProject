@@ -39,15 +39,23 @@
     <div>
       <h4>My Listings:</h4>
       <p> LIST OF LISTINGS </p>
+      <my-listings-card
+        v-for="item in items"
+            :key="item._id"
+            :price="review.title"
+            :rating="review.rating"
+            :comment="review.comment"></my-listings-card>
     </div>
     <div> </div>
   </div>
 </template>
 
 <script>
+import myListingsCard from '@/components/myListingsCard.vue'
 import axios from 'axios'
 export default {
   name: 'User',
+  components: { 'my-listings-card': myListingsCard },
   async mounted() {
     await this.getUser()
   },
