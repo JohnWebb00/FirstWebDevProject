@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <form @submit.prevent="handleRegistration" action="action_page.php">
+  <div class="container center">
+    <form @submit.prevent="handleRegistration" action="action_page.php" align-v="center">
       <div class="container center">
         <h1 class="first-line center">Create A New Account</h1>
         <p><b> Please enter your information below:</b></p>
@@ -197,6 +197,10 @@ hr {
 
 .registerbtn:hover {
   opacity: 1;
+}
+
+form{
+  max-width: 600px;
 }
 
 a {

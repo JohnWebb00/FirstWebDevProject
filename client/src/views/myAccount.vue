@@ -3,7 +3,7 @@
 <template>
   <div>
       <div class="container center">
-            <h1 class="first-line">My Account - "Username"</h1>
+            <h1 class="first-line">My Account - {{ user.userName }}</h1>
         <br>
         <img src="https://tinyurl.com/4sk8sjxj" alt="profilePic" class="image-cropper">
         <br>
@@ -15,11 +15,11 @@
               Account Details
         </h3>
         <p>
-          <b>Full name:</b> [fullName] <br>
-          <b>City:</b> [city] <br>
-          <b>Email:</b> [email] <br>
-          <b>Zip code:</b> [postalCode] <br>
-          <b>Street:</b> [street] <br>
+          <b>Full name:</b> {{ user.fullName }} <br>
+          <b>City:</b> {{ user.location.city }} <br>
+          <b>Email:</b> {{ user.email }} <br>
+          <b>Zip code:</b> {{ user.location.postNr }} <br>
+          <b>Street:</b> {{ user.location.streetAddress }} <br>
         </p>
 
           <b>
@@ -35,21 +35,12 @@
 
         </div>
 <hr>
-      <div2>
-        <h4>
-          My Listings:
-        </h4>
-        <br>
-      <p4>
-        LIST OF LISTINGS
-      </p4>
-      </div2>
 
     <div>
       <h4>My Listings:</h4>
       <p> LIST OF LISTINGS </p>
     </div>
-    <div>{{ users }}</div>
+    <div> </div>
   </div>
 </template>
 
@@ -62,7 +53,7 @@ export default {
   },
   data() {
     return {
-      users: {
+      user: {
         fullName: '',
         userName: '',
         userPass: '',
@@ -86,8 +77,8 @@ export default {
       }
       try {
         const response = await axios
-          .get('http://localhost:3000/api/v1/users', config)
-          .then((response) => (this.users = response.data))
+          .get('http://localhost:3000/api/v1/users/auth', config)
+          .then((response) => (this.user = response.data.user))
         console.log(response)
       } catch (error) {
         console.log(error)

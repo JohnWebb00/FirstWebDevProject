@@ -8,6 +8,7 @@
       <b-button id='button' to="/list-item">Post an Item</b-button>
       <b-button id='button' to="/view-item/634412cc13ca91fe31a0c8d9">Item view</b-button>
       </div>
+      <div class="navbar-center">Rent-it™</div>
       <div class="navbar-right">
         <b-button id='button' to="/login">Login</b-button>
         <b-button id='button' to="/register">Register New Account</b-button>
@@ -63,6 +64,10 @@ export default {
   align-items: center;
   flex-wrap: wrap;
   flex-direction: wrap;
+}
+.navbar-center{
+  display: flex;
+  align-items: center;
 }
 
 </style>

@@ -26,7 +26,11 @@
   justify-content: center;
   margin: auto;
   max-width: 420px;
-  background-color: #00428c;
+}
+
+header{
+  margin: 40px;
+  background-color: #00428c
 }
 #loginForm {
   max-width: 420px;
