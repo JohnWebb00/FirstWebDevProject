@@ -1,16 +1,19 @@
+<!-- Responsive design in progress. -->
 <template>
-  <div>
-    <form @submit.prevent="handleRegistration" action="action_page.php">
-      <div class="container center">
-        <h1 class="first-line center">Create A New Account</h1>
+  <div class="container">
+    <form @submit.prevent="handleRegistration" action="action_page.php" align-v="center">
+      <b-container>
+        <b-col>
+        <h1 class="first-line">Create A New Account</h1>
         <p><b> Please enter your information below:</b></p>
+      </b-col>
         <hr />
-
+<b-col>
         <label for="FullName">Full name:</label>
         <input
           v-model="fullName"
           type="text"
-          placeholder="Enter first and last name"
+          placeholder="Enter full name"
           name="FullName"
           id="FullName"
           required
@@ -80,12 +83,14 @@
         <input
           v-model="streetAddress"
           type="text"
-          placeholder="Enter street name and number"
+          placeholder="Enter street address"
           name="Address"
           id="Address"
           required
         />
+      </b-col>
         <br />
+        <b-col>
         <p>
           <b
             >By creating an account you agree to follow our
@@ -93,10 +98,11 @@
           >
         </p>
         <button type="submit" class="registerbtn"><b>REGISTER NOW!</b></button>
-      </div>
       <div class="container signin">
         <p>Already have an account? <a href="#">Sign in instead!</a></p>
       </div>
+    </b-col>
+    </b-container>
     </form>
   </div>
 </template>
@@ -154,17 +160,14 @@ export default {
   opacity: 0.9;
   padding: 30px;
 }
-
-.center {
-  text-align: center;
-}
-
 .large-text {
   font-size: 100%;
 }
 
 .container {
-  padding: 20px;
+  padding: 16px;
+  width: 100%;
+  margin: auto;
 }
 
 input[type='text'],
@@ -172,7 +175,7 @@ input[type='password'],
 input[type='email'] {
   width: 100%;
   padding: 15px;
-  margin: 5px 0 22px 0;
+  margin: auto;
   display: inline-block;
   border: none;
   background: #f1f1f1;
@@ -180,23 +183,28 @@ input[type='email'] {
 
 hr {
   border: 1px solid #00428c;
-  margin-bottom: 25px;
+  margin-bottom: auto;
 }
 
 .registerbtn {
   background-color: #00428c;
   color: white;
   padding: 20px;
-  margin: 10px 0;
+  margin: auto;
   border: none;
   cursor: pointer;
-  width: 50%;
+  width: 100%;
   opacity: 0.6;
   font-size: large;
 }
 
 .registerbtn:hover {
   opacity: 1;
+}
+
+form{
+  max-width: 600px;
+  margin: auto;
 }
 
 a {

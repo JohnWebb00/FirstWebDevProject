@@ -1,78 +1,105 @@
 <template>
-    <div class = 'div1'>
-<header>Admin Sign-in</header>
-<body>
-    <form>
-<label>Username:</label>
-<input type="username" required>
-
-<label>Password:</label>
-<input type="password" required>
-<b-button class = 'login' pill variant = "dark">Log-in</b-button>
-    </form>
-    </body>
-    <div>Can't remember your password?</div>
+  <div>
+    <div class="div1">
+      <header id="h1">Admin log-in</header>
     </div>
+    <body>
+      <form id="loginForm" @submit.prevent="handleLogin">
+        <label>Username:</label>
+        <input type="text" v-model="adminUsername" required />
+
+        <label>Password:</label>
+        <input type="password" v-model="adminPass" required />
+        <b-button type="submit" id="login" pill variant="dark">Log-in</b-button>
+      </form>
+    </body>
+  </div>
 </template>
 
 <style scoped>
-form {
-    max-width: 420px;
-    margin: 30px auto;
-    background: #eee;
-    text-align: left;
-    padding: 40px;
-    border-radius: 10px;
+.div1 {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 420px;
+}
+
+header{
+  margin: 40px;
+  background-color: #00428c
+}
+#loginForm {
+  max-width: 420px;
+  margin: 30px auto;
+  background: #eee;
+  text-align: left;
+  padding: 40px;
+  border-radius: 10px;
 }
 
 label {
-    color: #aaa;
-    display: inline-block;
-    margin: 25px 0 15px;
-    font-size: 0.6em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
+  color: #aaa;
+  display: inline-block;
+  margin: 25px 0 15px;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
 }
 
-input{
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-}
-body{
-    margin: 0;
-    background: #aaa;
+input {
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: black;
+  border-bottom: 1px solid #ddd;
+  color: #555;
 }
 
-#h1{
-    font-size: 2em;
-    color: black;
-    text-transform: uppercase;
-    margin: 40px;
+#h1 {
+  font-size: 2em;
+  color: white;
+  margin: 40px;
+  opacity: 0.9;
+  padding: 15px;
+  max-width: 420px;
 }
 
-.login {
-    margin-top: 25px;
-    color: #eee;
-    text-align: right;
+#login {
+  margin-top: 25px;
+  margin-left: 250px;
+  color: #eee;
 }
 </style>
 
-<!--
 <script>
 import axios from 'axios'
 export default {
-    name: 'admin login',
-    data(){
-        return{
-            adminUsername:'',
-            adminPass:''
-
+  name: 'Login',
+  data() {
+    return {
+      adminUsername: '',
+      adminPass: ''
+    }
+  },
+  methods: {
+    async handleLogin() {
+      try {
+        const reponse = await axios.post(
+          'http://localhost:3000/api/v1/admins/login',
+          {
+            adminUsername: this.adminUsername,
+            adminPass: this.adminPass
+          }
+        )
+        const token = reponse.data.accessToken
+        localStorage.setItem('token', token)
+        this.$router.push('/pendingListings')
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
 }
 </script>
--->

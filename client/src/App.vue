@@ -2,11 +2,12 @@
   <div id="app">
     <div class ="navbar" v-if="!['login', 'register'].includes(this.$route.name)">
       <div class="navbar-left">
-      <b-button id='button' to="/">Home</b-button>
-      <b-button id='button' to="/">Listings</b-button>
+      <b-button id='button' to="/home">Home</b-button>
+      <b-button id='button' to="/listings">Listings</b-button>
       <b-button id='button' to="/list-item">Post an Item</b-button>
       <b-button id='button' to="/view-item/634412cc13ca91fe31a0c8d9">Item view</b-button>
       </div>
+      <div class="navbar-center">Rent-it™</div>
       <div class="navbar-right">
         <b-button id='button' to="/login">Login</b-button>
         <b-button id='button' to="/register">Register New Account</b-button>
@@ -16,6 +17,12 @@
     </div>
     <!-- Render the content of the current page view -->
     <router-view/>
+    <MDBFooter :text="['center', 'lg-start']">
+    <div class="text-center p-3" style="margin-top: 50px">
+      <a class="text-dark" href="http://localhost:8080/admin-login">Admin Login</a>
+    </div>
+    <!-- Copyright -->
+  </MDBFooter>
   </div>
 </template>
 
@@ -62,6 +69,10 @@ export default {
   align-items: center;
   flex-wrap: wrap;
   flex-direction: wrap;
+}
+.navbar-center{
+  display: flex;
+  align-items: center;
 }
 
 </style>

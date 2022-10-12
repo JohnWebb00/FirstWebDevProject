@@ -11,7 +11,8 @@ import PendingListings from './views/pendingListings.vue'
 import AccountCreation from './views/accountCreation.vue'
 import MyAccount from './views/MyAccount.vue'
 import ReviewCard from './components/ReviewCard.vue'
-import Catagoryy from './views/Catagoryy.vue'
+import EditListing from './views/EditListing.vue'
+import myListingsCard from './components/myListingsCard.vue'
 
 Vue.use(Router)
 
@@ -20,7 +21,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home
     },
@@ -32,8 +33,14 @@ export default new Router({
     },
 
     {
+      path: '/my-listings-card',
+      name: 'my listings card',
+      component: myListingsCard
+    },
+
+    {
       path: '/register',
-      name: 'create account',
+      name: 'register',
       component: AccountCreation
     },
 
@@ -50,7 +57,7 @@ export default new Router({
     },
 
     {
-      path: '/adm-login',
+      path: '/admin-login',
       name: 'admin login',
       component: AdminLogin
     },
@@ -67,14 +74,14 @@ export default new Router({
       component: Item
     },
     {
+      path: '/edit-item/:id',
+      name: 'edit item',
+      component: EditListing
+    },
+    {
       path: '/catagory',
       name: 'catagory',
       component: Catagory
-    },
-    {
-      path: '/catagoryy',
-      name: 'catagoryy',
-      component: Catagoryy
     },
     {
       path: '/listings',
