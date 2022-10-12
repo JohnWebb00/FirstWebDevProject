@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card :title="name" :footer="price" :img-src="image" img-alt="Image" img-top class="navCard">
-      <a href=' http://localhost:8080/item + {{ item._id} }' class="stretched-link"></a>
+      <a href=link class="stretched-link"></a>
     </b-card>
   </div>
 </template>

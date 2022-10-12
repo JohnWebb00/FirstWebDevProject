@@ -8,12 +8,8 @@ var itemSchema = new Schema({
     description: {type: String, required: true},
     approved: {type: Boolean, default: false},
     category: {type: String, required: true},
-    Image:[{
-        img1: String, required: true,
-        img2: String, required: false,
-        img3: String, required: false,
-    }],
-    itemAuthor: {type: String, required: true}
+    image:{type: String, required: true},
+    itemAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
     });
 
 var Item = mongoose.model('items', itemSchema);

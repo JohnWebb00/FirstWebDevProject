@@ -2,7 +2,7 @@
   <div>
     <b-row align-v="center">
       <listing-card v-for="item in items" :key="item._id" :name="item.itemName"
-        :price="item.rentPrice + ' ' + item.duration" :image="item.Image.img1">
+        :price="item.rentPrice + ' ' + item.duration" :image="item.image">
       </listing-card>
     </b-row>
   </div>

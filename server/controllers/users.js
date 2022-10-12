@@ -107,6 +107,18 @@ router.get('/auth', authenticateToken, (req, res, next) => {
     res.json(user)
 });
 
+//Get all items belonging to a user
+router.get('/user_id/items', authenticateToken, function (req, res, next)  {
+    var userId = req.user._id
+    Item.find({'user_id' : userId}, function(err, review) {
+        if (err) { return next(err); }
+        if (review === null) {
+            return res.status(404).json({'message': 'Item not found!'});
+        }
+        res.json(review);
+    });
+});
+
 router.get('/', authenticateToken, (req, res, next) => {
     User.find((err, users) => {
         if (err) { return next(err); }

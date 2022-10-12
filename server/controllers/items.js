@@ -3,6 +3,7 @@ var router = express.Router({mergeParams: true});
 var Item = require('../models/item');
 var Review = require('../models/review');
 var jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 
 //Used to authenticate the current user
 function authenticateToken(req, res, next) {
@@ -66,12 +67,26 @@ router.get('/:id', function(req, res, next) {
         res.json(item);
     });
 });
-
+/*
 //Create a review for an item
 router.post('/:item_id/:userId/reviews', function(req, res, next){
     var review = new Review(req.body);
     review.author = req.params.userId
     review.item_id = req.params.item_id
+    review.save(function(err) {
+        if (err) { return next(err); }
+        res.status(201).json(review);
+    })
+});
+*/
+
+//Create a review for a item
+router.post('/:item_id/userId/reviews', authenticateToken, function(req, res, next){
+    var review = new Review(req.body);
+    review.author = req.user._id
+    review.item_id = req.params.item_id
+    console.log(review.author)
+    console.log(review.item_id)
     review.save(function(err) {
         if (err) { return next(err); }
         res.status(201).json(review);

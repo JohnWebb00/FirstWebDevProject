@@ -11,6 +11,7 @@ import PendingListings from './views/pendingListings.vue'
 import AccountCreation from './views/accountCreation.vue'
 import MyAccount from './views/MyAccount.vue'
 import ReviewCard from './components/ReviewCard.vue'
+import EditListing from './views/EditListing.vue'
 import myListingsCard from './components/myListingsCard.vue'
 
 Vue.use(Router)
@@ -56,7 +57,7 @@ export default new Router({
     },
 
     {
-      path: '/adm-login',
+      path: '/admin-login',
       name: 'admin login',
       component: AdminLogin
     },
@@ -71,6 +72,11 @@ export default new Router({
       path: '/view-item/:id',
       name: 'view item',
       component: Item
+    },
+    {
+      path: '/edit-item/:id',
+      name: 'edit item',
+      component: EditListing
     },
     {
       path: '/catagory',

@@ -1,11 +1,12 @@
 <template>
   <div>
     <b-card class="rev-card">
-      <h5>{{ title }}</h5>
+      <h5><u>{{ title }}</u></h5>
       <h6>Rating: {{ rating }}/5</h6>
       <body>
         <p>{{ comment }}</p>
       </body>
+      <footer>{{ author }}</footer>
     </b-card>
   </div>
 </template>
@@ -15,7 +16,8 @@ export default {
   props: {
     title: String,
     rating: Number,
-    comment: String
+    comment: String,
+    author: String
   }
 }
 </script>

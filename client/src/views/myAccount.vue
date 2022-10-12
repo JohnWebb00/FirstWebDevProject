@@ -2,51 +2,55 @@
 
 <template>
   <div>
-      <div class="container center">
-            <h1 class="first-line">My Account - {{ user.userName }}</h1>
-        <br>
-        <img src="https://tinyurl.com/4sk8sjxj" alt="profilePic" class="image-cropper">
-        <br>
-        <h2 class="pic-button">
-         CHANGE PICTURE
-        </h2>
-        <br>
-            <h3>
-              Account Details
-        </h3>
-        <p>
-          <b>Full name:</b> {{ user.fullName }} <br>
-          <b>City:</b> {{ user.location.city }} <br>
-          <b>Email:</b> {{ user.email }} <br>
-          <b>Zip code:</b> {{ user.location.postNr }} <br>
-          <b>Street:</b> {{ user.location.streetAddress }} <br>
-        </p>
+    <div class="container center">
+      <h1 class="first-line">My Account - {{ user.userName }}</h1>
+      <br />
+      <img
+        src="https://tinyurl.com/4sk8sjxj"
+        alt="profilePic"
+        class="image-cropper"
+      />
+      <br />
+      <h2 class="pic-button">CHANGE PICTURE</h2>
+      <br />
+      <h3>Account Details</h3>
+      <p>
+        <b>Full name:</b> {{ user.fullName }} <br />
+        <b>City:</b> {{ user.location.city }} <br />
+        <b>Email:</b> {{ user.email }} <br />
+        <b>Zip code:</b> {{ user.location.postNr }} <br />
+        <b>Street:</b> {{ user.location.streetAddress }} <br />
+      </p>
 
-          <b>
-            <button class="details-button">Edit Account Information</button>
-            <br>
+      <b>
+        <button class="details-button">Edit Account Information</button>
+        <br />
 
-            <b-button pill v-b-modal.modal-1 variant="outline-danger">Remove Account</b-button>
-             <b-modal id="modal-1" title="Leaving already?">
-             <p class="my-4">Are you sure you want to delete your account? This action is permanent and will delete all your data from Rent-It.</p>
-             </b-modal>
-
-          </b>
-
-        </div>
-<hr>
+        <b-button pill v-b-modal.modal-1 variant="outline-danger"
+          >Remove Account</b-button
+        >
+        <b-modal id="modal-1" title="Leaving already?">
+          <p class="my-4">
+            Are you sure you want to delete your account? This action is
+            permanent and will delete all your data from Rent-It.
+          </p>
+        </b-modal>
+      </b>
+    </div>
+    <hr />
 
     <div>
       <h4>My Listings:</h4>
-      <p> LIST OF LISTINGS </p>
+      <p>LIST OF LISTINGS</p>
       <my-listings-card
         v-for="item in items"
-            :key="item._id"
-            :price="review.title"
-            :rating="review.rating"
-            :comment="review.comment"></my-listings-card>
+        :key="item._id"
+        :rentPrice="item.rentPrice"
+        :itemName="item.itemName"
+        :duration="item.duration"
+      ></my-listings-card>
     </div>
-    <div> </div>
+    <div></div>
   </div>
 </template>
 
@@ -58,6 +62,7 @@ export default {
   components: { 'my-listings-card': myListingsCard },
   async mounted() {
     await this.getUser()
+    await this.getItems()
   },
   data() {
     return {
@@ -72,7 +77,8 @@ export default {
           streetAddress: ''
         },
         email: ''
-      }
+      },
+      items: []
     }
   },
   methods: {
@@ -87,6 +93,22 @@ export default {
         const response = await axios
           .get('http://localhost:3000/api/v1/users/auth', config)
           .then((response) => (this.user = response.data.user))
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async getItems() {
+      const token = localStorage.getItem('token')
+      const config = {
+        headers: {
+          authorization: 'Bearer ' + token
+        }
+      }
+      try {
+        const response = await axios
+          .get('http://localhost:3000/api/v1/users/user_id/items', config)
+          .then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
         console.log(error)
@@ -123,10 +145,10 @@ h1 {
   text-align: center;
 }
 
-  h2 {
-    text-align: center;
-    margin: 20 20 20 20;
-  }
+h2 {
+  text-align: center;
+  margin: 20 20 20 20;
+}
 
 h3 {
   background: #f1f1f1;
@@ -193,16 +215,16 @@ h4 {
   opacity: 0.6;
   padding: 5px;
   margin: 20px 0;
-  }
+}
 
-  .details-button:hover {
-    opacity: 1;
-  }
+.details-button:hover {
+  opacity: 1;
+}
 
-  p {
-    padding-left: 400;
-    font-size: 18;
-  }
+p {
+  padding-left: 400;
+  font-size: 18;
+}
 
 p {
   padding-left: 400;

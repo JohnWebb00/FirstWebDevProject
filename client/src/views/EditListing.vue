@@ -189,8 +189,8 @@ export default {
         }
       }
       axios
-        .post(
-          'http://localhost:3000/api/v1/items/user_id/items',
+        .patch(
+          `http://localhost:3000/api/v1/items/${this.$route.params.id}`,
           this.formData,
           config
         )
