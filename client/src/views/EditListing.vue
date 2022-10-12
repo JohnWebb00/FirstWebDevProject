@@ -181,7 +181,7 @@ export default {
     }
   },
   methods: {
-    createListing() { // guess this should be changed to editListing() method?
+    editListing() { // changed to editListing() method from createListing() here.
       const token = localStorage.getItem('token')
       const config = {
         headers: {
