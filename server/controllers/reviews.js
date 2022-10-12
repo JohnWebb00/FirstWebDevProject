@@ -18,16 +18,6 @@ function authenticateToken(req, res, next) {
     })
     }
 
-//Create a review for a item
-router.post('/items/:item_id/:userId/reviews', function(req, res, next){
-    var review = new Review(req.body);
-    review.author = req.user.userId
-    review.item_id = req.params.item_id
-    review.save(function(err) {
-        if (err) { return next(err); }
-        res.status(201).json(review);
-    })
-});
 /*
 //Get all reviews of an item // Duplicate
 router.get('/item/:item_id/reviews', function(req, res){
