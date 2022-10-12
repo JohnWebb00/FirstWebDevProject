@@ -6,7 +6,6 @@
       <body>
         <p>{{ comment }}</p>
       </body>
-      <footer>{{ author }}</footer>
     </b-card>
   </div>
 </template>
@@ -16,8 +15,7 @@ export default {
   props: {
     title: String,
     rating: Number,
-    comment: String,
-    author: String
+    comment: String
   }
 }
 </script>

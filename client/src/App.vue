@@ -5,7 +5,7 @@
       <b-button id='button' to="/home">Home</b-button>
       <b-button id='button' to="/listings">Listings</b-button>
       <b-button id='button' to="/list-item">Post an Item</b-button>
-      <b-button id='button' to="/view-item/634412cc13ca91fe31a0c8d9">Item view</b-button>
+      <b-button id='button' to="/view-item/634555879183030e05a87cb5">Item view</b-button>
       </div>
       <div class="navbar-center">Rent-it™</div>
       <div class="navbar-right">
