@@ -18,6 +18,12 @@
     </div>
     <!-- Render the content of the current page view -->
     <router-view/>
+    <MDBFooter :text="['center', 'lg-start']">
+    <div class="text-center p-3" style="margin-top: 50px">
+      <a class="text-dark" href="http://localhost:8080/admin-login">Admin Login</a>
+    </div>
+    <!-- Copyright -->
+  </MDBFooter>
   </div>
 </template>
 
