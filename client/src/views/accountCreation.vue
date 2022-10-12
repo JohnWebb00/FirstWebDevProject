@@ -1,15 +1,19 @@
+<!-- Responsive design in progress. -->
 <template>
   <div class="container">
     <form @submit.prevent="handleRegistration" action="action_page.php" align-v="center">
+      <b-container>
+        <b-col>
         <h1 class="first-line">Create A New Account</h1>
         <p><b> Please enter your information below:</b></p>
+      </b-col>
         <hr />
-
+<b-col>
         <label for="FullName">Full name:</label>
         <input
           v-model="fullName"
           type="text"
-          placeholder="Enter first and last name"
+          placeholder="Enter full name"
           name="FullName"
           id="FullName"
           required
@@ -79,12 +83,14 @@
         <input
           v-model="streetAddress"
           type="text"
-          placeholder="Enter street name and number"
+          placeholder="Enter street address"
           name="Address"
           id="Address"
           required
         />
+      </b-col>
         <br />
+        <b-col>
         <p>
           <b
             >By creating an account you agree to follow our
@@ -95,6 +101,8 @@
       <div class="container signin">
         <p>Already have an account? <a href="#">Sign in instead!</a></p>
       </div>
+    </b-col>
+    </b-container>
     </form>
   </div>
 </template>
@@ -185,7 +193,7 @@ hr {
   margin: auto;
   border: none;
   cursor: pointer;
-  width: 50%;
+  width: 100%;
   opacity: 0.6;
   font-size: large;
 }
