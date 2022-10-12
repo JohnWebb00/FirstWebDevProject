@@ -12,6 +12,7 @@ import AccountCreation from './views/accountCreation.vue'
 import MyAccount from './views/MyAccount.vue'
 import ReviewCard from './components/ReviewCard.vue'
 import EditListing from './views/EditListing.vue'
+import myListingsCard from './components/myListingsCard.vue'
 
 Vue.use(Router)
 
@@ -20,7 +21,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home
     },
@@ -29,6 +30,12 @@ export default new Router({
       path: '/review-card',
       name: 'review card',
       component: ReviewCard
+    },
+
+    {
+      path: '/my-listings-card',
+      name: 'my listings card',
+      component: myListingsCard
     },
 
     {
