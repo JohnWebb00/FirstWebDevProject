@@ -8,7 +8,7 @@
         <img src="https://tinyurl.com/4sk8sjxj" alt="profilePic" class="image-cropper">
         <br>
         <h2 class="pic-button">
-         CHANGE PICTURE
+        CHANGE PICTURE
         </h2>
         <br>
             <h3>

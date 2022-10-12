@@ -3,7 +3,6 @@
     <div class ="navbar" v-if="!['login', 'register'].includes(this.$route.name)">
       <div class="navbar-left">
       <b-button id='button' to="/">Home</b-button>
-      <b-button id='button' to="/">Search</b-button>
       <b-button id='button' to="/">Listings</b-button>
       <b-button id='button' to="/list-item">Post an Item</b-button>
       <b-button id='button' to="/view-item/634412cc13ca91fe31a0c8d9">Item view</b-button>

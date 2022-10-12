@@ -11,6 +11,7 @@ import PendingListings from './views/pendingListings.vue'
 import AccountCreation from './views/accountCreation.vue'
 import MyAccount from './views/MyAccount.vue'
 import ReviewCard from './components/ReviewCard.vue'
+import Catagoryy from './views/Catagoryy.vue'
 
 Vue.use(Router)
 
@@ -69,6 +70,11 @@ export default new Router({
       path: '/catagory',
       name: 'catagory',
       component: Catagory
+    },
+    {
+      path: '/catagoryy',
+      name: 'catagoryy',
+      component: Catagoryy
     },
     {
       path: '/listings',

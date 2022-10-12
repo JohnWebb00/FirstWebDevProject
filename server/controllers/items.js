@@ -36,7 +36,22 @@ router.get("/", function (req, res, next) {
     const approved = req.query.approved;
     //"?" Is like a if statement, if there are no rating we do else ":" which means "else"
     Item.find(approved ? { approved: { $eq: approved } } : {})
-    .populate('items')
+    //.populate('items')
+    .exec(function (err, items)
+    {
+    if (err) {
+        return res.status(500).send(err);
+    }
+    return res.status(200).json(items);
+    });
+});
+
+// Filtering out items that hasn't been approved
+router.get("/category", function (req, res, next) {
+    const category = req.query.category;
+    //"?" Is like a if statement, if there are no rating we do else ":" which means "else"
+    Item.find(category ? { category: { $eq: category } } : {})
+    // .populate('items')
     .exec(function (err, items)
     {
     if (err) {

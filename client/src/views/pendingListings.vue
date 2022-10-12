@@ -66,7 +66,6 @@ export default {
         console.log(error)
       }
     },
-    // Works WHEN you enter id value into url
     async approveListing() {
       const id = document.getElementById('child').innerHTML
       Api.patch('http://localhost:3000/api/v1/items/' + id, { approved: true })
@@ -77,7 +76,6 @@ export default {
           console.log(error)
         })
     },
-    // Not working
     deleteListing() {
       const id = document.getElementById('child').innerHTML
       Api.delete('http://localhost:3000/api/v1/items/' + id)
