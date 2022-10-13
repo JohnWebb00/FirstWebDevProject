@@ -9,10 +9,10 @@
       class="navCard"
     >
       <a
-        href=link
+        :href="link"
         class="stretched-link"
       ></a>
-      <button v-on:click="editItem">Edit Item</button>
+      <button :v-on:click="editItem">Edit Item</button>
       <br />
       <b-button pill v-b-modal.modal-1 variant="outline-danger"
         >Remove Item</b-button
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  props: ['itemName', 'rentPrice', 'image']
+  props: ['itemName', 'rentPrice', 'image', 'link', 'editItem']
 }
 </script>
 
