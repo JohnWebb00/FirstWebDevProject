@@ -2,6 +2,52 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 var Admin = require('../models/admin');
 
+router.post('/login', async (req, res) => {
+    try {
+
+        const { adminUsername, adminPass } = req.body
+
+        const admin = await Admin.findOne({ adminUsername: adminUsername });
+
+        if (!(adminUsername && adminPass)) {
+            return res.status(401).json({ 'message': 'Must enter a username and password' });
+        }
+
+        if (!admin) {
+            return res.status(404).json({ 'message': 'Admin account not found' });
+        }
+
+        if (!await bcrypt.compare(req.body.adminPass, admin.adminPass)) {
+            return res.status(400).send({ 'message': 'invalid credentials' })
+        }
+
+        const accessToken = createAccessToken(admin);
+        const refreshToken = jwt.sign(admin, "privateKey")
+
+        
+        res.json({ accessToken: accessToken, refreshToken: refreshToken })
+        res.send({ message: 'login successful' })
+    } catch (error) {
+        res.send(error)
+    }
+
+});
+
+router.post('/token', (req, res) => {
+    const refreshToken = req.body.token
+    if (refreshToken == null){
+        return res.sendStatus(401)
+    }
+    if (!refreshToken.includes(refreshToken)){
+        return res.sendStatus(403)
+    }
+
+})
+
+function createAccessToken(admin){
+return jwt.sign({ admin: admin }, "privateKey", {expiresIn: '45m'})
+}
+
 
 //Create a admin
 router.post('/', function(req, res, next){

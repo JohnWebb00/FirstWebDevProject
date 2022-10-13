@@ -7,11 +7,11 @@ var userSchema = new Schema({
     userPass : {type: String, required: true},
     phoneNumber : {type: String},
     location:
-    [{
+    {
         city: String,
         postNr: String,
         streetAddress: String
-    }],
+    },
     email: {type : String, required : true}
 });
 

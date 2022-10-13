@@ -2,19 +2,23 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 var Review = require('../models/review');
 var Item = require('../models/item')
+var jwt = require('jsonwebtoken');
 
-
-//Create a review for a item
-router.post('/items/:item_id/:userId/reviews', function(req, res, next){
-    var review = new Review(req.body);
-    review.author = req.params.userId
-    review.item_id = req.params.item_id
-    review.save(function(err) {
-        if (err) { return next(err); }
-        res.status(201).json(review);
+//Used to authenticate the current user
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    
+    if(token == null) {return res.send({message: 'no token'})}
+    
+    jwt.verify(token, 'privateKey', (err, user) => {
+    if(err){ return res.sendStatus(403) }
+    user = req.user
+    next()
     })
-});
+    }
 
+/*
 //Get all reviews of an item // Duplicate
 router.get('/item/:item_id/reviews', function(req, res){
     review.find({item_id: req.params.item_id})
@@ -26,6 +30,7 @@ router.get('/item/:item_id/reviews', function(req, res){
         return res.status(200).json(reviews);
     });
 });
+*/
 
 //Delete a item and all reviews connected to it
 router.delete('/items/:item_id/review/:review_id', function (req,res,next){
@@ -129,7 +134,7 @@ router.patch('/:id', function(req, res, next) {
 });
 
 //Filtering ratings if values in postman for example is left empty all reviews will be retrived.
-router.get("api/v1/reviews", function (req, res, next) {
+router.get("/", function (req, res, next) {
     //Change casting string to number (Changing variabel type)
     const rating = Number.parseInt(req.query.rating);
     //"?" Is like a if statement, if there are no rating we do else ":" which means "else"
