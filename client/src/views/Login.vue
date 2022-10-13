@@ -5,8 +5,8 @@
     </div>
     <body>
       <form id="loginForm" @submit.prevent="handleLogin">
-        <label>Email:</label>
-        <input type="email" v-model="email" required />
+        <label>Username:</label>
+        <input type="text" v-model="userName" required />
 
         <label>Password:</label>
         <input type="password" v-model="userPass" required />
@@ -84,7 +84,7 @@ export default {
   name: 'Login',
   data() {
     return {
-      email: '',
+      userName: '',
       userPass: ''
     }
   },
@@ -94,13 +94,13 @@ export default {
         const reponse = await axios.post(
           'http://localhost:3000/api/v1/users/login',
           {
-            email: this.email,
+            userName: this.userName,
             userPass: this.userPass
           }
         )
         const token = reponse.data.accessToken
         localStorage.setItem('token', token)
-        this.$router.push('/')
+        this.$router.push('/home')
       } catch (err) {
         console.log(err)
       }
