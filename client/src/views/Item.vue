@@ -28,11 +28,12 @@
 
   </b-container>
 
+  <b-container>
+
     <!-- User input box for item review. -->
-    <div style="align-content: center;
-    margin: auto;">
+    <div>
     <h6>Write a review for this item:</h6>
-    <form id='reviewForm' @submit.prevent="submitReview">
+    <form id='reviewForm' @submit.prevent="submitReview" style="align-content: center; margin: auto;">
        <label>Review title</label>
           <input
             id="title"
@@ -59,6 +60,9 @@
       <button id="submitButton" type="submit">Submit Review</button>
       </form>
       </div>
+
+    </b-container>
+
     <b-row>
       <b-col id="reviews">
         <h5>Reviews for {{ item.itemName }}:</h5>
