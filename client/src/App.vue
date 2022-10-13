@@ -1,18 +1,23 @@
 <template>
   <div id="app">
-    <div class ="navbar" v-if="!['login', 'register'].includes(this.$route.name)">
+    <div
+      class="navbar"
+      v-if="!['login', 'register'].includes(this.$route.name)"
+    >
       <div class="navbar-left">
-      <b-button id='button' to="/home">Home</b-button>
-      <b-button id='button' to="/listings">Listings</b-button>
-      <b-button id='button' to="/list-item">Post an Item</b-button>
-      <b-button id='button' to="/view-item/634412cc13ca91fe31a0c8d9">Item view</b-button>
+        <b-button id="button" to="/home">Home</b-button>
+        <b-button id="button" to="/listings">Listings</b-button>
+        <b-button id="button" to="/list-item">Post an Item</b-button>
+        <b-button id="button" to="/view-item/634555879183030e05a87cb5"
+          >Item view</b-button
+        >
       </div>
       <div class="navbar-center">Rent-it™</div>
       <div class="navbar-right">
-        <b-button id='button' to="/login">Login</b-button>
-        <b-button id='button' to="/register">Register New Account</b-button>
-        <b-button id='button' to="/my-account">My Account</b-button>
-        <b-button id='button' to="/review-card">Review card</b-button>
+        <b-button id="button" to="/login">Login</b-button>
+        <b-button id="button" @click="logout" to="/login">Logout</b-button>
+        <b-button id="button" to="/register">Register New Account</b-button>
+        <b-button id="button" to="/my-account">My Account</b-button>
       </div>
     </div>
     <!-- Render the content of the current page view -->
@@ -34,10 +39,12 @@
 </template>
 
 <script>
-
 export default {
-  components: {
-
+  components: {},
+  methods: {
+    logout() {
+      localStorage.setItem('token', null)
+    }
   }
 }
 </script>
@@ -61,25 +68,24 @@ export default {
   padding: 10px;
 }
 
-#button{
+#button {
   color: white;
   background-color: midnightblue;
   border: none;
   margin: 10px;
 }
 
-#button:active{
+#button:active {
   border: none;
 }
-.navbar-left{
+.navbar-left {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: wrap;
 }
-.navbar-center{
+.navbar-center {
   display: flex;
   align-items: center;
 }
-
 </style>

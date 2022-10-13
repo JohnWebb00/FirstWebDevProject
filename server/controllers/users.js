@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router({ mergeParams: true });
 var jwt = require('jsonwebtoken');
 var User = require('../models/user');
+var Item = require('../models/item');
 var bcrypt = require('bcryptjs')
 
 //Used to authenticate the current user
@@ -17,6 +18,13 @@ function authenticateToken(req, res, next) {
     next()
     })
     }
+//Get all admins
+router.get('/', (req, res, next) => {
+    User.find((err, users) => {
+        if(err){return next(err);}
+        res.json({"users": users});
+    });
+}); 
 
 //Register a user
 router.post('/register', async (req, res) => {
@@ -30,9 +38,9 @@ router.post('/register', async (req, res) => {
             userPass: hashPass,
             phoneNumber: req.body.phoneNumber,
             location: {
-                city: req.body.city,
-                postNr: req.body.postNr,
-                streetAddress: req.body.streetAddress
+                city: req.body.location.city,
+                postNr: req.body.location.postNr,
+                streetAddress: req.body.location.streetAddress
             },
             email: req.body.email
         })
@@ -50,12 +58,12 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
 
-        const { email, userPass } = req.body
+        const { userName, userPass } = req.body
 
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({ userName: userName });
 
-        if (!(email && userPass)) {
-            return res.status(401).json({ 'message': 'Must enter an email and password' });
+        if (!(userName && userPass)) {
+            return res.status(401).json({ 'message': 'Must enter a username and password' });
         }
 
         if (!user) {
@@ -87,7 +95,7 @@ jwt.verify(refreshToken, 'privateKey', (err, user) => {
 })
 
 function createAccessToken(user){
-return jwt.sign({ user: user }, "privateKey"/*, {expiresIn: '45m'}*/)
+return jwt.sign(user.toJSON(), "privateKey"/*, {expiresIn: '45m'}*/)
 }
 
 
@@ -103,19 +111,18 @@ router.post('/', function (req, res, next) {
 //Get authenticated user
 router.get('/auth', authenticateToken, (req, res, next) => {
     const user = req.user
-    console.log(user)
     res.json(user)
 });
 
 //Get all items belonging to a user
 router.get('/user_id/items', authenticateToken, function (req, res, next)  {
-    var userId = req.user._id
-    Item.find({'user_id' : userId}, function(err, review) {
+    const user = req.user
+    Item.find({'itemAuthor' : user._id}, function(err, item) {
         if (err) { return next(err); }
-        if (review === null) {
-            return res.status(404).json({'message': 'Item not found!'});
+        if (item === null) {
+            return res.status(404).json({'message': 'User not found!'});
         }
-        res.json(review);
+        res.json(item);
     });
 });
 
@@ -147,10 +154,25 @@ router.delete('/', function (req, res, next) {
     });
 })
 
+//Delete all items belonging to a user
+router.delete('/user_id/items', authenticateToken, function(req, res, next){
+    const user = req.user
+    Item.find({itemAuthor : user._id}, function(err, item) {
+        if (err) { return next(err); }
+        if (item === null) {
+            return res.status(404).json({'message': 'User not found!'});
+        }
+        Item.deleteMany({'itemAuthor' : user._id}, (err, item) => {
+            if(err){return next(err);}
+            res.json({"items": item});
+        });
+    });
+})
+
 //Delete user by id
-router.delete('/:id', function (req, res, next) {
-    var id = req.params.id
-    User.findByIdAndDelete(id, function (err, user) {
+router.delete('/id', authenticateToken, function (req, res, next) {
+    const user = req.user
+    User.findByIdAndDelete(user._id, function (err, user) {
         if (err) { return next(err); }
         if (user === null) {
             return res.status(404).json({ 'message': 'User not found!' });

@@ -1,31 +1,35 @@
 <template>
   <div>
+    <b-container>
     <b-row>
-      <b-col class="userDiv">
+      <b-col sm="6">
         <img
           src="https://images.timberland.com/is/image/TimberlandEU/10061713-hero"
           alt="boot"
         />
       </b-col>
-      <b-col class="iteminfo">
+
+      <b-col class="iteminfo" sm="6">
         <h5>{{ item.itemName }}</h5>
         <body>
           <h6>{{ item.rentPrice }} SEK <b>per</b> {{ item.duration }}</h6>
           <p>{{ item.description }}</p>
           <div>
             <body id="userBox">
-              <h5 text-align="center">Posted by: {{ user.userName }}</h5>
-              <p>Username: {{ user.email }}</p>
+              <h5 class="center">Posted by: {{ user.fullName }}</h5>
               <p>Location: {{ user.location.city }}</p>
+              <p>Phone Number: {{ user.phoneNumber }}</p>
+              <p>Email: {{ user.email }}</p>
             </body>
           </div>
         </body>
       </b-col>
     </b-row>
 
+  </b-container>
+
     <!-- User input box for item review. -->
-    <div style=
-    "align-content: center;
+    <div style="align-content: center;
     margin: auto;">
     <h6>Write a review for this item:</h6>
     <form id='reviewForm' @submit.prevent="submitReview">
@@ -73,10 +77,18 @@
 </template>
 
 <style scoped>
+
+@media (max-width: 767px) { /* Styling for devices with a width of 767px or SMALLER. */
+
+}
+
+@media (min-width: 768px) { /* Styling for devices with a width of 768px or BIGGER. */
+
+}
 label {
     color: #aaa;
     display: inline-block;
-    margin: 25px 0 15px;
+    margin: auto; /* backup: 25px 0 15px; */
     font-size: 0.6em;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -133,24 +145,18 @@ label {
   width: 250px;
 }
 
-.userDiv {
-  margin: 40px;
-  max-width: 25%;
-}
-
-#userbox {
-  text-align: left;
-}
-
 .iteminfo {
-  padding: 10px;
   text-align: left;
-  margin: 30px;
-  max-width: 60%;
+  margin: auto;
+  max-width: 50%;
 }
+  .center {
+    text-align: center;
+  }
 
 img {
-  align-content: center;
+  max-width: 100%;
+  height: auto;
   border: 1px solid;
 }
 

@@ -100,8 +100,6 @@ router.post('/:item_id/userId/reviews', authenticateToken, function(req, res, ne
     var review = new Review(req.body);
     review.author = req.user._id
     review.item_id = req.params.item_id
-    console.log(review.author)
-    console.log(review.item_id)
     review.save(function(err) {
         if (err) { return next(err); }
         res.status(201).json(review);
