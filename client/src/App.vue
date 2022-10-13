@@ -21,15 +21,20 @@
       </div>
     </div>
     <!-- Render the content of the current page view -->
-    <router-view />
-    <MDBFooter :text="['center', 'lg-start']">
-      <div class="text-center p-3" style="margin-top: 50px">
-        <a class="text-dark" href="http://localhost:8080/admin-login"
-          >Admin Login</a
-        >
-      </div>
-      <!-- Copyright -->
-    </MDBFooter>
+    <router-view/>
+    <div>
+  <b-card
+    overlay
+    img-src="https://img.freepik.com/free-vector/vibrant-summer-ombre-background-vector_53876-105765.jpg?w=2000&t=st=1665660718~exp=1665661318~hmac=bcd18d241e467b0b2c5278049e26b65daf6ee3722f328b60f7947284b427b082"
+    img-alt="Card Image"
+    img-height="300px"
+    img-width="100%"
+    >
+    <b-card-text>
+      <a href="http://localhost:8080/admin-login">Admin Login</a>
+    </b-card-text>
+  </b-card>
+</div>
   </div>
 </template>
 
