@@ -37,7 +37,22 @@ router.get("/", function (req, res, next) {
     const approved = req.query.approved;
     //"?" Is like a if statement, if there are no rating we do else ":" which means "else"
     Item.find(approved ? { approved: { $eq: approved } } : {})
-    .populate('items')
+    //.populate('items')
+    .exec(function (err, items)
+    {
+    if (err) {
+        return res.status(500).send(err);
+    }
+    return res.status(200).json(items);
+    });
+});
+
+// Filtering out items that hasn't been approved
+router.get("/category", function (req, res, next) {
+    const category = req.query.category;
+    //"?" Is like a if statement, if there are no rating we do else ":" which means "else"
+    Item.find(category ? { category: { $eq: category } } : {})
+    // .populate('items')
     .exec(function (err, items)
     {
     if (err) {
@@ -85,8 +100,6 @@ router.post('/:item_id/userId/reviews', authenticateToken, function(req, res, ne
     var review = new Review(req.body);
     review.author = req.user._id
     review.item_id = req.params.item_id
-    console.log(review.author)
-    console.log(review.item_id)
     review.save(function(err) {
         if (err) { return next(err); }
         res.status(201).json(review);

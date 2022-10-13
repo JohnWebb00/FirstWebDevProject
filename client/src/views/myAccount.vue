@@ -26,10 +26,14 @@
         <button class="details-button">Edit Account Information</button>
         <br />
 
-        <b-button pill v-b-modal.modal-1 variant="outline-danger"
+        <b-button
+          v-on:click="deleteAccount"
+          pill
+          v-b-modal.modal-1
+          variant="outline-danger"
           >Remove Account</b-button
         >
-        <b-modal id="modal-1" title="Leaving already?">
+        <b-modal id="modal-1" title="Delete account">
           <p class="my-4">
             Are you sure you want to delete your account? This action is
             permanent and will delete all your data from Rent-It.
@@ -92,7 +96,7 @@ export default {
       try {
         const response = await axios
           .get('http://localhost:3000/api/v1/users/auth', config)
-          .then((response) => (this.user = response.data.user))
+          .then((response) => (this.user = response.data))
         console.log(response)
       } catch (error) {
         console.log(error)
@@ -113,6 +117,33 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    async deleteAccount() {
+      const token = localStorage.getItem('token')
+      const config = {
+        headers: {
+          authorization: 'Bearer ' + token
+        }
+      }
+      await axios
+        .delete('http://localhost:3000/api/v1/users/user_id/items', config)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      axios
+        .delete('http://localhost:3000/api/v1/users/id', config)
+        .then((response) => {
+          console.log(response)
+          this.$router.push('/login')
+          localStorage.setItem('token', null)
+          this.user = {}
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }

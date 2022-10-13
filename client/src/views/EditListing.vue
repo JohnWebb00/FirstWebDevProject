@@ -1,17 +1,19 @@
 <template>
   <div>
     <div class="div1">
-      <h2 class="instructions"> Edit the details of your item. <!-- edited text here. -->
+      <h2 class="instructions">
+        Edit the details of your item
+        <!-- edited text here. -->
       </h2>
     </div>
     <b-row>
       <b-col id="col1">
-        <form class="itemDetails" @submit.prevent="editListing"> <!-- changed from createListing to editListing here. -->
+        <form class="itemDetails" @submit.prevent="editListing">
+          <!-- changed from createListing to editListing here. -->
           <label>Item name</label>
           <input
             id="itemName"
             type="text"
-            placeholder="Enter a name for your item"
             v-model="formData.itemName"
             required
           />
@@ -19,7 +21,6 @@
           <b-input-group id="currency" append="SEK">
             <b-form-input
               id="rentPrice"
-              placeholder="Enter the renting price for your item"
               v-model="formData.rentPrice"
               required
             ></b-form-input>
@@ -27,7 +28,6 @@
           <label>Rent fee is charged every:</label>
           <select
             id="duration"
-            placeholder="Select a duration"
             required
             v-model="formData.duration"
           >
@@ -35,20 +35,19 @@
             <option value="Week">Week</option>
             <option value="Month">Month</option>
           </select>
-          <label>Item description</label>
+          <label>Item description:</label>
           <b-form-textarea
             id="description"
             type="text"
             v-model="formData.description"
-            placeholder="Tell us about your item!"
             rows="3"
             max-rows="6"
           ></b-form-textarea>
 
-          <label>Category</label>
+          <label>Category:</label>
           <select
             id="category"
-            placeholder="Select a category"
+            value="item.category"
             v-model="formData.category"
             required
           >
@@ -168,7 +167,7 @@ button {
 <script>
 import axios from 'axios'
 export default {
-  name: 'EditListing', // changed to EditListing from CreateListing here.
+  name: 'EditListing',
   data() {
     return {
       formData: {
@@ -180,8 +179,11 @@ export default {
       }
     }
   },
+  mounted() {
+    this.getItem()
+  },
   methods: {
-    editListing() { // changed to editListing() method from createListing() here.
+    editListing() {
       const token = localStorage.getItem('token')
       const config = {
         headers: {
@@ -196,6 +198,18 @@ export default {
         )
         .then((response) => console.log(response))
         .catch((error) => console.log(error))
+    },
+    async getItem() {
+      const id = this.$route.params.id
+      console.log(id)
+      try {
+        const response = await axios
+          .get(`http://localhost:3000/api/v1/items/${this.$route.params.id}`)
+          .then((response) => (this.formData = response.data))
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
