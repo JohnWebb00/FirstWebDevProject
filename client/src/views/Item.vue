@@ -1,40 +1,42 @@
 <template>
   <div>
     <b-container>
-    <b-row>
-      <b-col sm="6">
-        <img
-          src="https://images.timberland.com/is/image/TimberlandEU/10061713-hero"
-          alt="boot"
-        />
-      </b-col>
+      <b-row>
+        <b-col sm="6">
+          <h5 class="center"><b>A Glorious Boot!</b>{{ item.itemName }} </h5>
+          <img
+            src="https://images.timberland.com/is/image/TimberlandEU/10061713-hero"
+            alt="boot"
+          />
+        </b-col>
 
-      <b-col class="iteminfo" sm="6">
-        <h5>{{ item.itemName }}</h5>
-        <body>
-          <h6>{{ item.rentPrice }} SEK <b>per</b> {{ item.duration }}</h6>
-          <p>{{ item.description }}</p>
-          <div id="userBox">
-            <body>
-              <h5 class="center">Posted by: {{ user.fullName }}</h5>
-              <p>Location: {{ user.location.city }}</p>
-              <p>Phone Number: {{ user.phoneNumber }}</p>
-              <p>Email: {{ user.email }}</p>
-            </body>
-          </div>
-        </body>
-      </b-col>
-    </b-row>
+        <b-col class="iteminfo" sm="6">
+          <body>
+            <h6 class="center">{{ item.rentPrice }} 2020 SEK per MONTH {{ item.duration }}</h6>
+            <p>{{ item.description }}</p>
+            <div id="userBox">
+              <body>
+                <h5 class="center"><u>Posted by:</u> {{ user.fullName }}</h5>
+                <p><u>Location:</u> Western Residential Area{{ user.location.city }}</p>
+                <p><u>Phone Number:</u> +4673617573 {{ user.phoneNumber }}</p>
+                <p><u>Email:</u> crazycatmom@securemail.com {{ user.email }}</p>
+              </body>
+            </div>
+          </body>
+        </b-col>
+      </b-row>
+    </b-container>
 
-  </b-container>
-
-  <b-container>
-
-    <!-- User input box for item review. -->
-    <div>
-    <h6>Write a review for this item:</h6>
-    <form id='reviewForm' @submit.prevent="submitReview" style="align-content: center; margin: auto;">
-       <label>Review title</label>
+    <b-container>
+      <!-- User input box for item review. -->
+      <div>
+        <h6>Write a review for this item:</h6>
+        <form
+          id="reviewForm"
+          @submit.prevent="submitReview"
+          style="align-content: center; margin: auto"
+        >
+          <label>Review title</label>
           <input
             id="title"
             type="text"
@@ -43,24 +45,27 @@
             required
           />
           <label>Comment</label>
-    <textarea id="comment" v-model="review.comment" placeholder="My experience with this item was..."></textarea>
+          <textarea
+            id="comment"
+            v-model="review.comment"
+            placeholder="My experience with this item was..."
+          ></textarea>
 
-    <!-- User input selection of item grade. -->
-    <label>Rating</label>
-    <select id="rating" v-model="review.rating">
-      <option disabled value="">Please select one</option>
-      <option>5</option>
-      <option>4</option>
-      <option>3</option>
-      <option>2</option>
-      <option>1</option>
-    </select>
+          <!-- User input selection of item grade. -->
+          <label>Rating</label>
+          <select id="rating" v-model="review.rating">
+            <option disabled value="">Please select one</option>
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+          </select>
 
-    <!-- "Submit Review" button. -->
-      <button id="submitButton" type="submit">Submit Review</button>
-      </form>
+          <!-- "Submit Review" button. -->
+          <button id="submitButton" type="submit">Submit Review</button>
+        </form>
       </div>
-
     </b-container>
 
     <b-row>
@@ -81,59 +86,58 @@
 </template>
 
 <style scoped>
-
-@media (max-width: 767px) { /* Styling for devices with a width of 767px or SMALLER. */
-
+@media (max-width: 767px) {
+  /* Styling for devices with a width of 767px or SMALLER. */
 }
 
-@media (min-width: 768px) { /* Styling for devices with a width of 768px or BIGGER. */
-
+@media (min-width: 768px) {
+  /* Styling for devices with a width of 768px or BIGGER. */
 }
 label {
-    color: #aaa;
-    display: inline-block;
-    margin: auto;
-    font-size: 0.6em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
+  color: #aaa;
+  display: inline-block;
+  margin: auto;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
 }
 
 #reviewForm {
-    max-width: 400px;
+  max-width: 400px;
 }
 
 #title {
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: black;
+  border-bottom: 1px solid #ddd;
+  color: #555;
 }
 
 #comment {
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: black;
+  border-bottom: 1px solid #ddd;
+  color: #555;
 }
 
 #rating {
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: black;
+  border-bottom: 1px solid #ddd;
+  color: #555;
 }
 
-#submitButton{
+#submitButton {
   margin-top: 20px;
 }
 
@@ -142,12 +146,11 @@ label {
   justify-content: center;
 }
 #userBox {
-  padding: 10px;
+  padding: 5%;
   border: 1px solid;
   text-align: left;
-  /* margin-top: 20px; */
   margin: auto;
-  width: 300px;
+  width: 100%;
 }
 
 .iteminfo {
@@ -155,9 +158,9 @@ label {
   margin: auto;
   max-width: 50%;
 }
-  .center {
-    text-align: center;
-  }
+.center {
+  text-align: center;
+}
 
 img {
   max-width: 100%;
