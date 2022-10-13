@@ -64,7 +64,7 @@
     </b-container>
 
     <b-row>
-      <b-col id="reviews">
+      <b-col sm="6" id="reviews">
         <h5>Reviews for {{ item.itemName }}:</h5>
         <div id="review_section">
           <review-card
@@ -92,7 +92,7 @@
 label {
     color: #aaa;
     display: inline-block;
-    margin: auto; /* backup: 25px 0 15px; */
+    margin: auto;
     font-size: 0.6em;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -146,7 +146,7 @@ label {
   border: 1px solid;
   text-align: left;
   margin-top: 20px;
-  width: 250px;
+  width: 400px;
 }
 
 .iteminfo {
