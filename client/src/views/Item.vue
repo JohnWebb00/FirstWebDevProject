@@ -14,8 +14,8 @@
         <body>
           <h6>{{ item.rentPrice }} SEK <b>per</b> {{ item.duration }}</h6>
           <p>{{ item.description }}</p>
-          <div>
-            <body id="userBox">
+          <div id="userBox">
+            <body>
               <h5 class="center">Posted by: {{ user.fullName }}</h5>
               <p>Location: {{ user.location.city }}</p>
               <p>Phone Number: {{ user.phoneNumber }}</p>
@@ -145,8 +145,9 @@ label {
   padding: 10px;
   border: 1px solid;
   text-align: left;
-  margin-top: 20px;
-  width: 400px;
+  /* margin-top: 20px; */
+  margin: auto;
+  width: 300px;
 }
 
 .iteminfo {
