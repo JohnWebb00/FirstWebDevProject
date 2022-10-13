@@ -1,35 +1,22 @@
 {
 	"info": {
-		"_postman_id": "dbc81e09-bb6c-4b87-b9e3-9ca01bbcaffd",
-		"name": "server Copy",
+		"_postman_id": "5a83035e-592d-48c6-98c1-28622c756fbb",
+		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23100799"
+		"_exporter_id": "23100753"
 	},
 	"item": [
 		{
 			"name": "User",
 			"item": [
 				{
-					"name": "Create User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {",
-									"pm.expect(pm.response.code).to.be.oneOf([201,404]);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
+					"name": "Register",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fullName\": \"John Webb\",\n    \"userName\": \"JWebbs\",\n    \"userPass\": \"Password123\",\n    \"phoneNumber\": \"072296742\",\n    \"location\": {\n        \"city\": \"Gothenburg\",\n        \"postNr\": \"45899\",\n        \"streetAddress\": \"lindholmen\"\n    },\n    \"email\": \"JohnS@gmail.com\"\n}\n",
+							"raw": "{\n    \"fullName\": \"John Webb\",\n    \"userName\": \"Bobby\",\n    \"userPass\": \"123\",\n    \"phoneNumber\": \"072296742\",\n    \"location\": {\n        \"city\": \"Gothenburg\",\n        \"postNr\": \"45899\",\n        \"streetAddress\": \"lindholmen\"\n    },\n    \"email\": \"John@gmail.com\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -37,14 +24,47 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/users",
+							"raw": "{{host}}/api/v1/users/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"users"
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"Bardia@gmail.com\",\n    \"userPass\": \"123\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/users/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
 							]
 						}
 					},
@@ -53,17 +73,35 @@
 				{
 					"name": "Get all users",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImxvY2F0aW9uIjp7ImNpdHkiOiJHb3RoZW5idXJnIiwicG9zdE5yIjoiMDIzNzciLCJzdHJlZXRBZGRyZXNzIjoiQmlnIGFuZCBHcmFuZCBzdHJlZXQgMjIifSwiX2lkIjoiNjM0NDA2YmUyNThmNThmNzM4Y2E4ZGNiIiwiZnVsbE5hbWUiOiJKb2huIFdlYmIiLCJ1c2VyTmFtZSI6Imp3IiwidXNlclBhc3MiOiIkMmEkMTAkOG0wcElGbFBST21TM0p3SldhMkVhLlFQU3hPbzY1NG02ZHFtaHh3M0tMMVU5YUVLR3ZtNE8iLCJwaG9uZU51bWJlciI6IjA3MjI4MzcwMjYiLCJlbWFpbCI6IkpXQGdtYWlsLmNvbSIsIl9fdiI6MX0sImlhdCI6MTY2NTQ5NzI2MH0.aSFhEI1DFJYnP5Lw2E2M0sNKaUmGf9U7QpngE3jXTBs",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Bearer",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImxvY2F0aW9uIjp7ImNpdHkiOiJHb3RoZW5idXJnIiwicG9zdE5yIjoiMDIzNzciLCJzdHJlZXRBZGRyZXNzIjoiQmlnIGFuZCBHcmFuZCBzdHJlZXQgMjIifSwiX2lkIjoiNjM0NDA2YmUyNThmNThmNzM4Y2E4ZGNiIiwiZnVsbE5hbWUiOiJKb2huIFdlYmIiLCJ1c2VyTmFtZSI6Imp3IiwidXNlclBhc3MiOiIkMmEkMTAkOG0wcElGbFBST21TM0p3SldhMkVhLlFQU3hPbzY1NG02ZHFtaHh3M0tMMVU5YUVLR3ZtNE8iLCJwaG9uZU51bWJlciI6IjA3MjI4MzcwMjYiLCJlbWFpbCI6IkpXQGdtYWlsLmNvbSIsIl9fdiI6MX0sImlhdCI6MTY2NTQ5NzI2MH0.aSFhEI1DFJYnP5Lw2E2M0sNKaUmGf9U7QpngE3jXTBs",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"url": {
-							"raw": "{{host}}/api/v1/users",
+							"raw": "{{host}}/api/v1/users/auth",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"users"
+								"users",
+								"auth"
 							]
 						}
 					},
@@ -133,7 +171,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "63222730dd5b9f24ae735114"
+									"value": "63230d95b1703232b708ddef"
 								}
 							]
 						}
@@ -146,7 +184,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/users/:id",
+							"raw": "{{host}}/api/v1/users/63230d95b1703232b708ddef",
 							"host": [
 								"{{host}}"
 							],
@@ -154,13 +192,7 @@
 								"api",
 								"v1",
 								"users",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+								"63230d95b1703232b708ddef"
 							]
 						}
 					},
@@ -238,7 +270,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"adminName\" : \"Bob\",\n    \"adminUsername\" : \"Freddy\",\n    \"adminPass\" : \"Jeffrocks133333\"\n}",
+							"raw": "{\n    \"adminName\" : \"The Great Administrator\",\n    \"adminUsername\" : \"admin\",\n    \"adminPass\" : \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -422,7 +454,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"itemName\": \"fries\",\n    \"rentPrice\": \"10 SEK\",\n    \"duration\": \"day\",\n    \"description\": \"desc\"\n}",
+							"raw": "{\n    \"itemName\": \"fries\",\n    \"rentPrice\": \"10 SEK\",\n    \"duration\": \"day\",\n    \"description\": \"descsd\",\n    \"category\" : \"Food\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -430,13 +462,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/items",
+							"raw": "{{host}}/api/v1/items/633ea3ab65d3028eed15f12b/items",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"items",
+								"633ea3ab65d3028eed15f12b",
 								"items"
 							]
 						}
@@ -538,8 +572,17 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemName\": \"chips\",\n    \"rentPrice\": \"12 SEK\",\n    \"duration\": \"week\",\n    \"description\": \"description\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{host}}/api/v1/items/:id",
+							"raw": "{{host}}/api/v1/items/632c709adbe3361562a97096",
 							"host": [
 								"{{host}}"
 							],
@@ -547,13 +590,7 @@
 								"api",
 								"v1",
 								"items",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+								"632c709adbe3361562a97096"
 							]
 						}
 					},
@@ -566,7 +603,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"itemName\": \"Post-it stamps\",\n    \"rentPrice\": \"95 SEK\",\n    \"duration\": \"2 days\",\n    \"description\": \"desc\"\n}",
+							"raw": "{\n    \"itemName\": \"chips\",\n    \"rentPrice\": \"12 SEK\",\n    \"duration\": \"day\",\n    \"description\": \"description\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -574,7 +611,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/items/:id",
+							"raw": "{{host}}/api/v1/items/632347cef9bd353e8d1b4f15",
 							"host": [
 								"{{host}}"
 							],
@@ -582,13 +619,7 @@
 								"api",
 								"v1",
 								"items",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+								"632347cef9bd353e8d1b4f15"
 							]
 						}
 					},
@@ -606,7 +637,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"item_id\": \"\",\n    \"author\": \"\",\n    \"title\" : \"this is a title\",\n    \"comment\" : \"blaaaablööööaaaaaaa\",\n    \"rating\": 5\n}",
+							"raw": "{\n    \"item_id\": \"634412cc13ca91fe31a0c8d9\",\n    \"author\": \"634406be258f58f738ca8dcb\",\n    \"title\" : \"Yummy\",\n    \"comment\" : \"fart is so scrumptious (and yummy!)\",\n    \"rating\": 5\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -614,7 +645,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/items/:item_id/:userId/reviews",
+							"raw": "{{host}}/api/v1/items/634412cc13ca91fe31a0c8d9/634406be258f58f738ca8dcb/reviews",
 							"host": [
 								"{{host}}"
 							],
@@ -622,19 +653,9 @@
 								"api",
 								"v1",
 								"items",
-								":item_id",
-								":userId",
+								"634412cc13ca91fe31a0c8d9",
+								"634406be258f58f738ca8dcb",
 								"reviews"
-							],
-							"variable": [
-								{
-									"key": "item_id",
-									"value": "632347cef9bd353e8d1b4f15"
-								},
-								{
-									"key": "userId",
-									"value": "63230d95b1703232b708ddef"
-								}
 							]
 						}
 					},
@@ -718,7 +739,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/reviews/:id",
+							"raw": "{{host}}/api/v1/reviews/632d82c7ae043e1b8022b273",
 							"host": [
 								"{{host}}"
 							],
@@ -726,13 +747,7 @@
 								"api",
 								"v1",
 								"reviews",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+								"632d82c7ae043e1b8022b273"
 							]
 						}
 					},
@@ -744,7 +759,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/reviews/:id",
+							"raw": "{{host}}/api/v1/reviews/632d82c7ae043e1b8022b273",
 							"host": [
 								"{{host}}"
 							],
@@ -752,13 +767,7 @@
 								"api",
 								"v1",
 								"reviews",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "63222730dd5b9f24ae735114"
-								}
+								"632d82c7ae043e1b8022b273"
 							]
 						}
 					},
@@ -833,7 +842,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "b58d92ec-5214-450c-adb0-28e068aa71b9",
 						"exec": [
 							""
 						],
@@ -867,7 +875,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "05864cff-5cba-4070-bac3-a59328954ebf",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -877,7 +884,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "e9c319be-3306-4fc5-ba34-fcf64391213a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -887,11 +893,9 @@
 	],
 	"variable": [
 		{
-			"id": "cd185905-a834-4211-8030-583d17702534",
 			"key": "host",
 			"value": "http://localhost:3000",
 			"type": "string"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
