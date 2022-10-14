@@ -199,21 +199,28 @@ router.put('/:id', function (req, res, next) {
     });
 });
 
-router.patch('/:id', function (req, res, next) {
-    var id = req.params.id;
-    User.findById(id, function (err, user) {
+router.patch('/id', authenticateToken, async (req, res, next) => {
+    const salt = await bcrypt.genSalt(10)
+    const hashPass = await bcrypt.hash(req.body.userPass, salt)
+    const id = req.user._id
+    
+    User.findById(id, async (err, user) => {
         if (err) { return next(err); }
         if (user == null) {
             return res.status(404).json({ "message": "User not found" });
         }
         user.fullName = (req.body.fullName || user.fullName)
         user.userName = (req.body.userName || user.userName)
-        user.userPass = (req.body.userPass || user.userPass)
+        user.userPass = (hashPass || user.userPass)
         user.phoneNumber = (req.body.phoneNumber || user.phoneNumber)
         user.location = (req.body.location || user.location)
         user.email = (req.body.email || user.email)
-        user.save();
-        res.json(user);
+
+        const result = user.save();
+
+        const { userPass, ...data } = await result.toJSON();
+
+        res.send(data)
     });
 });
 

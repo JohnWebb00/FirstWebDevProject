@@ -13,6 +13,7 @@ import MyAccount from './views/MyAccount.vue'
 import ReviewCard from './components/ReviewCard.vue'
 import EditListing from './views/EditListing.vue'
 import myListingsCard from './components/myListingsCard.vue'
+import EditAccount from './views/EditAccount.vue'
 
 Vue.use(Router)
 
@@ -77,6 +78,11 @@ export default new Router({
       path: '/edit-item/:id',
       name: 'edit item',
       component: EditListing
+    },
+    {
+      path: '/edit-account',
+      name: 'edit account',
+      component: EditAccount
     },
     {
       path: '/catagory',
