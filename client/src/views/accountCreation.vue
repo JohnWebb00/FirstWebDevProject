@@ -101,7 +101,7 @@
         </p>
         <button type="submit" class="registerbtn"><b>REGISTER NOW!</b></button>
       <div class="container signin">
-        <p class="large-text">Already have an account? <a href="#">Sign in instead!</a></p>
+        <p class="large-text">Already have an account? <a href="http://localhost:8080/login">Sign in instead!</a></p>
       </div>
     </b-col>
     </b-container>

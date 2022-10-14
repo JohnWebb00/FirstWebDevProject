@@ -2,32 +2,58 @@
   <div>
     <div class="div1">
       <h2 class="instructions">
-        Enter the details for your item, along with a photo and you're good to go!
+        Enter the details for your item, along with a photo and you're good to
+        go!
       </h2>
     </div>
     <b-row>
       <b-col id="col1">
         <form class="itemDetails" @submit.prevent="createListing">
           <label>Item name</label>
-          <input id="itemName" type="text" placeholder="Enter a name for your item" v-model="formData.itemName"
-            required />
+          <input
+            id="itemName"
+            type="text"
+            placeholder="Enter a name for your item"
+            v-model="formData.itemName"
+            required
+          />
           <label>Rent fee</label>
-          <b-input-group id='currency' append="SEK">
-            <b-form-input id="rentPrice" placeholder="Enter the renting price for your item"
-              v-model="formData.rentPrice" required></b-form-input>
+          <b-input-group id="currency" append="SEK">
+            <b-form-input
+              id="rentPrice"
+              placeholder="Enter the renting price for your item"
+              v-model="formData.rentPrice"
+              required
+            ></b-form-input>
           </b-input-group>
           <label>Rent fee is charged every:</label>
-          <select id="duration" placeholder="Select a duration" required v-model="formData.duration">
+          <select
+            id="duration"
+            placeholder="Select a duration"
+            required
+            v-model="formData.duration"
+          >
             <option value="Day">Day</option>
             <option value="Week">Week</option>
             <option value="Month">Month</option>
           </select>
           <label>Item description</label>
-          <b-form-textarea id="description" type="text" v-model="formData.description"
-            placeholder="Tell us about your item!" rows="3" max-rows="6"></b-form-textarea>
+          <b-form-textarea
+            id="description"
+            type="text"
+            v-model="formData.description"
+            placeholder="Tell us about your item!"
+            rows="3"
+            max-rows="6"
+          ></b-form-textarea>
 
           <label>Category</label>
-          <select id="category" placeholder="Select a category" v-model="formData.category" required>
+          <select
+            id="category"
+            placeholder="Select a category"
+            v-model="formData.category"
+            required
+          >
             <option value="Cars">Cars</option>
             <option value="Boats">Boats</option>
             <option value="Motercycle">Motercycle</option>
@@ -52,7 +78,6 @@
             <option value="Cooking">Cooking</option>
             <option value="Exploration">Exploration</option>
             <option value="Study Help">Study Help</option>
-
           </select>
 
           <b-button variant="primary" type="submit">Submit</b-button>
@@ -175,7 +200,8 @@ export default {
         rentPrice: '',
         duration: '',
         description: '',
-        category: ''
+        category: '',
+        image: ''
       }
     }
   },
@@ -187,8 +213,13 @@ export default {
           authorization: 'Bearer ' + token
         }
       }
-      axios.post('http://localhost:3000/api/v1/items/user_id/items', this.formData, config)
-        .then((response) => console.log(response))
+      axios
+        .post(
+          'http://localhost:3000/api/v1/items/user_id/items',
+          this.formData,
+          config
+        )
+        .then((response) => this.$router.push(`/view-item/${response.data._id}`))
         .catch((error) => console.log(error))
     }
   }
