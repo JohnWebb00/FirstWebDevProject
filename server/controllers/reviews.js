@@ -104,17 +104,19 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
-router.put('/:id', function(req, res) {
+router.put('/:id', function(req, res, next) {
     var id = req.params.id;
-    var updated_review = {
-        "_id": id,
-        "title": req.body.title,
-        "comment": req.body.comment,
-        "rating": req.body.rating
-    }
-    Review[id] = updated_review;
-    review.save();
-    res.json(updated_review);
+    Review.findById(id, function(err, review) {
+        if (err) { return next(err); }
+        if (review == null) {
+            return res.status(404).json({"message": "Review not found"});
+        }
+        review.title = req.body.title
+        review.comment = req.body.comment
+        review.rating = req.body.rating
+        review.save();
+        res.json(review);
+    });
 });
 
 
