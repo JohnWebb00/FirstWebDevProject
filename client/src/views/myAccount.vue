@@ -11,7 +11,6 @@
         class="image-cropper"
       />
       <br />
-      <h2 class="pic-button">CHANGE PICTURE</h2>
       <br />
       <h3>Account Details</h3>
       <p>
@@ -23,7 +22,7 @@
       </p>
 
       <b>
-        <button class="details-button">Edit Account Information</button>
+        <button class="details-button" @click="editAccount">Edit Account Information</button>
         <br />
 
         <b-button
@@ -144,6 +143,9 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    editAccount() {
+      this.$router.push('/edit-account')
     }
   }
 }
