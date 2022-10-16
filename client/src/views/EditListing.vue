@@ -26,11 +26,7 @@
             ></b-form-input>
           </b-input-group>
           <label>Rent fee is charged every:</label>
-          <select
-            id="duration"
-            required
-            v-model="formData.duration"
-          >
+          <select id="duration" required v-model="formData.duration">
             <option value="Day">Day</option>
             <option value="Week">Week</option>
             <option value="Month">Month</option>
@@ -218,7 +214,7 @@ export default {
           config
         )
         .then((response) => console.log(response))
-        .catch((error) => console.log(error))
+      this.$router.push(`/view-item/${this.$route.params.id}`).catch((error) => console.log(error))
     },
     async getItem() {
       const id = this.$route.params.id

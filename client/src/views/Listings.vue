@@ -80,7 +80,7 @@
 
     <b-row align-v="center">
       <listing-card v-for="item in items" :key="item._id" :name="item.itemName"
-        :price="item.rentPrice + ' SEK/' + item.duration + ' ' + item.category" :image="item.image"
+        :price="item.rentPrice + '/' + item.duration + ' ' + item.category" :image="item.image"
         :link="`http://localhost:8080/view-item/${item._id}`">
       </listing-card>
     </b-row>
@@ -150,5 +150,4 @@ export default {
 </script>
 
 <style>
-
 </style>

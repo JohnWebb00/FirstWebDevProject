@@ -204,7 +204,7 @@ router.patch('/id', authenticateToken, async (req, res, next) => {
     const hashPass = await bcrypt.hash(req.body.userPass, salt)
     const id = req.user._id
     
-    User.findById(id, async (err, user) => {
+    User.findById(id, function (err, user) {
         if (err) { return next(err); }
         if (user == null) {
             return res.status(404).json({ "message": "User not found" });
@@ -216,11 +216,8 @@ router.patch('/id', authenticateToken, async (req, res, next) => {
         user.location = (req.body.location || user.location)
         user.email = (req.body.email || user.email)
 
-        const result = user.save();
-
-        const { userPass, ...data } = await result.toJSON();
-
-        res.send(data)
+        user.save()
+        res.json(user)
     });
 });
 

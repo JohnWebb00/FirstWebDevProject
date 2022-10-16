@@ -157,22 +157,6 @@ router.put('/:id', function(req, res, next) {
 });
 
 // Partially update Item by ID
-/*
-router.patch('/items/:id', function(req, res) {
-    var id = req.params.id;
-    var item = Item[id];
-    var updated_item = {
-        "_id": id,
-        "itemName": (req.body.itemName || item.itemName),
-        "rentPrice": (req.body.rentPrice || item.rentPrice),
-        "duration": (req.body.duration || item.duration),
-        "description": (req.body.description || item.description)
-    };
-    Item[id] = updated_item;
-
-    res.json(updated_item);
-});
-*/
 
 router.patch('/:id', function(req, res, next) {
     var id = req.params.id;

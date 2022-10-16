@@ -162,13 +162,12 @@ export default {
               postNr: this.formData.location.postNr,
               streetAddress: this.formData.location.streetAddress
             },
-            email: this.formData.email,
-            image: this.formData.image
+            email: this.formData.email
           },
           config
         )
         .then((response) => console.log(response))
-        .catch((error) => console.log(error))
+      this.$router.push('/my-account').catch((error) => console.log(error))
     }
   }
 }

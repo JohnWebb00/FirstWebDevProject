@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "5a83035e-592d-48c6-98c1-28622c756fbb",
-		"name": "server",
+		"_postman_id": "51a7b997-678a-4a8c-b754-7550bc0d7794",
+		"name": "server.v4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23100753"
+		"_exporter_id": "23100799"
 	},
 	"item": [
 		{
@@ -11,6 +11,19 @@
 			"item": [
 				{
 					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([201,404]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -40,6 +53,20 @@
 				},
 				{
 					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,401,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer"
@@ -71,7 +98,20 @@
 					"response": []
 				},
 				{
-					"name": "Get all users",
+					"name": "Get By Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -109,6 +149,20 @@
 				},
 				{
 					"name": "Delete all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -128,6 +182,20 @@
 				},
 				{
 					"name": "Delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -154,6 +222,19 @@
 				},
 				{
 					"name": "Get user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -180,6 +261,19 @@
 				},
 				{
 					"name": "Put user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -200,6 +294,19 @@
 				},
 				{
 					"name": "Patch user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -235,6 +342,19 @@
 				},
 				{
 					"name": "Get user by username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -265,6 +385,19 @@
 			"item": [
 				{
 					"name": "Create Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -293,6 +426,19 @@
 				},
 				{
 					"name": "Get all admins",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -312,6 +458,20 @@
 				},
 				{
 					"name": "Delete all admins",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -331,6 +491,20 @@
 				},
 				{
 					"name": "Delete admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -357,6 +531,19 @@
 				},
 				{
 					"name": "Get user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -383,6 +570,19 @@
 				},
 				{
 					"name": "Put user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -409,6 +609,19 @@
 				},
 				{
 					"name": "Patch user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -449,12 +662,35 @@
 			"item": [
 				{
 					"name": "Create Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,201,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbiI6eyJjaXR5IjoiR290aGVuYnVyZyIsInBvc3ROciI6IjQ1ODk5Iiwic3RyZWV0QWRkcmVzcyI6ImxpbmRob2xtZW4ifSwiX2lkIjoiNjM0ODY5ZDRhZjk1ZmM4YjZhZmE1YmUyIiwiZnVsbE5hbWUiOiJKb2huIFdlYmIiLCJ1c2VyTmFtZSI6IkJvYmJ5IiwidXNlclBhc3MiOiIkMmEkMTAkZDl4MmkvTGVLTWguUHh3MnRnVWdKT0hLL1g3UzRBWVJoT0o1anE5THlJNGxreG40S3g1WHUiLCJwaG9uZU51bWJlciI6IjA3MjI5Njc0MiIsImVtYWlsIjoiSm9obkBnbWFpbC5jb20iLCJfX3YiOjAsImlhdCI6MTY2NTY5MDE0N30.g7sE0WWNQqACAuW0zcFyb8NtAPU5_1X39tpg832-eh8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"itemName\": \"fries\",\n    \"rentPrice\": \"10 SEK\",\n    \"duration\": \"day\",\n    \"description\": \"descsd\",\n    \"category\" : \"Food\"\n}",
+							"raw": "{\n    \"itemName\": \"Bobby\",\n    \"rentPrice\": \"400 SEK\",\n    \"duration\": \"Day\",\n    \"description\": \"Great to drive on the road!\",\n    \"category\" : \"Motercycle\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -462,7 +698,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/items/633ea3ab65d3028eed15f12b/items",
+							"raw": "{{host}}/api/v1/items/user_id/items",
 							"host": [
 								"{{host}}"
 							],
@@ -470,7 +706,7 @@
 								"api",
 								"v1",
 								"items",
-								"633ea3ab65d3028eed15f12b",
+								"user_id",
 								"items"
 							]
 						}
@@ -479,6 +715,19 @@
 				},
 				{
 					"name": "Get all items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -498,6 +747,19 @@
 				},
 				{
 					"name": "Delete all items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -517,6 +779,19 @@
 				},
 				{
 					"name": "Delete item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -543,6 +818,19 @@
 				},
 				{
 					"name": "Get item by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -569,6 +857,19 @@
 				},
 				{
 					"name": "Put item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -598,6 +899,19 @@
 				},
 				{
 					"name": "Patch item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -632,6 +946,19 @@
 			"item": [
 				{
 					"name": "Create Review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -663,6 +990,19 @@
 				},
 				{
 					"name": "Get all reviews",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -689,6 +1029,19 @@
 				},
 				{
 					"name": "Get all reviews for item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -735,6 +1088,19 @@
 				},
 				{
 					"name": "Delete review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -755,6 +1121,19 @@
 				},
 				{
 					"name": "Get review by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -775,6 +1154,19 @@
 				},
 				{
 					"name": "Put review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -801,6 +1193,19 @@
 				},
 				{
 					"name": "Patch review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
