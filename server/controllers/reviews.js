@@ -18,6 +18,71 @@ function authenticateToken(req, res, next) {
     })
     }
 
+    //Create a review 
+router.post('/', function(req, res, next){
+    var review = new Review(req.body);
+    review.save(function(err) {
+        if (err) { return next(err); }
+        res.status(201).json(review);
+    })
+});
+
+//Get all reviews
+    router.get('/', (req, res, next) => {
+        Review.find((err, reviews) => {
+            if(err){return next(err);}
+            res.json({"reviews": reviews});
+        });
+    });
+
+//Get review by id
+    router.get('/:id', function(req, res, next) {
+        var id = req.params.id
+        Review.findById(id, function(err, review) {
+            if (err) { return next(err); }
+            if (review === null) {
+                return res.status(404).json({'message': 'Review not found!'});
+            }
+            res.json(review);
+        });
+    });
+
+
+//Delete all reviews
+router.delete('/', function(req, res, next){
+    Review.deleteMany((err, reviews) => {
+        if(err){return next(err);}
+        res.json({"reviews": reviews});
+    });
+})
+
+//Delete review by id
+router.delete('/:id', function(req, res, next) {
+    var id = req.params.id
+    Review.findByIdAndDelete(id, function(err, review) {
+        if (err) { return next(err); }
+        if (review === null) {
+            return res.status(404).json({'message': 'Review not found!'});
+        }
+        res.json(review);
+    });
+});
+
+
+/*
+//Get all reviews of an item // Duplicate
+router.get('/item/:item_id/reviews', function(req, res){
+    review.find({item_id: req.params.item_id})
+    .populate('reviews')
+    .exec(function ( err, reviews){
+        if(err) {
+            return res.status(500).send(err);
+        }
+        return res.status(200).json(reviews);
+    });
+});
+*/
+
 //Delete a item and all reviews connected to it
 router.delete('/items/:item_id/review/:review_id', function (req,res,next){
     Review.findOneAndDelete({_id: req.params.review_id}, function(err, review){
@@ -35,16 +100,6 @@ router.delete('/items/:item_id/review/:review_id', function (req,res,next){
     });
 });
 
-
-/*
-//Get all reviews // may be used in the future
-router.get('/reviews', function(req, res, next) {
-    Review.find(function(err, reviews) {
-        if (err) { return next(err); }
-        res.json({"reviews": reviews });
-    });
-});
-*/
 
 //Get all reviews for a particular item // Duplicate
 router.get('/items/:item_id/reviews', function (req, res, next)  {
