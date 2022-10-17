@@ -45,24 +45,51 @@
     <div>
       <h4>My Listings:</h4>
       <p>LIST OF LISTINGS</p>
-      <my-listings-card
-        v-for="item in items"
-        :key="item._id"
-        :rentPrice="item.rentPrice"
-        :itemName="item.itemName"
-        :duration="item.duration"
-      ></my-listings-card>
+      <b-card-group deck>
+    <b-card class="list" v-for="item in items" :key="item._id" img-src=""
+      img-alt="Image" img-top :title="item.itemName" style="max-width: 20rem;"
+>
+      <b-card-text>
+        {{ item.description }}
+      </b-card-text>
+
+      <template #footer>
+        <b-container>
+          <b-row>
+            <b-col>
+              <small> {{ item.rentPrice + ' SEK per ' + item.duration }} </small>
+            </b-col>
+          </b-row>
+          <b-row>
+            <small> Catagory: {{ item.category + '' }} </small>
+          </b-row>
+          <b-row>
+            <small id="child">{{ item._id }} </small>
+          </b-row>
+          <b-row>
+            <b-col>
+              <b-button variant="success" v-bind:key="item.id" v-on:click="approveListing(items._id)" style="max-width: 4rem; font-size: 0.6rem;">Edit Item
+              </b-button>
+            </b-col>
+            <b-col>
+              <b-button variant="danger" v-bind:key="item._id" v-on:click="deleteListing(items._id)" style="max-width: 4rem; font-size: 0.6rem;">Remove Item
+              </b-button>
+            </b-col>
+          </b-row>
+        </b-container>
+      </template>
+    </b-card>
+  </b-card-group>
     </div>
     <div></div>
   </div>
 </template>
 
 <script>
-import myListingsCard from '@/components/myListingsCard.vue'
 import axios from 'axios'
+
 export default {
   name: 'User',
-  components: { 'my-listings-card': myListingsCard },
   async mounted() {
     await this.getUser()
     await this.getItems()
@@ -146,6 +173,16 @@ export default {
     },
     editAccount() {
       this.$router.push('/edit-account')
+    },
+    deleteListing() {
+      const id = document.getElementById('child').innerHTML
+      axios.delete('http://localhost:3000/api/v1/items/' + id)
+        .then(response => {
+        })
+        .catch(error => {
+          this.items = []
+          console.log(error)
+        })
     }
   }
 }

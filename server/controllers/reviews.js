@@ -8,29 +8,15 @@ var jwt = require('jsonwebtoken');
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
-    
+
     if(token == null) {return res.send({message: 'no token'})}
-    
+
     jwt.verify(token, 'privateKey', (err, user) => {
     if(err){ return res.sendStatus(403) }
     user = req.user
     next()
     })
     }
-
-/*
-//Get all reviews of an item // Duplicate
-router.get('/item/:item_id/reviews', function(req, res){
-    review.find({item_id: req.params.item_id})
-    .populate('reviews')
-    .exec(function ( err, reviews){
-        if(err) {
-            return res.status(500).send(err);
-        }
-        return res.status(200).json(reviews);
-    });
-});
-*/
 
 //Delete a item and all reviews connected to it
 router.delete('/items/:item_id/review/:review_id', function (req,res,next){
@@ -79,7 +65,7 @@ router.get('/:id', function(req, res, next) {
     Review.findById(id, function(err, review) {
         if (err) { return next(err); }
         if (review === null) {
-            return res.status(404).json({'message': 'review not found!'});
+            return res.status(404).json({'message': 'Review not found!'});
         }
         res.json(review);
     });

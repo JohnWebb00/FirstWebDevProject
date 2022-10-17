@@ -17,7 +17,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status test\", function () {",
-									"pm.expect(pm.response.code).to.be.oneOf([201,404]);",
+									"pm.expect(pm.response.code).to.be.oneOf([200,201,404]);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -75,7 +75,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"Bardia@gmail.com\",\n    \"userPass\": \"123\"\n}\n",
+							"raw": "{\n    \"userName\": \"CDT22\",\n    \"userPass\": \"123\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -391,7 +391,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status test\", function () {",
-									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"pm.expect(pm.response.code).to.be.oneOf([200,201,404,500]);",
 									"});"
 								],
 								"type": "text/javascript"

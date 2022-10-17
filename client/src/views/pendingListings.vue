@@ -1,7 +1,7 @@
 <template>
   <b-card-group deck>
     <b-card class="list" v-for="item in items" :key="item._id" img-src="https://picsum.photos/600/300/?image=25"
-      img-alt="Image" img-top :title="item.itemName">
+      img-alt="Image" img-top :title="item.itemName" style="max-width: 15rem">
       <b-card-text>
         {{ item.description }}
       </b-card-text>
@@ -21,7 +21,7 @@
           </b-row>
           <b-row>
             <b-col>
-              <b-button variant="success" v-bind:key="item.id" v-on:click="approveListing(items._id)">Approve Listing
+              <b-button variant="success" v-bind:key="item.id" v-on:click="approveListing()">Approve Listing
               </b-button>
             </b-col>
             <b-col>
@@ -49,7 +49,15 @@ export default {
 
   data() {
     return {
-      items: []
+      items: [],
+      item: {
+        approved: '',
+        itemName: '',
+        rentPrice: '',
+        duration: '',
+        description: '',
+        category: ''
+      }
     }
   },
 
@@ -65,8 +73,12 @@ export default {
     },
     async approveListing() {
       const id = document.getElementById('child').innerHTML
-      Api.patch('http://localhost:3000/api/v1/items/' + id, { approved: true })
+      Api.put('http://localhost:3000/api/v1/items/' + id,
+        {
+          approved: true
+        })
         .then(response => {
+          console.log('Success')
         })
         .catch(error => {
           this.items = []

@@ -145,12 +145,13 @@ router.put('/:id', function(req, res, next) {
         if (item == null) {
             return res.status(404).json({"message": "item not found"});
         }
-        item.itemName = req.body.itemName
-        item.rentPrice = req.body.rentPrice
-        item.duration = req.body.duration
-        item.description = req.body.description
-        item.approved = req.body.approved
-        item.category = req.body.category
+        item.itemName = (req.body.itemName || item.itemName)
+        item.approved = (req.body.approved || item.approved)
+        item.rentPrice = (req.body.rentPrice || item.rentPrice)
+        item.duration = (req.body.duration || item.duration)
+        item.description = (req.body.description || item.description)
+        item.approved = (req.body.approved || item.approved)
+        item.category = (req.body.category || item.category)
         item.save();
         res.json(item);
     });

@@ -19,19 +19,20 @@
     </div>
     <!-- Render the content of the current page view -->
     <router-view />
+    <footer class="mt-auto">
     <div>
       <b-card
         overlay
-        img-src="https://img.freepik.com/free-vector/vibrant-summer-ombre-background-vector_53876-105765.jpg?w=2000&t=st=1665660718~exp=1665661318~hmac=bcd18d241e467b0b2c5278049e26b65daf6ee3722f328b60f7947284b427b082"
+        img-src="https://www.rseconf.org/wp-content/uploads/2019/02/footer-bg.png"
         img-alt="Card Image"
-        img-height="300px"
         img-width="100%"
-      >
+        max-height="40rem">
         <b-card-text>
           <a href="http://localhost:8080/admin-login">Admin Login</a>
         </b-card-text>
       </b-card>
     </div>
+  </footer>
   </div>
 </template>
 
