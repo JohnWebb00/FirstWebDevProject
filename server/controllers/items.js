@@ -32,6 +32,14 @@ router.post('/user_id/items', authenticateToken, function(req, res, next){
     })
 });
 
+//Get all items
+    router.get('/', (req, res, next) => {
+        Item.find((err, items) => {
+            if(err){return next(err);}
+            res.json({"items": items});
+        });
+    });
+
 // Filtering out items that hasn't been approved
 router.get("/", function (req, res, next) {
     const approved = req.query.approved;
@@ -61,15 +69,6 @@ router.get("/category", function (req, res, next) {
     return res.status(200).json(items);
     });
 });
-
-/*
-//Get all item
-router.get('/', function(req, res, next) {
-    Item.find(function(err, items) {
-        if (err) { return next(err); }
-        res.json({"items": items });
-    });
-}); */
 
 // Get Item by ID
 router.get('/:id', function(req, res, next) {

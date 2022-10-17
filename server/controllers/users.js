@@ -18,7 +18,8 @@ function authenticateToken(req, res, next) {
     next()
     })
     }
-//Get all admins
+
+//Get all users
 router.get('/', (req, res, next) => {
     User.find((err, users) => {
         if(err){return next(err);}
@@ -27,7 +28,7 @@ router.get('/', (req, res, next) => {
 }); 
 
 //Register a user
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const salt = await bcrypt.genSalt(10)
         const hashPass = await bcrypt.hash(req.body.userPass, salt)
@@ -123,13 +124,6 @@ router.get('/user_id/items', authenticateToken, function (req, res, next)  {
             return res.status(404).json({'message': 'User not found!'});
         }
         res.json(item);
-    });
-});
-
-router.get('/', authenticateToken, (req, res, next) => {
-    User.find((err, users) => {
-        if (err) { return next(err); }
-        res.json({ "users": users });
     });
 });
 
