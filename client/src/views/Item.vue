@@ -10,13 +10,17 @@
         </b-col>
 
         <b-col class="iteminfo" sm="6">
-          <h5 class="center"><b>{{ item.itemName }}</b></h5>
+          <h5 class="center">
+            <b>{{ item.itemName }}</b>
+          </h5>
           <body>
             <h6 class="center">{{ item.rentPrice }} per {{ item.duration }}</h6>
             <p>{{ item.description }}</p>
             <div id="userBox">
               <body>
-                <h5 class="center">Posted by: <u>{{ user.fullName }}</u></h5>
+                <h5 class="center">
+                  Posted by: <u>{{ user.fullName }}</u>
+                </h5>
                 <p><u>Location:</u> {{ user.location.city }}</p>
                 <p><u>Phone Number:</u> {{ user.phoneNumber }}</p>
                 <p><u>Email:</u> {{ user.email }}</p>
@@ -33,7 +37,7 @@
         <h6>Write a review for this item:</h6>
         <form
           id="reviewForm"
-          @submit.prevent="submitReview"
+          @submit="submitReview"
           style="align-content: center; margin: auto"
         >
           <label>Review title</label>
@@ -270,6 +274,8 @@ export default {
           config
         )
         .then((response) => console.log(response))
+      this.$router
+        .push(`/view-item/${this.$route.params.id}`)
         .catch((error) => console.log(error))
     }
   }

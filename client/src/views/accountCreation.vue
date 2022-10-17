@@ -131,7 +131,7 @@ export default {
     async handleRegistration() {
       try {
         const response = await axios.post(
-          'http://localhost:3000/api/v1/users/register',
+          'http://localhost:3000/api/v1/users',
           {
             fullName: this.fullName,
             userName: this.userName,
