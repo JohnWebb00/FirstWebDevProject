@@ -28,7 +28,7 @@ router.get('/', (req, res, next) => {
 }); 
 
 //Register a user
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         const salt = await bcrypt.genSalt(10)
         const hashPass = await bcrypt.hash(req.body.userPass, salt)
@@ -98,16 +98,6 @@ jwt.verify(refreshToken, 'privateKey', (err, user) => {
 function createAccessToken(user){
 return jwt.sign(user.toJSON(), "privateKey"/*, {expiresIn: '45m'}*/)
 }
-
-
-router.post('/', function (req, res, next) {
-    console.log(req.body)
-    var user = new User(req.body);
-    user.save(function (err) {
-        if (err) { return next(err); }
-        res.status(201).json(user);
-    })
-});
 
 //Get authenticated user
 router.get('/auth', authenticateToken, (req, res, next) => {
