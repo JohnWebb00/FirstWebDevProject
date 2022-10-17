@@ -3,6 +3,7 @@
     <b-container>
       <b-row>
         <b-col sm="6">
+          <h5 class="center"><b>{{ item.itemName }}</b></h5>
           <img
             src="https://images.timberland.com/is/image/TimberlandEU/10061713-hero"
             alt="boot"
@@ -14,6 +15,16 @@
             <b>{{ item.itemName }}</b>
           </h5>
           <body>
+            <h6 class="center">{{ item.rentPrice }} SEK per {{ item.duration }}</h6>
+            <p>{{ item.description }}</p>
+            <div id="userBox">
+              <body>
+                <h5 class="center"><u>Posted by:</u> {{ user.fullName }}</h5>
+                <p><u>Location:</u>{{ user.location.city }}</p>
+                <p><u>Phone Number:</u>{{ user.phoneNumber }}</p>
+                <p><u>Email:</u>{{ user.email }}</p>
+                </body>
+              </div>
             <h6 class="center">{{ item.rentPrice }} per {{ item.duration }}</h6>
             <p>{{ item.description }}</p>
             <div id="userBox">
@@ -26,7 +37,7 @@
                 <p><u>Email:</u> {{ user.email }}</p>
               </body>
             </div>
-          </body>
+            </body>
         </b-col>
       </b-row>
     </b-container>
@@ -79,7 +90,7 @@
           <review-card
             v-for="review in reviews"
             :key="review._id"
-            :title="review.title"
+            :title="review.gittitle"
             :rating="review.rating"
             :comment="review.comment"
           ></review-card>
