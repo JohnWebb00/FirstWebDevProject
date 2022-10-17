@@ -3,10 +3,7 @@
     <b-container>
       <b-row>
         <b-col sm="6">
-<<<<<<< HEAD
           <h5 class="center"><b>{{ item.itemName }}</b></h5>
-=======
->>>>>>> d17155aa1bf53c67cc901d353c9511678db69a7e
           <img
             src="https://images.timberland.com/is/image/TimberlandEU/10061713-hero"
             alt="boot"
@@ -16,7 +13,6 @@
         <b-col class="iteminfo" sm="6">
           <h5 class="center"><b>{{ item.itemName }}</b></h5>
           <body>
-<<<<<<< HEAD
             <h6 class="center">{{ item.rentPrice }} SEK per {{ item.duration }}</h6>
             <p>{{ item.description }}</p>
             <div id="userBox">
@@ -25,7 +21,8 @@
                 <p><u>Location:</u>{{ user.location.city }}</p>
                 <p><u>Phone Number:</u>{{ user.phoneNumber }}</p>
                 <p><u>Email:</u>{{ user.email }}</p>
-=======
+                </body>
+              </div>
             <h6 class="center">{{ item.rentPrice }} per {{ item.duration }}</h6>
             <p>{{ item.description }}</p>
             <div id="userBox">
@@ -34,10 +31,9 @@
                 <p><u>Location:</u> {{ user.location.city }}</p>
                 <p><u>Phone Number:</u> {{ user.phoneNumber }}</p>
                 <p><u>Email:</u> {{ user.email }}</p>
->>>>>>> d17155aa1bf53c67cc901d353c9511678db69a7e
               </body>
             </div>
-          </body>
+            </body>
         </b-col>
       </b-row>
     </b-container>
