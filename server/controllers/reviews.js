@@ -69,20 +69,6 @@ router.delete('/:id', function(req, res, next) {
 });
 
 
-/*
-//Get all reviews of an item // Duplicate
-router.get('/item/:item_id/reviews', function(req, res){
-    review.find({item_id: req.params.item_id})
-    .populate('reviews')
-    .exec(function ( err, reviews){
-        if(err) {
-            return res.status(500).send(err);
-        }
-        return res.status(200).json(reviews);
-    });
-});
-*/
-
 //Delete a item and all reviews connected to it
 router.delete('/items/:item_id/review/:review_id', function (req,res,next){
     Review.findOneAndDelete({_id: req.params.review_id}, function(err, review){
@@ -101,7 +87,7 @@ router.delete('/items/:item_id/review/:review_id', function (req,res,next){
 });
 
 
-//Get all reviews for a particular item // Duplicate
+//Get all reviews for a particular item
 router.get('/items/:item_id/reviews', function (req, res, next)  {
     var itemId = req.params.item_id
     Review.find({'item_id' : itemId}, function(err, review) {

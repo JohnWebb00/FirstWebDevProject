@@ -22,7 +22,7 @@ function authenticateToken(req, res, next) {
     }
 
 //Create a item
-router.post('/user_id/items', authenticateToken, function(req, res, next){
+router.post('/', authenticateToken, function(req, res, next){
     var item = new Item(req.body)
     item.itemAuthor = req.user._id;
 
@@ -73,21 +73,9 @@ router.get('/:id', function(req, res, next) {
         res.json(item);
     });
 });
-/*
-//Create a review for an item
-router.post('/:item_id/:userId/reviews', function(req, res, next){
-    var review = new Review(req.body);
-    review.author = req.params.userId
-    review.item_id = req.params.item_id
-    review.save(function(err) {
-        if (err) { return next(err); }
-        res.status(201).json(review);
-    })
-});
-*/
 
 //Create a review for a item
-router.post('/:item_id/userId/reviews', authenticateToken, function(req, res, next){
+router.post('/:item_id/reviews', authenticateToken, function(req, res, next){
     var review = new Review(req.body);
     review.author = req.user._id
     review.item_id = req.params.item_id

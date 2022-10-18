@@ -267,7 +267,7 @@ export default {
       }
       axios
         .post(
-          `http://localhost:3000/api/v1/items/${this.$route.params.id}/userId/reviews`,
+          `http://localhost:3000/api/v1/items/${this.$route.params.id}/reviews`,
           this.review,
           config
         )

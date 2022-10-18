@@ -49,7 +49,7 @@ router.post('/register', async (req, res) => {
 
         const { userPass, ...data } = await result.toJSON();
 
-        res.send(data)
+        res.status(201).send(data)
     } catch (error) {
         return res.status(error)
     }

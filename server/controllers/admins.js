@@ -25,8 +25,8 @@ router.post('/login', async (req, res) => {
         const refreshToken = jwt.sign(admin, "privateKey")
 
         
-        res.json({ accessToken: accessToken, refreshToken: refreshToken })
-        res.send({ message: 'login successful' })
+        res.status(200).json({ accessToken: accessToken, refreshToken: refreshToken })
+        
     } catch (error) {
         res.send(error)
     }
@@ -54,7 +54,7 @@ router.post('/', function(req, res, next){
     var admin = new Admin(req.body);
     admin.save(function(err) {
         if (err) { return next(err); }
-        res.status(201).json(admin);
+        res.status(200).json(admin);
     })
 });
 
