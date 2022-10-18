@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-container>
+      <h1>Welcome to Rent-it!</h1>
         <b-row align-h="around">
     <b-col cols="*">
       <b-card title="Listings" overlay

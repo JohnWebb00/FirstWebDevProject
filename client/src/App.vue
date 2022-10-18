@@ -6,7 +6,6 @@
         <b-button id="button" to="/listings">Listings</b-button>
         <b-button id="button" to="/list-item">Post an Item</b-button>
       </div>
-      <div class="navbar-center">Rent-it™</div>
       <div class="navbar-right">
         <b-button id="button" v-if="!loggedIn" to="/login">Login</b-button>
         <b-button id="button" v-if="loggedIn" @click="logout" to="/login">Logout</b-button>
