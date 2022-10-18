@@ -1,115 +1,68 @@
 <template>
   <b-div>
     <b-row class="justify-content-md-center">
-    <div>
-      <b-button v-b-toggle.sidebar-1 style="margin:2.5rem">Filter By Categories</b-button>
-      <b-sidebar
-        id="sidebar-1"
-        title="Categories"
-        shadow
-        width="50%"
-        style="font-size: auto"
-      >
-        <b-col cols="12" md="auto">
-          <div>
+      <div>
+        <b-button v-b-toggle.sidebar-1 style="margin:2.5rem">Filter By Categories</b-button>
+        <b-sidebar id="sidebar-1" title="Categories" shadow width="50%" style="font-size: auto">
+          <b-col cols="12" md="auto">
             <div>
-              <b-button pill variant="info" v-on:click="getItems()"
-                >Get All Listings</b-button
-              >
+              <div>
+                <b-button pill variant="info" v-on:click="getItems()">Get All Listings</b-button>
+              </div>
+              <div>
+                <b-button pill v-b-toggle="'collapse-1'" class="m-1">Transport</b-button>
+              </div>
+              <b-collapse id="collapse-1">
+                <b-list-group>
+                  <b-list-group-item id="cars" v-on:click="filterCars()">Cars</b-list-group-item>
+                  <b-list-group-item id="boats" v-on:click="filterBoats()">Boats</b-list-group-item>
+                  <b-list-group-item id="motercycle" v-on:click="filterMotercycle()">Motercycle</b-list-group-item>
+                  <b-list-group-item id="construction" v-on:click="filterConstruction()">Construction
+                  </b-list-group-item>
+                </b-list-group>
+              </b-collapse>
             </div>
+          </b-col>
+          <b-col cols="12" md="auto">
             <div>
-              <b-button pill v-b-toggle="'collapse-1'" class="m-1"
-                >Transport</b-button
-              >
+              <div>
+                <b-button pill v-b-toggle="'collapse-2'" class="m-1">Living</b-button>
+              </div>
+              <b-collapse id="collapse-2">
+                <b-list-group>
+                  <b-list-group-item id="Apartments" v-on:click="filterApartments()">Apartments</b-list-group-item>
+                  <b-list-group-item id="Houses" v-on:click="filterHouses()">Houses</b-list-group-item>
+                  <b-list-group-item id="Cabins" v-on:click="filterCabins()">Cabins</b-list-group-item>
+                  <b-list-group-item id="Abroad" v-on:click="filterAbroad()">Abroad</b-list-group-item>
+                </b-list-group>
+              </b-collapse>
             </div>
-            <b-collapse id="collapse-1">
-              <b-list-group>
-                <b-list-group-item id="cars" v-on:click="filterCars()"
-                  >Cars</b-list-group-item
-                >
-                <b-list-group-item id="boats" v-on:click="filterBoats()"
-                  >Boats</b-list-group-item
-                >
-                <b-list-group-item
-                  id="motercycle"
-                  v-on:click="filterMotercycle()"
-                  >Motercycle</b-list-group-item
-                >
-                <b-list-group-item
-                  id="construction"
-                  v-on:click="filterConstruction()"
-                  >Construction</b-list-group-item
-                >
-              </b-list-group>
-            </b-collapse>
-          </div>
-        </b-col>
-        <b-col cols="12" md="auto">
-        <div>
-          <div>
-            <b-button pill v-b-toggle="'collapse-2'" class="m-1"
-              >Living</b-button
-            >
-          </div>
-          <b-collapse id="collapse-2">
-            <b-list-group>
-              <b-list-group-item id="Apartments" v-on:click="filterApartments()"
-                >Apartments</b-list-group-item
-              >
-              <b-list-group-item id="Houses" v-on:click="filterHouses()"
-                >Houses</b-list-group-item
-              >
-              <b-list-group-item id="Cabins" v-on:click="filterCabins()"
-                >Cabins</b-list-group-item
-              >
-              <b-list-group-item id="Abroad" v-on:click="filterAbroad()"
-                >Abroad</b-list-group-item
-              >
-            </b-list-group>
-          </b-collapse>
-        </div>
-      </b-col>
-      <b-col cols="12" md="auto">
-        <div>
-          <div>
-            <b-button pill v-b-toggle="'collapse-3'" class="m-1"
-              >Hobbies</b-button
-            >
-          </div>
-          <b-collapse id="collapse-3">
-            <b-list-group>
-              <b-list-group-item id="Bikes" v-on:click="filterBikes()"
-                >Bikes</b-list-group-item
-              >
-              <b-list-group-item id="Watersport" v-on:click="filterWatersport()"
-                >Watersport</b-list-group-item
-              >
-              <b-list-group-item id="Music" v-on:click="filterMusic()"
-                >Music</b-list-group-item
-              >
-              <b-list-group-item id="Sports" v-on:click="filterSports()"
-                >Sports</b-list-group-item
-              >
-            </b-list-group>
-          </b-collapse>
-        </div>
-      </b-col>
-      </b-sidebar>
-    </div>
+          </b-col>
+          <b-col cols="12" md="auto">
+            <div>
+              <div>
+                <b-button pill v-b-toggle="'collapse-3'" class="m-1">Hobbies</b-button>
+              </div>
+              <b-collapse id="collapse-3">
+                <b-list-group>
+                  <b-list-group-item id="Bikes" v-on:click="filterBikes()">Bikes</b-list-group-item>
+                  <b-list-group-item id="Watersport" v-on:click="filterWatersport()">Watersport</b-list-group-item>
+                  <b-list-group-item id="Music" v-on:click="filterMusic()">Music</b-list-group-item>
+                  <b-list-group-item id="Sports" v-on:click="filterSports()">Sports</b-list-group-item>
+                </b-list-group>
+              </b-collapse>
+            </div>
+          </b-col>
+        </b-sidebar>
+      </div>
 
-    <b-row>
-      <listing-card
-        v-for="item in items"
-        :key="item._id"
-        :name="item.itemName"
-        :price="item.rentPrice + '/' + item.duration + ' ' + item.category"
-        :image="item.image"
-        :link="`http://localhost:8080/view-item/${item._id}`"
-        class="navCard"
-      >
-      </listing-card>
+      <b-row>
+        <listing-card v-for="item in items" :key="item._id" :name="item.itemName"
+          :price="item.rentPrice + '/' + item.duration + ' ' + item.category" :image="item.image"
+          :link="`http://localhost:8080/view-item/${item._id}`" class="navCard">
+        </listing-card>
+      </b-row>
     </b-row>
-  </b-row>
   </b-div>
 </template>
 

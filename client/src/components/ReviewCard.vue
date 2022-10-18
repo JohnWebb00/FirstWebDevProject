@@ -3,6 +3,7 @@
     <b-card class="rev-card">
       <h5><u>{{ title }}</u></h5>
       <h6>Rating: {{ rating }}/5</h6>
+
       <body>
         <p>{{ comment }}</p>
       </body>

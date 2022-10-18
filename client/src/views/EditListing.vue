@@ -11,19 +11,10 @@
         <form class="itemDetails" @submit.prevent="editListing">
           <!-- changed from createListing to editListing here. -->
           <label>Item name</label>
-          <input
-            id="itemName"
-            type="text"
-            v-model="formData.itemName"
-            required
-          />
+          <input id="itemName" type="text" v-model="formData.itemName" required />
           <label>Rent fee</label>
           <b-input-group id="currency" append="SEK">
-            <b-form-input
-              id="rentPrice"
-              v-model="formData.rentPrice"
-              required
-            ></b-form-input>
+            <b-form-input id="rentPrice" v-model="formData.rentPrice" required></b-form-input>
           </b-input-group>
           <label>Rent fee is charged every:</label>
           <select id="duration" required v-model="formData.duration">
@@ -32,21 +23,11 @@
             <option value="Month">Month</option>
           </select>
           <label>Item description:</label>
-          <b-form-textarea
-            id="description"
-            type="text"
-            v-model="formData.description"
-            rows="3"
-            max-rows="6"
-          ></b-form-textarea>
+          <b-form-textarea id="description" type="text" v-model="formData.description" rows="3" max-rows="6">
+          </b-form-textarea>
 
           <label>Category:</label>
-          <select
-            id="category"
-            value="item.category"
-            v-model="formData.category"
-            required
-          >
+          <select id="category" value="item.category" v-model="formData.category" required>
             <option value="Cars">Cars</option>
             <option value="Boats">Boats</option>
             <option value="Motercycle">Motercycle</option>
@@ -80,7 +61,7 @@
   </div>
 </template>
 
-  <style scoped>
+<style scoped>
 .div1 {
   display: flex;
   justify-content: center;
@@ -97,6 +78,7 @@
   padding: 15px;
   max-width: 600px;
 }
+
 .itemDetails {
   width: 600px;
   margin: 30px auto;
