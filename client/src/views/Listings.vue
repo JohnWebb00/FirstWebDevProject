@@ -49,36 +49,6 @@
           </b-collapse>
         </div>
 
-        <div>
-          <div>
-            <b-button pill v-b-toggle="'collapse-4'" class="m-1">Tools</b-button>
-          </div>
-          <b-collapse id="collapse-4">
-            <b-list-group>
-              <b-list-group-item id="value" v-on:click="filter()">Drills</b-list-group-item>
-              <b-list-group-item button>Electric</b-list-group-item>
-              <b-list-group-item button>Saws</b-list-group-item>
-              <b-list-group-item button>Welders</b-list-group-item>
-
-            </b-list-group>
-          </b-collapse>
-        </div>
-
-        <div>
-          <div>
-            <b-button pill v-b-toggle="'collapse-5'" class="m-1">Services</b-button>
-          </div>
-          <b-collapse id="collapse-5">
-            <b-list-group>
-              <b-list-group-item button>Construction</b-list-group-item>
-              <b-list-group-item button>Cooking</b-list-group-item>
-              <b-list-group-item button>Exploration</b-list-group-item>
-              <b-list-group-item button>Study Help</b-list-group-item>
-
-            </b-list-group>
-          </b-collapse>
-        </div>
-
       </b-sidebar>
     </div>
 

@@ -68,16 +68,6 @@
             <option value="Watersports">Watersports</option>
             <option value="Music">Music</option>
             <option value="Sports">Sports</option>
-
-            <option value="Drills">Drills</option>
-            <option value="Electric">Electric</option>
-            <option value="Saws">Saws</option>
-            <option value="Welders">Welders</option>
-
-            <option value="Construction">Construction</option>
-            <option value="Cooking">Cooking</option>
-            <option value="Exploration">Exploration</option>
-            <option value="Study Help">Study Help</option>
           </select>
 
           <b-button variant="primary" type="submit">Submit</b-button>
