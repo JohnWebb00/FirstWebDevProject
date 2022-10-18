@@ -2,8 +2,8 @@
   <b-container>
     <b-row>
       <b-col class="div1">
-      <header id="h1">Sign-in</header>
-    </b-col>
+        <header id="h1">Sign-in</header>
+      </b-col>
     </b-row>
     <b-row>
       <form id="loginForm" @submit.prevent="handleLogin">
@@ -18,11 +18,11 @@
     </b-row>
     <b-row>
       <b-col>
-      Don't have an account yet?
-      <a href="http://localhost:8080/register">Click here</a>
-    </b-col>
+        Don't have an account yet?
+        <a href="http://localhost:8080/register">Click here</a>
+      </b-col>
     </b-row>
-</b-container>
+  </b-container>
 </template>
 
 <style scoped>
@@ -33,10 +33,11 @@
   max-width: 420px;
 }
 
-header{
+header {
   margin: 40px;
   background-color: #00428c
 }
+
 #loginForm {
   max-width: 420px;
   margin: 30px auto;

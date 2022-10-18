@@ -1,19 +1,20 @@
 <template>
   <b-container>
-  <b-row class="justify-content-md-center">
-    <b-col cols="12" md="auto">
-      <header id="h1">Admin log-in</header>
-    <body>
-      <form id="loginForm" @submit.prevent="handleLogin">
-        <label>Username:</label>
-        <input type="text" v-model="adminUsername" required />
+    <b-row class="justify-content-md-center">
+      <b-col cols="12" md="auto">
+        <header id="h1">Admin log-in</header>
 
-        <label>Password:</label>
-        <input type="password" v-model="adminPass" required />
-        <b-button type="submit" id="login" pill variant="dark">Log-in</b-button>
-      </form>
-    </body>
-  </b-col>
+        <body>
+          <form id="loginForm" @submit.prevent="handleLogin">
+            <label>Username:</label>
+            <input type="text" v-model="adminUsername" required />
+
+            <label>Password:</label>
+            <input type="password" v-model="adminPass" required />
+            <b-button type="submit" id="login" pill variant="dark">Log-in</b-button>
+          </form>
+        </body>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -26,10 +27,11 @@
   max-width: 420px;
 }
 
-header{
+header {
   margin: 40px;
   background-color: #00428c
 }
+
 #loginForm {
   max-width: 420px;
   margin: 30px auto;

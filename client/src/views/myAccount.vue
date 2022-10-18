@@ -3,11 +3,7 @@
     <div class="container center">
       <h1 class="first-line">My Account - {{ user.userName }}</h1>
       <br />
-      <img
-        src="https://tinyurl.com/4sk8sjxj"
-        alt="profilePic"
-        class="image-cropper"
-      />
+      <img src="https://tinyurl.com/4sk8sjxj" alt="profilePic" class="image-cropper" />
       <br />
       <br />
       <h3>Account Details</h3>
@@ -25,13 +21,7 @@
         </button>
         <br />
 
-        <b-button
-          v-on:click="deleteAccount"
-          pill
-          v-b-modal.modal-1
-          variant="outline-danger"
-          >Remove Account</b-button
-        >
+        <b-button v-on:click="deleteAccount" pill v-b-modal.modal-1 variant="outline-danger">Remove Account</b-button>
         <b-modal id="modal-1" title="Delete account">
           <p class="my-4">
             Are you sure you want to delete your account? This action is
@@ -47,18 +37,10 @@
       <p>LIST OF LISTINGS</p>
       <b-container>
         <b-row class="justify-content-md-center">
-        <b-col cols="12" md="auto">
+          <b-col cols="12" md="auto">
             <b-card-group deck>
-              <b-card
-                class="list"
-                v-for="item in items"
-                :key="item._id"
-                img-src=""
-                img-alt="Image"
-                img-top
-                :title="item.itemName"
-                style="max-width: 20rem"
-              >
+              <b-card class="list" v-for="item in items" :key="item._id" img-src="" img-alt="Image" img-top
+                :title="item.itemName" style="max-width: 20rem">
                 <b-card-text>
                   {{ item.description }}
                 </b-card-text>
@@ -76,30 +58,18 @@
                     </b-row>
                     <b-row>
                       <b-col>
-                        <b-button
-                          variant="success"
-                          v-bind:key="item.id"
-                          v-on:click="editListing(item._id)"
-                          style="max-width: 4rem; font-size: 0.6rem"
-                          >Edit Item
+                        <b-button variant="success" v-bind:key="item.id" v-on:click="editListing(item._id)"
+                          style="max-width: 4rem; font-size: 0.6rem">Edit Item
                         </b-button>
                       </b-col>
                       <b-col>
-                        <b-button
-                          variant="primary"
-                          v-bind:key="item._id"
-                          v-on:click="viewListing(item._id)"
-                          style="max-width: 4rem; font-size: 0.6rem"
-                          >View Item
+                        <b-button variant="primary" v-bind:key="item._id" v-on:click="viewListing(item._id)"
+                          style="max-width: 4rem; font-size: 0.6rem">View Item
                         </b-button>
                       </b-col>
                       <b-col>
-                        <b-button
-                          variant="danger"
-                          v-bind:key="item._id"
-                          v-on:click="deleteListing(item._id)"
-                          style="max-width: 4rem; font-size: 0.6rem"
-                          >Remove Item
+                        <b-button variant="danger" v-bind:key="item._id" v-on:click="deleteListing(item._id)"
+                          style="max-width: 4rem; font-size: 0.6rem">Remove Item
                         </b-button>
                       </b-col>
                     </b-row>
@@ -108,7 +78,7 @@
               </b-card>
             </b-card-group>
           </b-col>
-          </b-row>
+        </b-row>
       </b-container>
     </div>
   </div>
@@ -212,7 +182,7 @@ export default {
     deleteListing(id) {
       axios
         .delete('http://localhost:3000/api/v1/items/' + id)
-        .then((response) => {})
+        .then((response) => { })
         .catch((error) => {
           this.items = []
           console.log(error)
@@ -272,6 +242,7 @@ h4 {
   display: inline-block;
   text-align: center;
 }
+
 .first-line {
   color: white;
   background-color: #00428c;

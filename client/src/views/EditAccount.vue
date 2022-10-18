@@ -3,11 +3,7 @@
 
 <template>
   <div class="container">
-    <form
-      @submit.prevent="editAccount"
-      action="action_page.php"
-      align-v="center"
-    >
+    <form @submit.prevent="editAccount" action="action_page.php" align-v="center">
       <b-container>
         <b-col>
           <h1 class="first-line">Edit your account</h1>
@@ -18,76 +14,28 @@
         <hr />
         <b-col>
           <label for="FullName" class="mobile-text">Full name:</label>
-          <input
-            v-model="formData.fullName"
-            type="text"
-            name="FullName"
-            id="FullName"
-            required
-          />
+          <input v-model="formData.fullName" type="text" name="FullName" id="FullName" required />
           <br />
           <label for="UserName" class="mobile-text">Username:</label>
-          <input
-            v-model="formData.userName"
-            type="text"
-            name="UserName"
-            id="UserName"
-            required
-          />
+          <input v-model="formData.userName" type="text" name="UserName" id="UserName" required />
           <br />
           <label for="UserPassword" class="mobile-text">Password:</label>
-          <input
-            v-model="userPass"
-            type="password"
-            name="UserPassword"
-            id="UserPassword"
-            required
-          />
+          <input v-model="userPass" type="password" name="UserPassword" id="UserPassword" required />
           <br />
           <label for="Email" class="mobile-text">Email:</label>
-          <input
-            v-model="formData.email"
-            type="email"
-            name="Email"
-            id="Email"
-            required
-          />
+          <input v-model="formData.email" type="email" name="Email" id="Email" required />
           <br />
           <label for="PhoneNumber" class="mobile-text">Phone number:</label>
-          <input
-            v-model="formData.phoneNumber"
-            type="text"
-            name="PhoneNumber"
-            id="PhoneNumber"
-            required
-          />
+          <input v-model="formData.phoneNumber" type="text" name="PhoneNumber" id="PhoneNumber" required />
           <br />
           <label for="City" class="mobile-text">City:</label>
-          <input
-            v-model="formData.location.city"
-            type="text"
-            name="City"
-            id="City"
-            required
-          />
+          <input v-model="formData.location.city" type="text" name="City" id="City" required />
           <br />
           <label for="PostNr" class="mobile-text">Postal code:</label>
-          <input
-            v-model="formData.location.postNr"
-            type="text"
-            name="PostNr"
-            id="PostNr"
-            required
-          />
+          <input v-model="formData.location.postNr" type="text" name="PostNr" id="PostNr" required />
           <br />
           <label for="Address" class="mobile-text">Street address:</label>
-          <input
-            v-model="formData.location.streetAddress"
-            type="text"
-            name="Address"
-            id="Address"
-            required
-          />
+          <input v-model="formData.location.streetAddress" type="text" name="Address" id="Address" required />
         </b-col>
         <br />
         <b-col>
@@ -174,12 +122,14 @@ export default {
 </script>
 <style scoped>
 @media (max-width: 767px) {
+
   /* Styling for devices with a width of 767px or SMALLER. */
   .container {
     padding: 16px;
     width: 100%;
     margin: auto;
   }
+
   .first-line {
     color: white;
     background-color: #001e41;
@@ -198,6 +148,7 @@ export default {
     border: none;
     background: #f1f1f1;
   }
+
   .registerbtn {
     background-color: #002753;
     color: white;
@@ -224,12 +175,14 @@ export default {
 }
 
 @media (min-width: 768px) {
+
   /* Styling for devices with a width of 768px or BIGGER. */
   .container {
     padding: 8px;
     width: 100%;
     margin: auto;
   }
+
   .first-line {
     color: white;
     background-color: #013a7b;
@@ -252,6 +205,7 @@ export default {
     border: 1px solid #00428c;
     margin-bottom: 10%;
   }
+
   .registerbtn {
     background-color: #00428c;
     color: white;
@@ -263,6 +217,7 @@ export default {
     opacity: 0.6;
     font-size: large;
   }
+
   .large-text {
     font-size: 110%;
     margin-bottom: 4%;

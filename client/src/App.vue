@@ -34,7 +34,7 @@
             <div class="col-md-2">
               <h6 class="text-uppercase font-weight-bold">
                 <a href="https://www.amazon.se/Coding-Development-All-One-Dummies/dp/1119473926/ref=asc_df_1119473926/?tag=shpngadsglede-21&linkCode=df0&hvadid=476505640779&hvpos=&hvnetw=g&hvrand=13015083246108035693&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1012511&hvtargid=pla-489073989775&psc=1"
-                class="text-white">Help</a>
+                  class="text-white">Help</a>
               </h6>
             </div>
 
