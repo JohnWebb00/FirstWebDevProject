@@ -224,7 +224,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/users/:id",
+							"raw": "{{host}}/api/v1/users/id",
 							"host": [
 								"{{host}}"
 							],
@@ -232,13 +232,7 @@
 								"api",
 								"v1",
 								"users",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "634daa28bc84fa28a5fe6131"
-								}
+								"id"
 							]
 						}
 					},
@@ -1129,6 +1123,14 @@
 								"reviews"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific review for a particular item",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				},

@@ -4,20 +4,6 @@ var Review = require('../models/review');
 var Item = require('../models/item')
 var jwt = require('jsonwebtoken');
 
-//Used to authenticate the current user
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-
-    if(token == null) {return res.send({message: 'no token'})}
-
-    jwt.verify(token, 'privateKey', (err, user) => {
-    if(err){ return res.sendStatus(403) }
-    user = req.user
-    next()
-    })
-    }
-
     //Create a review 
 router.post('/', function(req, res, next){
     var review = new Review(req.body);
@@ -86,18 +72,6 @@ router.delete('/items/:item_id/review/:review_id', function (req,res,next){
     });
 });
 
-
-//Get all reviews for a particular item
-router.get('/items/:item_id/reviews', function (req, res, next)  {
-    var itemId = req.params.item_id
-    Review.find({'item_id' : itemId}, function(err, review) {
-        if (err) { return next(err); }
-        if (review === null) {
-            return res.status(404).json({'message': 'Item not found!'});
-        }
-        res.json(review);
-    });
-});
 
 
 // Get review by ID

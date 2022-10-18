@@ -153,7 +153,7 @@ router.delete('/user_id/items', authenticateToken, function(req, res, next){
 })
 
 //Delete user by id
-router.delete('/:id', authenticateToken, function (req, res, next) {
+router.delete('/id', authenticateToken, function (req, res, next) {
     const user = req.user
     User.findByIdAndDelete(user._id, function (err, user) {
         if (err) { return next(err); }
