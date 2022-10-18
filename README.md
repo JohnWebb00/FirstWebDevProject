@@ -65,15 +65,14 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 The purpose of this website will be to create a platform where users can both rent and publish listings for items. Therefore the content on the website will be primarily user generated. The problem that we aim to solve with this website is to minimize unecessary purchases of items which would otherwise not be used regularly, thereby combatting consumerism and reducing waste.
 
 ### Pages
-* Home: From here the user will be able to search for items, view and navigate directly to top rated items and view the catagories. 
-* Personal-Account: This is where the user gets a overview of their published listings, account details and renting history and is able to change account information
-* Visit-Account: This is where a user will be able to see an overview of another users profile and their published listings.
-* Search Result: Shows the user relevent listings based on search result or category. The user can filter based on price, rating and catagories. The listings will be presented by image boxes with some item information like price, overall rating.  
-* Item: Here is where the user can get a more detailed discription of a listing, the listing has a image of the item, textual discription, price, rating, reviews from previous renters and location of the item.  
-* Create-Listing: Here the user can create their own listings, the user will be asked to fill in the necessary information about the item before publishing.   
+* HomePage: From here the user will be able to go to other pages of the website. The user can go to, listings, login, register, admin login, listings creation page.
+* Personal-Account: This is where the user gets a overview of their published listings, account details and is able to change account information
+* ListingPage: Shows the user all the listings. The user can filter based on catagories. The listings will be presented by image boxes with some item information like price, overall rating.
+* Item: Here is where the user can get a more detailed discription of a listing, the listing has a image of the item, textual discription, price, rating, reviews from previous renters and location of the item.
+* Create-Listing: Here the user can create their own listings, the user will be asked to fill in the necessary information about the item before publishing.
 * Create-Account: Shows the sign up form from which a prospective user may create an account.
-* Log-in: This is where users can log into the website or be redirected to create an account if they have not done so yet. 
-* Moderation: This is where admins will moderate posts, choosing whether to approve or reject new items.
+* Log-in: This is where users can log into the website or be redirected to create an account if they have not done so yet.
+* Moderation: This is where admins will moderate posts, choosing whether to approve or reject new listings.
 * Admin Login: This is where the administrator will login so that they can moderate items.
 ### Entity-Relationship (ER) Diagram
 

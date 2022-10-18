@@ -89,9 +89,9 @@
 </template>
 
 <style scoped>
-@media (max-width: 767px) {
-  /* Styling for devices with a width of 767px or SMALLER. */
-}
+/*@media (max-width: 767px) {
+  /* Styling for devices with a width of 767px or SMALLER.
+  }*/
 
 @media (min-width: 768px) {
   /* Styling for devices with a width of 768px or BIGGER. */
