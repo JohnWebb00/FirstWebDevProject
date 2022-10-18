@@ -8,8 +8,8 @@
       </div>
       <div class="navbar-center">Rent-it™</div>
       <div class="navbar-right">
-        <b-button id="button" v-if="!loggedIn" @click="loggedIn=true" to="/login">Login</b-button>
-        <b-button id="button" v-if="loggedIn" @click="logout, loggedIn=false" loggedIn to="/login">Logout</b-button>
+        <b-button id="button" v-if="!loggedIn" to="/login">Login</b-button>
+        <b-button id="button" v-if="loggedIn" @click="logout" to="/login">Logout</b-button>
         <b-button id="button" v-if="!loggedIn" to="/register">Register New Account</b-button>
         <b-button id="button" v-if="loggedIn" to="/my-account">My Account</b-button>
       </div>
@@ -63,12 +63,12 @@ export default {
   components: {},
   data() {
     return {
-      loggedIn: false
+      loggedIn: localStorage.getItem('token') || false
     }
   },
   methods: {
     logout() {
-      localStorage.setItem('token', null)
+      localStorage.clear()
     }
   }
 }
@@ -92,13 +92,13 @@ export default {
   flex-direction: wrap;
   align-content: center;
   color: white;
-  background-color: midnightblue;
+  background-color: #3f51b5;
   padding: 10px;
 }
 
 #button {
   color: white;
-  background-color: midnightblue;
+  background-color: #3f51b5;
   border: none;
   margin: 10px;
 }

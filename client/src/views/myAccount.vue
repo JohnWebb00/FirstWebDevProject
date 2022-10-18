@@ -48,7 +48,7 @@
       <b-card-group deck>
     <b-card class="list" v-for="item in items" :key="item._id" img-src=""
       img-alt="Image" img-top :title="item.itemName" style="max-width: 20rem;"
->
+      >
       <b-card-text>
         {{ item.description }}
       </b-card-text>
@@ -64,15 +64,16 @@
             <small> Catagory: {{ item.category + '' }} </small>
           </b-row>
           <b-row>
-            <small id="child">{{ item._id }} </small>
-          </b-row>
-          <b-row>
             <b-col>
-              <b-button variant="success" v-bind:key="item.id" v-on:click="approveListing(items._id)" style="max-width: 4rem; font-size: 0.6rem;">Edit Item
+              <b-button variant="success" v-bind:key="item.id" v-on:click="editListing(item._id)" style="max-width: 4rem; font-size: 0.6rem;">Edit Item
               </b-button>
             </b-col>
             <b-col>
-              <b-button variant="danger" v-bind:key="item._id" v-on:click="deleteListing(items._id)" style="max-width: 4rem; font-size: 0.6rem;">Remove Item
+              <b-button variant="primary" v-bind:key="item._id" v-on:click="viewListing(item._id)" style="max-width: 4rem; font-size: 0.6rem;">View Item
+              </b-button>
+            </b-col>
+            <b-col>
+              <b-button variant="danger" v-bind:key="item._id" v-on:click="deleteListing(item._id)" style="max-width: 4rem; font-size: 0.6rem;">Remove Item
               </b-button>
             </b-col>
           </b-row>
@@ -174,12 +175,17 @@ export default {
     editAccount() {
       this.$router.push('/edit-account')
     },
-    deleteListing() {
-      const id = document.getElementById('child').innerHTML
-      axios.delete('http://localhost:3000/api/v1/items/' + id)
-        .then(response => {
-        })
-        .catch(error => {
+    editListing(id) {
+      this.$router.push('/edit-item/' + id)
+    },
+    viewListing(id) {
+      this.$router.push('/view-item/' + id)
+    },
+    deleteListing(id) {
+      axios
+        .delete('http://localhost:3000/api/v1/items/' + id)
+        .then((response) => {})
+        .catch((error) => {
           this.items = []
           console.log(error)
         })

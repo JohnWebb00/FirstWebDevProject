@@ -21,11 +21,11 @@
           </b-row>
           <b-row>
             <b-col>
-              <b-button variant="success" v-bind:key="item.id" v-on:click="approveListing()">Approve Listing
+              <b-button variant="success" v-bind:key="item.id" v-on:click="approveListing(item.id)">Approve Listing
               </b-button>
             </b-col>
             <b-col>
-              <b-button variant="danger" v-bind:key="item._id" v-on:click="deleteListing(items._id)">Reject Listing
+              <b-button variant="danger" v-bind:key="item._id" v-on:click="deleteListing(item._id)">Reject Listing
               </b-button>
             </b-col>
           </b-row>
@@ -49,15 +49,7 @@ export default {
 
   data() {
     return {
-      items: [],
-      item: {
-        approved: '',
-        itemName: '',
-        rentPrice: '',
-        duration: '',
-        description: '',
-        category: ''
-      }
+      items: []
     }
   },
 

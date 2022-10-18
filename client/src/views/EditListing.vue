@@ -213,8 +213,11 @@ export default {
           this.formData,
           config
         )
-        .then((response) => console.log(response))
-      this.$router.push(`/view-item/${this.$route.params.id}`).catch((error) => console.log(error))
+        .then((response) => {
+          console.log(response)
+          this.$router.push(`/view-item/${this.$route.params.id}`)
+        })
+        .catch((error) => console.log(error))
     },
     async getItem() {
       const id = this.$route.params.id

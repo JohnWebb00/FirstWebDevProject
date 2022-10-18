@@ -167,7 +167,7 @@ export default {
           config
         )
         .then((response) => console.log(response))
-      this.$router.push('/my-account').catch((error) => console.log(error))
+      this.$router.push('/login').catch((error) => console.log(error))
     }
   }
 }
