@@ -96,11 +96,13 @@
         </b-col>
         <br />
         <b-col>
-          <p>
-            <b class="large-text">
-              By creating an account you agree to follow our
-              <a href="#">Site Rules</a>.</b
-            >
+            <p class="large-text mobile-text">
+             <b>By creating an account you agree to follow our Site Rules: </b> <br>
+            1. Don't post illegal items. <br>
+            2. Only post items you actually have. <br>
+            3. Item reviews must be constructive and respectful.<br>
+            4. If you do not follow the rules, your account will be deleted.<br>
+            5. Don't buy or sell items. <b>RENT-IT™</b>!<br>
           </p>
           <button type="submit" class="registerbtn">
             <b>REGISTER NOW!</b>

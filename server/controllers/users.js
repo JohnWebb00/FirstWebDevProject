@@ -50,7 +50,6 @@ router.post('/register', async (req, res) => {
         const { userPass, ...data } = await result.toJSON();
 
         res.send(data)
-        res.send({message: 'Registration successful'})
     } catch (error) {
         return res.status(error)
     }
@@ -96,7 +95,7 @@ jwt.verify(refreshToken, 'privateKey', (err, user) => {
 })
 
 function createAccessToken(user){
-return jwt.sign(user.toJSON(), "privateKey"/*, {expiresIn: '45m'}*/)
+return jwt.sign(user.toJSON(), "privateKey")
 }
 
 //Get authenticated user
