@@ -159,7 +159,7 @@ img {
 </style>
 
 <script>
-import axios from 'axios'
+import { Api } from '@/Api'
 import ReviewCard from '@/components/ReviewCard.vue'
 
 export default {
@@ -199,8 +199,8 @@ export default {
       const id = this.$route.params.id
       console.log(id)
       try {
-        const response = await axios
-          .get(`http://localhost:3000/api/v1/items/${this.$route.params.id}`)
+        const response = await Api
+          .get(`/v1/items/${this.$route.params.id}`)
           .then((response) => (this.item = response.data))
         console.log(response)
       } catch (error) {
@@ -215,9 +215,9 @@ export default {
         }
       }
       try {
-        const response = await axios
+        const response = await Api
           .get(
-            `http://localhost:3000/api/v1/users/${this.item.itemAuthor}`,
+            `/v1/users/${this.item.itemAuthor}`,
             config
           )
           .then((response) => (this.user = response.data))
@@ -228,9 +228,9 @@ export default {
     },
     async getReviews() {
       try {
-        const response = await axios
+        const response = await Api
           .get(
-            `http://localhost:3000/api/v1/items/${this.$route.params.id}/reviews`
+            `/v1/items/${this.$route.params.id}/reviews`
           )
           .then((response) => (this.reviews = response.data))
         console.log(response)
@@ -245,9 +245,9 @@ export default {
           authorization: 'Bearer ' + token
         }
       }
-      axios
+      Api
         .post(
-          `http://localhost:3000/api/v1/items/${this.$route.params.id}/reviews`,
+          `/v1/items/${this.$route.params.id}/reviews`,
           this.review,
           config
         )

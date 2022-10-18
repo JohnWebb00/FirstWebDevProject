@@ -59,7 +59,7 @@
       <b-row>
         <listing-card v-for="item in items" :key="item._id" :name="item.itemName"
           :price="item.rentPrice + '/' + item.duration + ' ' + item.category" :image="item.image"
-          :link="`http://localhost:8080/view-item/${item._id}`" class="navCard">
+          :link="`http://localhost:5000/view-item/${item._id}`" class="navCard">
         </listing-card>
       </b-row>
     </b-row>
@@ -87,7 +87,7 @@ export default {
     async getItems() {
       try {
         const response = Api.get(
-          'http://localhost:3000/api/v1/items?approved=true'
+          '/v1/items?approved=true'
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -98,7 +98,7 @@ export default {
       try {
         const value = document.getElementById('cars').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -109,7 +109,7 @@ export default {
       try {
         const value = document.getElementById('boats').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -120,7 +120,7 @@ export default {
       try {
         const value = document.getElementById('motercycle').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -131,7 +131,7 @@ export default {
       try {
         const value = document.getElementById('construction').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -142,7 +142,7 @@ export default {
       try {
         const value = document.getElementById('Apartments').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -153,7 +153,7 @@ export default {
       try {
         const value = document.getElementById('Houses').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -164,7 +164,7 @@ export default {
       try {
         const value = document.getElementById('Cabins').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -175,7 +175,7 @@ export default {
       try {
         const value = document.getElementById('Abroad').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -186,7 +186,7 @@ export default {
       try {
         const value = document.getElementById('Watersport').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -197,7 +197,7 @@ export default {
       try {
         const value = document.getElementById('Bikes').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -208,7 +208,7 @@ export default {
       try {
         const value = document.getElementById('Music').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -219,7 +219,7 @@ export default {
       try {
         const value = document.getElementById('Sports').innerHTML
         const response = Api.get(
-          'http://localhost:3000/api/v1/items/category?category=' + value
+          '/v1/items/category?category=' + value
         ).then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {

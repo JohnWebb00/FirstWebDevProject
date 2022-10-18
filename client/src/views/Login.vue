@@ -19,7 +19,7 @@
     <b-row>
       <b-col>
         Don't have an account yet?
-        <a href="http://localhost:8080/register">Click here</a>
+        <a href="http://localhost:5000/register">Click here</a>
       </b-col>
     </b-row>
   </b-container>
@@ -85,8 +85,7 @@ input {
 </style>
 
 <script>
-// import { Api } from '@/Api'
-import axios from 'axios'
+import { Api } from '@/Api'
 export default {
   name: 'Login',
   data() {
@@ -98,8 +97,8 @@ export default {
   methods: {
     async handleLogin() {
       try {
-        const reponse = await axios.post(
-          'http://localhost:3000/api/v1/users/login',
+        const reponse = await Api.post(
+          '/v1/users/login',
           {
             userName: this.userName,
             userPass: this.userPass

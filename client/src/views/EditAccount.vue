@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { Api } from '@/Api'
 
 export default {
   name: 'Register',
@@ -82,8 +82,8 @@ export default {
         }
       }
       try {
-        const response = await axios
-          .get('http://localhost:3000/api/v1/users/auth', config)
+        const response = await Api
+          .get('/v1/users/auth', config)
           .then((response) => (this.formData = response.data))
         console.log(response)
       } catch (error) {
@@ -97,9 +97,9 @@ export default {
           authorization: 'Bearer ' + token
         }
       }
-      axios
+      Api
         .patch(
-          'http://localhost:3000/api/v1/users/id',
+          '/v1/users/id',
           {
             fullName: this.formData.fullName,
             userName: this.formData.userName,

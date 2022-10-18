@@ -164,7 +164,7 @@ button {
 </style>
 
 <script>
-import axios from 'axios'
+import { Api } from '@/Api'
 export default {
   name: 'EditListing',
   data() {
@@ -189,9 +189,9 @@ export default {
           authorization: 'Bearer ' + token
         }
       }
-      axios
+      Api
         .patch(
-          `http://localhost:3000/api/v1/items/${this.$route.params.id}`,
+          `/v1/items/${this.$route.params.id}`,
           this.formData,
           config
         )
@@ -205,8 +205,8 @@ export default {
       const id = this.$route.params.id
       console.log(id)
       try {
-        const response = await axios
-          .get(`http://localhost:3000/api/v1/items/${this.$route.params.id}`)
+        const response = await Api
+          .get(`/v1/items/${this.$route.params.id}`)
           .then((response) => (this.formData = response.data))
         console.log(response)
       } catch (error) {

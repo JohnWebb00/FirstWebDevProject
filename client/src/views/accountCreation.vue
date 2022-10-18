@@ -54,7 +54,7 @@
           <div class="container signin">
             <p class="large-text">
               Already have an account?
-              <a href="http://localhost:8080/login">Sign in instead!</a>
+              <a href="http://localhost:5000/login">Sign in instead!</a>
             </p>
           </div>
         </b-col>
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { Api } from '@/Api'
 export default {
   name: 'Register',
   data() {
@@ -84,8 +84,8 @@ export default {
   methods: {
     async handleRegistration() {
       try {
-        const response = await axios.post(
-          'http://localhost:3000/api/v1/users/register',
+        const response = await Api.post(
+          '/v1/users/register',
           {
             fullName: this.fullName,
             userName: this.userName,

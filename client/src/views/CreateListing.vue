@@ -268,7 +268,7 @@
 </style>
 
 <script>
-import axios from 'axios'
+import { Api } from '@/Api'
 export default {
   name: 'CreateListing',
   data() {
@@ -291,9 +291,9 @@ export default {
           authorization: 'Bearer ' + token
         }
       }
-      axios
+      Api
         .post(
-          'http://localhost:3000/api/v1/items',
+          '/v1/items',
           this.formData,
           config
         )

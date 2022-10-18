@@ -24,7 +24,7 @@
             </b-row>
             <b-row>
               <b-col>
-                <b-button variant="success" v-bind:key="item.id" v-on:click="approveListing(item.id)">Approve Listing
+                <b-button variant="success" v-bind:key="item.id" v-on:click="approveListing(item._id)">Approve Listing
                 </b-button>
               </b-col>
               <b-col>
@@ -41,7 +41,7 @@
 
 <script>
 import { Api } from '@/Api'
-const url = 'http://localhost:3000/api/v1/items?approved=false'
+const url = '/v1/items?approved=false'
 
 export default {
   name: 'PendingListings',
@@ -69,18 +69,19 @@ export default {
       }
     },
     async approveListing(id) {
-      Api.put('http://localhost:3000/api/v1/items/' + id, {
+      Api.put('/v1/items/' + id, {
         approved: true
       }).then((response) => {
         console.log('Success')
       })
-      this.$router.push('/pendingListings').catch((error) => {
-        this.items = []
-        console.log(error)
-      })
+      this.$router.push('/pendingListings')
+        .catch((error) => {
+          this.items = []
+          console.log(error)
+        })
     },
     deleteListing(id) {
-      Api.delete('http://localhost:3000/api/v1/items/' + id).then(
+      Api.delete('/v1/items/' + id).then(
         (response) => { }
       )
       this.$router.push('/pendingListings').catch((error) => {

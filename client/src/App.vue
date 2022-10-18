@@ -27,7 +27,7 @@
 
             <div class="col-md-2">
               <h6 class="text-uppercase font-weight-bold">
-                <a href="http://localhost:8080/listings" class="text-white">Listings</a>
+                <a href="http://localhost:5000/listings" class="text-white">Listings</a>
               </h6>
             </div>
 
@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-2">
               <h6 class="text-uppercase font-weight-bold">
-                <a href="http://localhost:8080/admin-login" class="text-white">Administrator Login</a>
+                <a href="http://localhost:5000/admin-login" class="text-white">Administrator Login</a>
               </h6>
             </div>
           </div>

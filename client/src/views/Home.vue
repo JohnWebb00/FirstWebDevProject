@@ -7,14 +7,14 @@
           <b-card title="Listings" overlay
             img-src="https://cdn.pixabay.com/photo/2015/05/29/19/18/bicycle-789648_1280.jpg" img-alt="Image"
             tag="article" class="card">
-            <a href="http://localhost:8080/listings" class="stretched-link"></a>
+            <a href="http://localhost:5000/listings" class="stretched-link"></a>
           </b-card>
         </b-col>
         <b-col cols="*">
           <b-card title="Create your own listing" overlay
             img-src="https://cdn.pixabay.com/photo/2017/11/27/21/31/computer-2982270_1280.jpg" img-alt="Image"
             tag="article" class="card">
-            <a href="http://localhost:8080/list-item" class="stretched-link"></a>
+            <a href="http://localhost:5000/list-item" class="stretched-link"></a>
           </b-card>
         </b-col>
       </b-row>
