@@ -45,6 +45,8 @@
     <hr />
 
     <div>
+      <b-row class="justify-content-md-center">
+          <b-col cols="12" md="auto">
       <h4>My Listings:</h4>
       <p>LIST OF LISTINGS</p>
       <b-card-group deck>
@@ -106,6 +108,8 @@
             </template>
         </b-card>
       </b-card-group>
+      </b-col>
+    </b-row>
     </div>
   </div>
 </template>
