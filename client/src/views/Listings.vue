@@ -1,5 +1,6 @@
 <template>
   <b-container>
+    <b-row class="justify-content-md-center">
     <div>
       <b-button v-b-toggle.sidebar-1>Filter By Categories</b-button>
       <b-sidebar
@@ -107,6 +108,7 @@
       >
       </listing-card>
     </b-row>
+  </b-row>
   </b-container>
 </template>
 
