@@ -78,7 +78,7 @@ input {
 </style>
 
 <script>
-import axios from 'axios'
+import { Api } from '@/Api'
 export default {
   name: 'Login',
   data() {
@@ -90,8 +90,8 @@ export default {
   methods: {
     async handleLogin() {
       try {
-        const reponse = await axios.post(
-          'http://localhost:3000/api/v1/admins/login',
+        const reponse = await Api.post(
+          '/v1/admins/login',
           {
             adminUsername: this.adminUsername,
             adminPass: this.adminPass

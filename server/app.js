@@ -16,9 +16,9 @@ var app = express();
 
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
+//var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://webdev32:webdev32pass@cluster0.ay1qyti.mongodb.net/Rent-ItDB?retryWrites=true&w=majority';
 //var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
-// var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/rentItDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/rentItProductionDB';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -44,7 +44,7 @@ app.use(morgan('dev'));
 app.options('*', cors());
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:3000','http://localhost:8080']
+    origin: ['http://localhost:3000','http://localhost:8080', 'http://localhost:5000']
 }));
 
 // Has to be below cors

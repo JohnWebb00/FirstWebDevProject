@@ -36,11 +36,11 @@
       <h4>My Listings:</h4>
       <p>LIST OF LISTINGS</p>
       <b-container>
-        <b-row class="justify-content-md-center">
+        <b-row class="row justify-content-md-center">
           <b-col cols="12" md="auto">
             <b-card-group deck>
               <b-card class="list" v-for="item in items" :key="item._id" img-src="" img-alt="Image" img-top
-                :title="item.itemName" style="max-width: 20rem">
+                :title="item.itemName" style="max-width: 10rem">
                 <b-card-text>
                   {{ item.description }}
                 </b-card-text>
@@ -58,7 +58,7 @@
                     </b-row>
                     <b-row>
                       <b-col>
-                        <b-button variant="success" v-bind:key="item.id" v-on:click="editListing(item._id)"
+                        <b-button variant="success" v-bind:key="item._id" v-on:click="editListing(item._id)"
                           style="max-width: 4rem; font-size: 0.6rem">Edit Item
                         </b-button>
                       </b-col>
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { Api } from '@/Api'
 
 export default {
   name: 'User',
@@ -119,8 +119,8 @@ export default {
         }
       }
       try {
-        const response = await axios
-          .get('http://localhost:3000/api/v1/users/auth', config)
+        const response = await Api
+          .get('/v1/users/auth', config)
           .then((response) => (this.user = response.data))
         console.log(response)
       } catch (error) {
@@ -135,8 +135,8 @@ export default {
         }
       }
       try {
-        const response = await axios
-          .get('http://localhost:3000/api/v1/users/user_id/items', config)
+        const response = await Api
+          .get('/v1/users/user_id/items', config)
           .then((response) => (this.items = response.data))
         console.log(response)
       } catch (error) {
@@ -150,16 +150,16 @@ export default {
           authorization: 'Bearer ' + token
         }
       }
-      await axios
-        .delete('http://localhost:3000/api/v1/users/user_id/items', config)
+      await Api
+        .delete('/v1/users/user_id/items', config)
         .then((response) => {
           console.log(response)
         })
         .catch((error) => {
           console.log(error)
         })
-      axios
-        .delete('http://localhost:3000/api/v1/users/id', config)
+      Api
+        .delete('/v1/users/id', config)
         .then((response) => {
           console.log(response)
           this.$router.push('/login')
@@ -180,8 +180,8 @@ export default {
       this.$router.push('/view-item/' + id)
     },
     deleteListing(id) {
-      axios
-        .delete('http://localhost:3000/api/v1/items/' + id)
+      Api
+        .delete('/v1/items/' + id)
         .then((response) => { })
         .catch((error) => {
           this.items = []
