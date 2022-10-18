@@ -1,5 +1,3 @@
-// https://www.youtube.com/watch?v=IYuMBejxXUo video that might be helpful
-
 <template>
   <div>
     <div class="container center">
@@ -45,71 +43,73 @@
     <hr />
 
     <div>
-      <b-row class="justify-content-md-center">
-          <b-col cols="12" md="auto">
       <h4>My Listings:</h4>
       <p>LIST OF LISTINGS</p>
-      <b-card-group deck>
-        <b-card
-          class="list"
-          v-for="item in items"
-          :key="item._id"
-          img-src=""
-          img-alt="Image"
-          img-top
-          :title="item.itemName"
-          style="max-width: 20rem"
-        >
-          <b-card-text>
-            {{ item.description }}
-          </b-card-text>
-            <template #footer>
-              <b-container id="listingsSection">
-                <b-row>
-                  <b-col>
-                    <small>
-                      {{ item.rentPrice + ' SEK per ' + item.duration }}
-                    </small>
-                  </b-col>
-                </b-row>
-                <b-row>
-                  <small> Category: {{ item.category + '' }} </small>
-                </b-row>
-                <b-row>
-                  <b-col>
-                    <b-button
-                      variant="success"
-                      v-bind:key="item.id"
-                      v-on:click="editListing(item._id)"
-                      style="max-width: 4rem; font-size: 0.6rem"
-                      >Edit Item
-                    </b-button>
-                  </b-col>
-                  <b-col>
-                    <b-button
-                      variant="primary"
-                      v-bind:key="item._id"
-                      v-on:click="viewListing(item._id)"
-                      style="max-width: 4rem; font-size: 0.6rem"
-                      >View Item
-                    </b-button>
-                  </b-col>
-                  <b-col>
-                    <b-button
-                      variant="danger"
-                      v-bind:key="item._id"
-                      v-on:click="deleteListing(item._id)"
-                      style="max-width: 4rem; font-size: 0.6rem"
-                      >Remove Item
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </b-container>
-            </template>
-        </b-card>
-      </b-card-group>
-      </b-col>
-    </b-row>
+      <b-container>
+        <b-row class="justify-content-md-center">
+        <b-col cols="12" md="auto">
+            <b-card-group deck>
+              <b-card
+                class="list"
+                v-for="item in items"
+                :key="item._id"
+                img-src=""
+                img-alt="Image"
+                img-top
+                :title="item.itemName"
+                style="max-width: 20rem"
+              >
+                <b-card-text>
+                  {{ item.description }}
+                </b-card-text>
+                <template #footer>
+                  <b-container id="listingsSection">
+                    <b-row>
+                      <b-col>
+                        <small>
+                          {{ item.rentPrice + ' SEK per ' + item.duration }}
+                        </small>
+                      </b-col>
+                    </b-row>
+                    <b-row>
+                      <small> Category: {{ item.category + '' }} </small>
+                    </b-row>
+                    <b-row>
+                      <b-col>
+                        <b-button
+                          variant="success"
+                          v-bind:key="item.id"
+                          v-on:click="editListing(item._id)"
+                          style="max-width: 4rem; font-size: 0.6rem"
+                          >Edit Item
+                        </b-button>
+                      </b-col>
+                      <b-col>
+                        <b-button
+                          variant="primary"
+                          v-bind:key="item._id"
+                          v-on:click="viewListing(item._id)"
+                          style="max-width: 4rem; font-size: 0.6rem"
+                          >View Item
+                        </b-button>
+                      </b-col>
+                      <b-col>
+                        <b-button
+                          variant="danger"
+                          v-bind:key="item._id"
+                          v-on:click="deleteListing(item._id)"
+                          style="max-width: 4rem; font-size: 0.6rem"
+                          >Remove Item
+                        </b-button>
+                      </b-col>
+                    </b-row>
+                  </b-container>
+                </template>
+              </b-card>
+            </b-card-group>
+          </b-col>
+          </b-row>
+      </b-container>
     </div>
   </div>
 </template>
