@@ -282,7 +282,7 @@ export default {
   .navCard {
     max-width: 35rem;
     min-width: 25rem;
-    font-size: 100rem;
+    font-size: 10rem;
   }
 }
 
