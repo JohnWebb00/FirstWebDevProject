@@ -1,7 +1,15 @@
 <template>
   <b-card-group deck>
-    <b-card class="list" v-for="item in items" :key="item._id" img-src="https://picsum.photos/600/300/?image=25"
-      img-alt="Image" img-top :title="item.itemName" style="max-width: 15rem">
+    <b-card
+      class="list"
+      v-for="item in items"
+      :key="item._id"
+      img-src="https://picsum.photos/600/300/?image=25"
+      img-alt="Image"
+      img-top
+      :title="item.itemName"
+      style="max-width: 15rem"
+    >
       <b-card-text>
         {{ item.description }}
       </b-card-text>
@@ -10,7 +18,9 @@
         <b-container>
           <b-row>
             <b-col>
-              <small> {{ item.rentPrice + ' SEK per ' + item.duration }} </small>
+              <small>
+                {{ item.rentPrice + ' SEK per ' + item.duration }}
+              </small>
             </b-col>
           </b-row>
           <b-row>
@@ -21,11 +31,19 @@
           </b-row>
           <b-row>
             <b-col>
-              <b-button variant="success" v-bind:key="item.id" v-on:click="approveListing()">Approve Listing
+              <b-button
+                variant="success"
+                v-bind:key="item.id"
+                v-on:click="approveListing(item._id)"
+                >Approve Listing
               </b-button>
             </b-col>
             <b-col>
-              <b-button variant="danger" v-bind:key="item._id" v-on:click="deleteListing(items._id)">Reject Listing
+              <b-button
+                variant="danger"
+                v-bind:key="item._id"
+                v-on:click="deleteListing(item._id)"
+                >Reject Listing
               </b-button>
             </b-col>
           </b-row>
@@ -64,40 +82,36 @@ export default {
   methods: {
     async GetNotApproved() {
       try {
-        const response = Api.get(url)
-          .then(response => (this.items = response.data))
+        const response = Api.get(url).then(
+          (response) => (this.items = response.data)
+        )
         console.log(response)
       } catch (error) {
         console.log(error)
       }
     },
-    async approveListing() {
-      const id = document.getElementById('child').innerHTML
-      Api.put('http://localhost:3000/api/v1/items/' + id,
-        {
-          approved: true
-        })
-        .then(response => {
-          console.log('Success')
-        })
-        .catch(error => {
-          this.items = []
-          console.log(error)
-        })
+    async approveListing(id) {
+      Api.put('http://localhost:3000/api/v1/items/' + id, {
+        approved: true
+      }).then((response) => {
+        console.log('Success')
+      })
+      this.$router.push('/pendingListings').catch((error) => {
+        this.items = []
+        console.log(error)
+      })
     },
-    deleteListing() {
-      const id = document.getElementById('child').innerHTML
-      Api.delete('http://localhost:3000/api/v1/items/' + id)
-        .then(response => {
-        })
-        .catch(error => {
-          this.items = []
-          console.log(error)
-        })
+    deleteListing(id) {
+      Api.delete('http://localhost:3000/api/v1/items/' + id).then(
+        (response) => {}
+      )
+      this.$router.push('/pendingListings').catch((error) => {
+        this.items = []
+        console.log(error)
+      })
     }
   }
 }
-
 </script>
 
 <style>
