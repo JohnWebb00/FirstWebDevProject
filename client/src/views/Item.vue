@@ -74,8 +74,8 @@
     <!-- List of Reviews for this item. -->
     <b-container>
         <h5>Reviews for {{ item.itemName }}:</h5>
-        <b-row>
-          <b-col cols="6" id="review_section">
+        <b-row class="justify-content-md-center">
+          <b-col cols="12" md="auto">
           <review-card
             v-for="review in reviews"
             :key="review._id"
@@ -83,13 +83,21 @@
             :rating="review.rating"
             :comment="review.comment"
           ></review-card>
-        </b-col>
+          </b-col>
       </b-row>
   </b-container>
   </div>
 </template>
 
 <style scoped>
+
+#review_section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin:auto;
+}
 
 label {
   color: #aaa;
@@ -139,10 +147,6 @@ label {
   margin-top: 20px;
 }
 
-#review_section {
-  display: flex;
-  justify-content: center;
-}
 #userBox {
   padding: 5%;
   border: 1px solid;

@@ -22,7 +22,9 @@
       </p>
 
       <b>
-        <button class="details-button" @click="editAccount">Edit Account Information</button>
+        <button class="details-button" @click="editAccount">
+          Edit Account Information
+        </button>
         <br />
 
         <b-button
@@ -46,43 +48,65 @@
       <h4>My Listings:</h4>
       <p>LIST OF LISTINGS</p>
       <b-card-group deck>
-    <b-card class="list" v-for="item in items" :key="item._id" img-src=""
-      img-alt="Image" img-top :title="item.itemName" style="max-width: 20rem;"
-      >
-      <b-card-text>
-        {{ item.description }}
-      </b-card-text>
-
-      <template #footer>
-        <b-container>
-          <b-row>
-            <b-col>
-              <small> {{ item.rentPrice + ' SEK per ' + item.duration }} </small>
-            </b-col>
-          </b-row>
-          <b-row>
-            <small> Catagory: {{ item.category + '' }} </small>
-          </b-row>
-          <b-row>
-            <b-col>
-              <b-button variant="success" v-bind:key="item.id" v-on:click="editListing(item._id)" style="max-width: 4rem; font-size: 0.6rem;">Edit Item
-              </b-button>
-            </b-col>
-            <b-col>
-              <b-button variant="primary" v-bind:key="item._id" v-on:click="viewListing(item._id)" style="max-width: 4rem; font-size: 0.6rem;">View Item
-              </b-button>
-            </b-col>
-            <b-col>
-              <b-button variant="danger" v-bind:key="item._id" v-on:click="deleteListing(item._id)" style="max-width: 4rem; font-size: 0.6rem;">Remove Item
-              </b-button>
-            </b-col>
-          </b-row>
-        </b-container>
-      </template>
-    </b-card>
-  </b-card-group>
+        <b-card
+          class="list"
+          v-for="item in items"
+          :key="item._id"
+          img-src=""
+          img-alt="Image"
+          img-top
+          :title="item.itemName"
+          style="max-width: 20rem"
+        >
+          <b-card-text>
+            {{ item.description }}
+          </b-card-text>
+            <template #footer>
+              <b-container id="listingsSection">
+                <b-row>
+                  <b-col>
+                    <small>
+                      {{ item.rentPrice + ' SEK per ' + item.duration }}
+                    </small>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <small> Category: {{ item.category + '' }} </small>
+                </b-row>
+                <b-row>
+                  <b-col>
+                    <b-button
+                      variant="success"
+                      v-bind:key="item.id"
+                      v-on:click="editListing(item._id)"
+                      style="max-width: 4rem; font-size: 0.6rem"
+                      >Edit Item
+                    </b-button>
+                  </b-col>
+                  <b-col>
+                    <b-button
+                      variant="primary"
+                      v-bind:key="item._id"
+                      v-on:click="viewListing(item._id)"
+                      style="max-width: 4rem; font-size: 0.6rem"
+                      >View Item
+                    </b-button>
+                  </b-col>
+                  <b-col>
+                    <b-button
+                      variant="danger"
+                      v-bind:key="item._id"
+                      v-on:click="deleteListing(item._id)"
+                      style="max-width: 4rem; font-size: 0.6rem"
+                      >Remove Item
+                    </b-button>
+                  </b-col>
+                </b-row>
+              </b-container>
+            </template>
+        </b-card>
+      </b-card-group>
     </div>
-    <div></div>
   </div>
 </template>
 
@@ -195,6 +219,14 @@ export default {
 </script>
 
 <style>
+#listingsSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
 .container {
   padding: 20px;
 }
