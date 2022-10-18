@@ -54,7 +54,7 @@
       </b-card-text>
 
       <template #footer>
-        <b-container>
+        <b-container id = "listingsSection">
           <b-row>
             <b-col>
               <small> {{ item.rentPrice + ' SEK per ' + item.duration }} </small>
@@ -195,6 +195,13 @@ export default {
 </script>
 
 <style>
+.card-deck {
+display: flex;
+flex-direction: column;
+justify-content: center;
+margin-bottom: 50px;
+}
+
 .container {
   padding: 20px;
 }

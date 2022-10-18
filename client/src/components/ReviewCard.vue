@@ -21,7 +21,7 @@ export default {
 </script>
 <style scoped>
 .rev-card {
-  width: 500px;
+  width: 400px;
   height: 175px;
   margin: 20px;
 }
