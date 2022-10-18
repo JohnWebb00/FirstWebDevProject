@@ -21,6 +21,8 @@
           <b-input-group id="currency" append="SEK">
             <b-form-input
               id="rentPrice"
+              type=number
+              min=1
               placeholder="Enter the renting price for your item"
               v-model="formData.rentPrice"
               required
@@ -68,6 +70,16 @@
             <option value="Watersports">Watersports</option>
             <option value="Music">Music</option>
             <option value="Sports">Sports</option>
+
+            <option value="Drills">Drills</option>
+            <option value="Electric">Electric</option>
+            <option value="Saws">Saws</option>
+            <option value="Welders">Welders</option>
+
+            <option value="Construction">Construction</option>
+            <option value="Cooking">Cooking</option>
+            <option value="Exploration">Exploration</option>
+            <option value="Study Help">Study Help</option>
           </select>
 
           <b-button variant="primary" type="submit">Submit</b-button>
@@ -78,198 +90,104 @@
 </template>
 
 <style scoped>
-@media (max-width: 767px) {
-  /* Styling for devices with a width of 767px or SMALLER. */
-
-  .div1 {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    max-width: 600px;
-  }
-  .instructions {
-    background-color: #002753;
-    font-size: 2em;
-    color: white;
-    margin: 20px;
-    opacity: 0.9;
-    padding: 30px;
-    max-width: 500px;
-  }
-  #col1 {
-    display: flex;
-    justify-content: center;
-  }
-  .itemDetails {
-    background: #eee;
-    text-align: left;
-    padding: 60px;
-    border-radius: 10px;
-  }
-  #category {
-    display: block;
-    padding: 20px 12px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-  }
-  label {
-    color: #00418b;
-    display: inline-block;
-    margin: 25px 0 15px;
-    font-size: 1.4em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
-  }
-  #itemName {
-    /* Doesn't work? */
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-  }
-  #rentPrice {
-    display: block;
-    padding: 10px 6px;
-    width: 75%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-  }
-
-  #duration {
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    height: 10%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-  }
-
-  #description {
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-  }
-  button {
-    margin-top: 50px;
-    margin-bottom: 30px;
-    width: 100%;
-    font-size: 2.3em;
-  }
+.div1 {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 600px;
 }
 
-@media (min-width: 768px) {
-  /* Styling for devices with a width of 768px or BIGGER. */
+.instructions {
+  background-color: #00428c;
+  font-size: 20px;
+  color: white;
+  margin: 40px;
+  opacity: 0.9;
+  padding: 15px;
+  max-width: 600px;
+}
 
-  .div1 {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    max-width: 600px;
-  }
+.itemDetails {
+  width: 600px;
+  margin: 30px auto;
+  background: #eee;
+  text-align: left;
+  padding: 40px;
+  border-radius: 10px;
+}
 
-  .instructions {
-    background-color: #00428c;
-    font-size: 20px;
-    color: white;
-    margin: 40px;
-    opacity: 0.9;
-    padding: 15px;
-    max-width: 600px;
-  }
+label {
+  color: #aaa;
+  display: inline-block;
+  margin: 25px 0 15px;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
 
-  .itemDetails {
-    width: 600px;
-    margin: 30px auto;
-    background: #eee;
-    text-align: left;
-    padding: 40px;
-    border-radius: 10px;
-  }
+header {
+  margin-top: 30px;
+}
 
-  label {
-    color: #aaa;
-    display: inline-block;
-    margin: 25px 0 15px;
-    font-size: 0.6em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
-  }
+#col1 {
+  width: 1200px;
+  display: flex;
+  justify-content: center;
+}
 
-  #col1 {
-    width: 1200px;
-    display: flex;
-    justify-content: center;
-  }
+#itemName {
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: black;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
 
-  #itemName {
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-  }
+#rentPrice {
+  display: block;
+  padding: 10px 6px;
+  width: 75%;
+  box-sizing: border-box;
+  border: black;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
 
-  #rentPrice {
-    display: block;
-    padding: 10px 6px;
-    width: 75%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-  }
+#duration {
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: black;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
 
-  #duration {
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-  }
+#description {
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: black;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
 
-  #description {
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-  }
+#category {
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: black;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
 
-  #category {
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: black;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-  }
-
-  button {
-    margin-top: 25px;
-  }
+button {
+  margin-top: 25px;
 }
 </style>
 
@@ -303,9 +221,7 @@ export default {
           this.formData,
           config
         )
-        .then((response) =>
-          this.$router.push(`/view-item/${response.data._id}`)
-        )
+        .then((response) => this.$router.push(`/view-item/${response.data._id}`))
         .catch((error) => console.log(error))
     }
   }
