@@ -20,9 +20,9 @@
             <div id="userBox">
               <body>
                 <h5 class="center"><u>Posted by:</u> {{ user.fullName }}</h5>
-                <p><u>Location:</u>{{ user.location.city }}</p>
-                <p><u>Phone Number:</u>{{ user.phoneNumber }}</p>
-                <p><u>Email:</u>{{ user.email }}</p>
+                <p><u>Location:</u> {{ user.location.city }}</p>
+                <p><u>Phone Number:</u> {{ user.phoneNumber }}</p>
+                <p><u>Email:</u> {{ user.email }}</p>
                 </body>
               </div>
             </body>

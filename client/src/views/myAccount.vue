@@ -45,7 +45,7 @@
     <div>
       <h4>My Listings:</h4>
       <p>LIST OF LISTINGS</p>
-      <b-container>
+      <b-container id="listingsSection">
         <b-row class="justify-content-md-center">
         <b-col cols="12" md="auto">
             <b-card-group deck>
@@ -63,7 +63,7 @@
                   {{ item.description }}
                 </b-card-text>
                 <template #footer>
-                  <b-container id="listingsSection">
+                  <b-container>
                     <b-row>
                       <b-col>
                         <small>
@@ -226,9 +226,12 @@ export default {
 #listingsSection {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin-bottom: 50px;
   flex-wrap: wrap;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  row-gap: 20px;
 }
 
 .container {
