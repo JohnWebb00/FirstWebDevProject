@@ -74,8 +74,8 @@
     <!-- List of Reviews for this item. -->
     <b-container>
         <h5>Reviews for {{ item.itemName }}:</h5>
-        <b-row id="review_section">
-          <b-col cols="6">
+        <b-row class="justify-content-md-center">
+          <b-col cols="12" md="auto">
           <review-card
             v-for="review in reviews"
             :key="review._id"
