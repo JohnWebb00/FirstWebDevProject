@@ -31,15 +31,7 @@ router.post('/user_id/items', authenticateToken, function(req, res, next){
         res.status(201).json(item);
     })
 });
-/*
-//Get all items
-    router.get('/', (req, res, next) => {
-        Item.find((err, items) => {
-            if(err){return next(err);}
-            res.json({"items": items});
-        });
-    });
-*/
+
 // Filtering out items that hasn't been approved
 router.get("/", function (req, res, next) {
     const approved = req.query.approved;
