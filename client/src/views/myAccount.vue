@@ -64,7 +64,7 @@
             {{ item.description }}
           </b-card-text>
             <template #footer>
-              <b-container id="listingsSection">
+              <b-container>
                 <b-row>
                   <b-col>
                     <small>
@@ -226,9 +226,12 @@ export default {
 #listingsSection {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin-bottom: 50px;
   flex-wrap: wrap;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  row-gap: 20px;
 }
 
 .container {
