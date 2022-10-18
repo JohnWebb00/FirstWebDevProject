@@ -18,7 +18,8 @@ function authenticateToken(req, res, next) {
     next()
     })
     }
-//Get all admins
+
+//Get all users
 router.get('/', (req, res, next) => {
     User.find((err, users) => {
         if(err){return next(err);}
@@ -48,8 +49,7 @@ router.post('/register', async (req, res) => {
 
         const { userPass, ...data } = await result.toJSON();
 
-        res.send(data)
-        res.send({message: 'Registration successful'})
+        res.status(201).send(data)
     } catch (error) {
         return res.status(error)
     }
@@ -95,18 +95,8 @@ jwt.verify(refreshToken, 'privateKey', (err, user) => {
 })
 
 function createAccessToken(user){
-return jwt.sign(user.toJSON(), "privateKey"/*, {expiresIn: '45m'}*/)
+return jwt.sign(user.toJSON(), "privateKey")
 }
-
-
-router.post('/', function (req, res, next) {
-    console.log(req.body)
-    var user = new User(req.body);
-    user.save(function (err) {
-        if (err) { return next(err); }
-        res.status(201).json(user);
-    })
-});
 
 //Get authenticated user
 router.get('/auth', authenticateToken, (req, res, next) => {
@@ -123,13 +113,6 @@ router.get('/user_id/items', authenticateToken, function (req, res, next)  {
             return res.status(404).json({'message': 'User not found!'});
         }
         res.json(item);
-    });
-});
-
-router.get('/', authenticateToken, (req, res, next) => {
-    User.find((err, users) => {
-        if (err) { return next(err); }
-        res.json({ "users": users });
     });
 });
 
@@ -199,8 +182,11 @@ router.put('/:id', function (req, res, next) {
     });
 });
 
-router.patch('/:id', function (req, res, next) {
-    var id = req.params.id;
+router.patch('/id', authenticateToken, async (req, res, next) => {
+    const salt = await bcrypt.genSalt(10)
+    const hashPass = await bcrypt.hash(req.body.userPass, salt)
+    const id = req.user._id
+    
     User.findById(id, function (err, user) {
         if (err) { return next(err); }
         if (user == null) {
@@ -208,12 +194,13 @@ router.patch('/:id', function (req, res, next) {
         }
         user.fullName = (req.body.fullName || user.fullName)
         user.userName = (req.body.userName || user.userName)
-        user.userPass = (req.body.userPass || user.userPass)
+        user.userPass = (hashPass || user.userPass)
         user.phoneNumber = (req.body.phoneNumber || user.phoneNumber)
         user.location = (req.body.location || user.location)
         user.email = (req.body.email || user.email)
-        user.save();
-        res.json(user);
+
+        user.save()
+        res.json(user)
     });
 });
 

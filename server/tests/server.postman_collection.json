@@ -1,16 +1,16 @@
 {
 	"info": {
-		"_postman_id": "dbc81e09-bb6c-4b87-b9e3-9ca01bbcaffd",
-		"name": "server Copy",
+		"_postman_id": "52eec70c-ffdb-449d-8d40-71d6747c8aef",
+		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23100799"
+		"_exporter_id": "23100753"
 	},
 	"item": [
 		{
 			"name": "User",
 			"item": [
 				{
-					"name": "Create User",
+					"name": "Register",
 					"event": [
 						{
 							"listen": "test",
@@ -29,7 +29,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fullName\": \"John Webb\",\n    \"userName\": \"JWebbs\",\n    \"userPass\": \"Password123\",\n    \"phoneNumber\": \"072296742\",\n    \"location\": {\n        \"city\": \"Gothenburg\",\n        \"postNr\": \"45899\",\n        \"streetAddress\": \"lindholmen\"\n    },\n    \"email\": \"JohnS@gmail.com\"\n}\n",
+							"raw": "{\n    \"fullName\": \"David Bowie\",\n    \"userName\": \"Moonman\",\n    \"userPass\": \"123\",\n    \"phoneNumber\": \"+468658599772\",\n    \"location\": {\n        \"city\": \"Göteborg\",\n        \"postNr\": \"05489\",\n        \"streetAddress\": \"Kungsgatan 27\"\n    },\n    \"email\": \"BowieKnife@gmail.com\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -37,33 +37,111 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/users",
+							"raw": "{{host}}/api/v1/users/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"users"
+								"users",
+								"register"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get all users",
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,401,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "GET",
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"Bardia@gmail.com\",\n    \"userPass\": \"123\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{host}}/api/v1/users",
+							"raw": "{{host}}/api/v1/users/login",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"users"
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbiI6eyJjaXR5IjoiR8O2dGVib3JnIiwicG9zdE5yIjoiMDU0ODkiLCJzdHJlZXRBZGRyZXNzIjoiS3VuZ3NnYXRhbiAyNyJ9LCJfaWQiOiI2MzRlZDQ3ZGRjY2Y0YjQwZmMxZDMyNjkiLCJmdWxsTmFtZSI6IlBoaWwgRHVucGh5IiwidXNlck5hbWUiOiJOby4xUmVhbHRvciIsInVzZXJQYXNzIjoiJDJhJDEwJGI5WVguV2EuTUtBbnlmbE1ZanA0a2VrdzFhR3ZmNngwWmhFZnVhNTNTMnJvbWtFZ2JyVEpPIiwicGhvbmVOdW1iZXIiOiIrNDY4NjU4NTk5NzcyIiwiZW1haWwiOiJQaGlsREBnbWFpbC5jb20iLCJfX3YiOjAsImlhdCI6MTY2NjExMTc2OX0.thPrZD5vmou7A1QuGIZvsF7SZUK8eQDNBzbgjPPQBIs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Bearer",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImxvY2F0aW9uIjp7ImNpdHkiOiJHb3RoZW5idXJnIiwicG9zdE5yIjoiMDIzNzciLCJzdHJlZXRBZGRyZXNzIjoiQmlnIGFuZCBHcmFuZCBzdHJlZXQgMjIifSwiX2lkIjoiNjM0NDA2YmUyNThmNThmNzM4Y2E4ZGNiIiwiZnVsbE5hbWUiOiJKb2huIFdlYmIiLCJ1c2VyTmFtZSI6Imp3IiwidXNlclBhc3MiOiIkMmEkMTAkOG0wcElGbFBST21TM0p3SldhMkVhLlFQU3hPbzY1NG02ZHFtaHh3M0tMMVU5YUVLR3ZtNE8iLCJwaG9uZU51bWJlciI6IjA3MjI4MzcwMjYiLCJlbWFpbCI6IkpXQGdtYWlsLmNvbSIsIl9fdiI6MX0sImlhdCI6MTY2NTQ5NzI2MH0.aSFhEI1DFJYnP5Lw2E2M0sNKaUmGf9U7QpngE3jXTBs",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/v1/users/auth",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"auth"
 							]
 						}
 					},
@@ -71,6 +149,20 @@
 				},
 				{
 					"name": "Delete all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -89,12 +181,12 @@
 					"response": []
 				},
 				{
-					"name": "Delete user",
+					"name": "Delete all items belonging to a user",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/users/:id",
+							"raw": "{{host}}/api/v1/users/user_id/items",
 							"host": [
 								"{{host}}"
 							],
@@ -102,13 +194,45 @@
 								"api",
 								"v1",
 								"users",
-								":id"
+								"user_id",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/users/id",
+							"host": [
+								"{{host}}"
 							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"id"
 							]
 						}
 					},
@@ -116,6 +240,19 @@
 				},
 				{
 					"name": "Get user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -133,7 +270,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "63222730dd5b9f24ae735114"
+									"value": "63230d95b1703232b708ddef"
 								}
 							]
 						}
@@ -142,11 +279,24 @@
 				},
 				{
 					"name": "Put user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/users/:id",
+							"raw": "{{host}}/api/v1/users/63230d95b1703232b708ddef",
 							"host": [
 								"{{host}}"
 							],
@@ -154,13 +304,7 @@
 								"api",
 								"v1",
 								"users",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
+								"63230d95b1703232b708ddef"
 							]
 						}
 					},
@@ -168,6 +312,19 @@
 				},
 				{
 					"name": "Patch user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -203,6 +360,19 @@
 				},
 				{
 					"name": "Get user by username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -225,6 +395,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -233,12 +435,25 @@
 			"item": [
 				{
 					"name": "Create Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"adminName\" : \"Bob\",\n    \"adminUsername\" : \"Freddy\",\n    \"adminPass\" : \"Jeffrocks133333\"\n}",
+							"raw": "{\n    \"adminName\" : \"The Great Administrator\",\n    \"adminUsername\" : \"admin\",\n    \"adminPass\" : \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -260,7 +475,66 @@
 					"response": []
 				},
 				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,401,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"Bardia@gmail.com\",\n    \"userPass\": \"123\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admins/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admins",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get all admins",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -279,52 +553,20 @@
 					"response": []
 				},
 				{
-					"name": "Delete all admins",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v1/admins",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"admins"
-							]
+					"name": "Get admin by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete admin",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v1/admins/:id",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"admins",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get user by id",
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -350,7 +592,93 @@
 					"response": []
 				},
 				{
+					"name": "Delete admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/admins/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admins",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all admins",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/admins",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Put user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -377,6 +705,19 @@
 				},
 				{
 					"name": "Patch user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -417,12 +758,35 @@
 			"item": [
 				{
 					"name": "Create Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,201,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbiI6eyJjaXR5IjoiR8O2dGVib3JnIiwicG9zdE5yIjoiMDU0ODkiLCJzdHJlZXRBZGRyZXNzIjoiS3VuZ3NnYXRhbiAyNyJ9LCJfaWQiOiI2MzRlZDQ3ZGRjY2Y0YjQwZmMxZDMyNjkiLCJmdWxsTmFtZSI6IlBoaWwgRHVucGh5IiwidXNlck5hbWUiOiJOby4xUmVhbHRvciIsInVzZXJQYXNzIjoiJDJhJDEwJGI5WVguV2EuTUtBbnlmbE1ZanA0a2VrdzFhR3ZmNngwWmhFZnVhNTNTMnJvbWtFZ2JyVEpPIiwicGhvbmVOdW1iZXIiOiIrNDY4NjU4NTk5NzcyIiwiZW1haWwiOiJQaGlsREBnbWFpbC5jb20iLCJfX3YiOjAsImlhdCI6MTY2NjExMTc2OX0.thPrZD5vmou7A1QuGIZvsF7SZUK8eQDNBzbgjPPQBIs",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"itemName\": \"fries\",\n    \"rentPrice\": \"10 SEK\",\n    \"duration\": \"day\",\n    \"description\": \"desc\"\n}",
+							"raw": "{\n    \"itemName\": \"Bobby\",\n    \"rentPrice\": \"400 SEK\",\n    \"duration\": \"Day\",\n    \"description\": \"Great to drive on the road!\",\n    \"category\" : \"Motercycle\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -445,6 +809,19 @@
 				},
 				{
 					"name": "Get all items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -463,7 +840,53 @@
 					"response": []
 				},
 				{
+					"name": "Get all items by category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/items/category",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete all items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -483,6 +906,19 @@
 				},
 				{
 					"name": "Delete item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -509,6 +945,19 @@
 				},
 				{
 					"name": "Get item by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -535,9 +984,31 @@
 				},
 				{
 					"name": "Put item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemName\": \"chips\",\n    \"rentPrice\": \"12 SEK\",\n    \"duration\": \"week\",\n    \"description\": \"description\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{host}}/api/v1/items/:id",
 							"host": [
@@ -561,12 +1032,25 @@
 				},
 				{
 					"name": "Patch item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"itemName\": \"Post-it stamps\",\n    \"rentPrice\": \"95 SEK\",\n    \"duration\": \"2 days\",\n    \"description\": \"desc\"\n}",
+							"raw": "{\n    \"itemName\": \"chips\",\n    \"rentPrice\": \"12 SEK\",\n    \"duration\": \"day\",\n    \"description\": \"description\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -600,13 +1084,26 @@
 			"name": "Review",
 			"item": [
 				{
-					"name": "Create Review",
+					"name": "Create Review for an item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"item_id\": \"\",\n    \"author\": \"\",\n    \"title\" : \"this is a title\",\n    \"comment\" : \"blaaaablööööaaaaaaa\",\n    \"rating\": 5\n}",
+							"raw": "{\n    \"item_id\": \"634412cc13ca91fe31a0c8d9\",\n    \"author\": \"634406be258f58f738ca8dcb\",\n    \"title\" : \"Yummy\",\n    \"comment\" : \"fart is so scrumptious (and yummy!)\",\n    \"rating\": 5\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -614,7 +1111,28 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/items/:item_id/:userId/reviews",
+							"raw": "{{host}}/api/v1/items/user_id/reviews",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items",
+								"user_id",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a specific review for a particular item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/items/:item_id/reviews/:review_id",
 							"host": [
 								"{{host}}"
 							],
@@ -623,17 +1141,17 @@
 								"v1",
 								"items",
 								":item_id",
-								":userId",
-								"reviews"
+								"reviews",
+								":review_id"
 							],
 							"variable": [
 								{
 									"key": "item_id",
-									"value": "632347cef9bd353e8d1b4f15"
+									"value": "634e897dd8f2bd2fd0f9fcc0"
 								},
 								{
-									"key": "userId",
-									"value": "63230d95b1703232b708ddef"
+									"key": "review_id",
+									"value": "634ee2b300707d47e672b4ac"
 								}
 							]
 						}
@@ -642,6 +1160,19 @@
 				},
 				{
 					"name": "Get all reviews",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -668,6 +1199,19 @@
 				},
 				{
 					"name": "Get all reviews for item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -686,6 +1230,45 @@
 							"variable": [
 								{
 									"key": "item_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get review by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/reviews/:id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reviews",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
 									"value": null
 								}
 							]
@@ -714,6 +1297,19 @@
 				},
 				{
 					"name": "Delete review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Error code test\", () => {",
+									"  pm.expect(pm.response.code).to.be.oneOf([200,204,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -739,33 +1335,20 @@
 					"response": []
 				},
 				{
-					"name": "Get review by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v1/reviews/:id",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"reviews",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "63222730dd5b9f24ae735114"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Put review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -792,6 +1375,19 @@
 				},
 				{
 					"name": "Patch review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"pm.expect(pm.response.code).to.be.oneOf([200,404,500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -824,6 +1420,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete an item and all reviews connected to it",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/items/:item_id/reviews/:review_id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items",
+								":item_id",
+								"reviews",
+								":review_id"
+							],
+							"variable": [
+								{
+									"key": "item_id",
+									"value": null
+								},
+								{
+									"key": "review_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -833,7 +1461,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "b58d92ec-5214-450c-adb0-28e068aa71b9",
 						"exec": [
 							""
 						],
@@ -867,7 +1494,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "05864cff-5cba-4070-bac3-a59328954ebf",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -877,7 +1503,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "e9c319be-3306-4fc5-ba34-fcf64391213a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -887,11 +1512,9 @@
 	],
 	"variable": [
 		{
-			"id": "cd185905-a834-4211-8030-583d17702534",
 			"key": "host",
 			"value": "http://localhost:3000",
 			"type": "string"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

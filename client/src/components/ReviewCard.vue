@@ -3,6 +3,7 @@
     <b-card class="rev-card">
       <h5><u>{{ title }}</u></h5>
       <h6>Rating: {{ rating }}/5</h6>
+
       <body>
         <p>{{ comment }}</p>
       </body>
@@ -21,7 +22,7 @@ export default {
 </script>
 <style scoped>
 .rev-card {
-  width: 500px;
+  width: 400px;
   height: 175px;
   margin: 20px;
 }

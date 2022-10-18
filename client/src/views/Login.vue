@@ -1,23 +1,28 @@
 <template>
-  <div>
-    <div class="div1">
-      <header id="h1">Sign-in</header>
-    </div>
-    <body>
+  <b-container>
+    <b-row>
+      <b-col class="div1">
+        <header id="h1">Sign-in</header>
+      </b-col>
+    </b-row>
+    <b-row>
       <form id="loginForm" @submit.prevent="handleLogin">
         <label>Username:</label>
         <input type="text" v-model="userName" required />
 
         <label>Password:</label>
         <input type="password" v-model="userPass" required />
+
         <b-button type="submit" id="login" pill variant="dark">Log-in</b-button>
       </form>
-    </body>
-    <div>
-      Don't have an account yet?
-      <a href="http://localhost:8080/register">Click here</a>
-    </div>
-  </div>
+    </b-row>
+    <b-row>
+      <b-col>
+        Don't have an account yet?
+        <a href="http://localhost:8080/register">Click here</a>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <style scoped>
@@ -28,10 +33,11 @@
   max-width: 420px;
 }
 
-header{
+header {
   margin: 40px;
   background-color: #00428c
 }
+
 #loginForm {
   max-width: 420px;
   margin: 30px auto;
@@ -63,6 +69,7 @@ input {
 
 #h1 {
   font-size: 2em;
+  position: relative;
   color: white;
   margin: 40px;
   opacity: 0.9;

@@ -11,49 +11,47 @@
         <form class="itemDetails" @submit.prevent="editListing">
           <!-- changed from createListing to editListing here. -->
           <label>Item name</label>
-          <input
-            id="itemName"
-            type="text"
-            v-model="formData.itemName"
-            required
-          />
+          <input id="itemName" type="text" v-model="formData.itemName" required />
           <label>Rent fee</label>
           <b-input-group id="currency" append="SEK">
-            <b-form-input
-              id="rentPrice"
-              v-model="formData.rentPrice"
-              required
-            ></b-form-input>
+            <b-form-input id="rentPrice" v-model="formData.rentPrice" required></b-form-input>
           </b-input-group>
           <label>Rent fee is charged every:</label>
-          <select
-            id="duration"
-            required
-            v-model="formData.duration"
-          >
+          <select id="duration" required v-model="formData.duration">
             <option value="Day">Day</option>
             <option value="Week">Week</option>
             <option value="Month">Month</option>
           </select>
           <label>Item description:</label>
-          <b-form-textarea
-            id="description"
-            type="text"
-            v-model="formData.description"
-            rows="3"
-            max-rows="6"
-          ></b-form-textarea>
+          <b-form-textarea id="description" type="text" v-model="formData.description" rows="3" max-rows="6">
+          </b-form-textarea>
 
           <label>Category:</label>
-          <select
-            id="category"
-            value="item.category"
-            v-model="formData.category"
-            required
-          >
+          <select id="category" value="item.category" v-model="formData.category" required>
+            <option value="Cars">Cars</option>
+            <option value="Boats">Boats</option>
+            <option value="Motercycle">Motercycle</option>
+            <option value="Construction">Construction</option>
+
+            <option value="Apartments">Apartments</option>
+            <option value="Houses">Houses</option>
+            <option value="Cabins">Cabins</option>
+            <option value="Abroad">Abroad</option>
+
+            <option value="Bikes">Bikes</option>
+            <option value="Watersports">Watersports</option>
+            <option value="Music">Music</option>
             <option value="Sports">Sports</option>
-            <option value="Home improvement">Home Improvement</option>
+
+            <option value="Drills">Drills</option>
+            <option value="Electric">Electric</option>
+            <option value="Saws">Saws</option>
+            <option value="Welders">Welders</option>
+
+            <option value="Construction">Construction</option>
             <option value="Cooking">Cooking</option>
+            <option value="Exploration">Exploration</option>
+            <option value="Study Help">Study Help</option>
           </select>
 
           <b-button variant="primary" type="submit">Submit</b-button>
@@ -63,7 +61,7 @@
   </div>
 </template>
 
-  <style scoped>
+<style scoped>
 .div1 {
   display: flex;
   justify-content: center;
@@ -80,6 +78,7 @@
   padding: 15px;
   max-width: 600px;
 }
+
 .itemDetails {
   width: 600px;
   margin: 30px auto;
@@ -196,7 +195,10 @@ export default {
           this.formData,
           config
         )
-        .then((response) => console.log(response))
+        .then((response) => {
+          console.log(response)
+          this.$router.push(`/view-item/${this.$route.params.id}`)
+        })
         .catch((error) => console.log(error))
     },
     async getItem() {

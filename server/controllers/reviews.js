@@ -4,33 +4,56 @@ var Review = require('../models/review');
 var Item = require('../models/item')
 var jwt = require('jsonwebtoken');
 
-//Used to authenticate the current user
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    
-    if(token == null) {return res.send({message: 'no token'})}
-    
-    jwt.verify(token, 'privateKey', (err, user) => {
-    if(err){ return res.sendStatus(403) }
-    user = req.user
-    next()
+    //Create a review 
+router.post('/', function(req, res, next){
+    var review = new Review(req.body);
+    review.save(function(err) {
+        if (err) { return next(err); }
+        res.status(201).json(review);
     })
-    }
+});
 
-/*
-//Get all reviews of an item // Duplicate
-router.get('/item/:item_id/reviews', function(req, res){
-    review.find({item_id: req.params.item_id})
-    .populate('reviews')
-    .exec(function ( err, reviews){
-        if(err) {
-            return res.status(500).send(err);
+//Get all reviews
+    router.get('/', (req, res, next) => {
+        Review.find((err, reviews) => {
+            if(err){return next(err);}
+            res.json({"reviews": reviews});
+        });
+    });
+
+//Get review by id
+    router.get('/:id', function(req, res, next) {
+        var id = req.params.id
+        Review.findById(id, function(err, review) {
+            if (err) { return next(err); }
+            if (review === null) {
+                return res.status(404).json({'message': 'Review not found!'});
+            }
+            res.json(review);
+        });
+    });
+
+
+//Delete all reviews
+router.delete('/', function(req, res, next){
+    Review.deleteMany((err, reviews) => {
+        if(err){return next(err);}
+        res.json({"reviews": reviews});
+    });
+})
+
+//Delete review by id
+router.delete('/:id', function(req, res, next) {
+    var id = req.params.id
+    Review.findByIdAndDelete(id, function(err, review) {
+        if (err) { return next(err); }
+        if (review === null) {
+            return res.status(404).json({'message': 'Review not found!'});
         }
-        return res.status(200).json(reviews);
+        res.json(review);
     });
 });
-*/
+
 
 //Delete a item and all reviews connected to it
 router.delete('/items/:item_id/review/:review_id', function (req,res,next){
@@ -50,28 +73,6 @@ router.delete('/items/:item_id/review/:review_id', function (req,res,next){
 });
 
 
-/*
-//Get all reviews // may be used in the future
-router.get('/reviews', function(req, res, next) {
-    Review.find(function(err, reviews) {
-        if (err) { return next(err); }
-        res.json({"reviews": reviews });
-    });
-});
-*/
-
-//Get all reviews for a particular item // Duplicate
-router.get('/items/:item_id/reviews', function (req, res, next)  {
-    var itemId = req.params.item_id
-    Review.find({'item_id' : itemId}, function(err, review) {
-        if (err) { return next(err); }
-        if (review === null) {
-            return res.status(404).json({'message': 'Item not found!'});
-        }
-        res.json(review);
-    });
-});
-
 
 // Get review by ID
 router.get('/:id', function(req, res, next) {
@@ -79,7 +80,7 @@ router.get('/:id', function(req, res, next) {
     Review.findById(id, function(err, review) {
         if (err) { return next(err); }
         if (review === null) {
-            return res.status(404).json({'message': 'review not found!'});
+            return res.status(404).json({'message': 'Review not found!'});
         }
         res.json(review);
     });
@@ -104,17 +105,19 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
-router.put('/:id', function(req, res) {
+router.put('/:id', function(req, res, next) {
     var id = req.params.id;
-    var updated_review = {
-        "_id": id,
-        "title": req.body.title,
-        "comment": req.body.comment,
-        "rating": req.body.rating
-    }
-    Review[id] = updated_review;
-    review.save();
-    res.json(updated_review);
+    Review.findById(id, function(err, review) {
+        if (err) { return next(err); }
+        if (review == null) {
+            return res.status(404).json({"message": "Review not found"});
+        }
+        review.title = req.body.title
+        review.comment = req.body.comment
+        review.rating = req.body.rating
+        review.save();
+        res.json(review);
+    });
 });
 
 

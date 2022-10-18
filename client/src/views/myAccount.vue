@@ -1,17 +1,10 @@
-// https://www.youtube.com/watch?v=IYuMBejxXUo video that might be helpful
-
 <template>
   <div>
     <div class="container center">
       <h1 class="first-line">My Account - {{ user.userName }}</h1>
       <br />
-      <img
-        src="https://tinyurl.com/4sk8sjxj"
-        alt="profilePic"
-        class="image-cropper"
-      />
+      <img src="https://tinyurl.com/4sk8sjxj" alt="profilePic" class="image-cropper" />
       <br />
-      <h2 class="pic-button">CHANGE PICTURE</h2>
       <br />
       <h3>Account Details</h3>
       <p>
@@ -23,16 +16,12 @@
       </p>
 
       <b>
-        <button class="details-button">Edit Account Information</button>
+        <button class="details-button" @click="editAccount">
+          Edit Account Information
+        </button>
         <br />
 
-        <b-button
-          v-on:click="deleteAccount"
-          pill
-          v-b-modal.modal-1
-          variant="outline-danger"
-          >Remove Account</b-button
-        >
+        <b-button v-on:click="deleteAccount" pill v-b-modal.modal-1 variant="outline-danger">Remove Account</b-button>
         <b-modal id="modal-1" title="Delete account">
           <p class="my-4">
             Are you sure you want to delete your account? This action is
@@ -46,24 +35,60 @@
     <div>
       <h4>My Listings:</h4>
       <p>LIST OF LISTINGS</p>
-      <my-listings-card
-        v-for="item in items"
-        :key="item._id"
-        :rentPrice="item.rentPrice"
-        :itemName="item.itemName"
-        :duration="item.duration"
-      ></my-listings-card>
+      <b-container>
+        <b-row class="justify-content-md-center">
+          <b-col cols="12" md="auto">
+            <b-card-group deck>
+              <b-card class="list" v-for="item in items" :key="item._id" img-src="" img-alt="Image" img-top
+                :title="item.itemName" style="max-width: 20rem">
+                <b-card-text>
+                  {{ item.description }}
+                </b-card-text>
+                <template #footer>
+                  <b-container>
+                    <b-row>
+                      <b-col>
+                        <small>
+                          {{ item.rentPrice + ' SEK per ' + item.duration }}
+                        </small>
+                      </b-col>
+                    </b-row>
+                    <b-row>
+                      <small> Category: {{ item.category + '' }} </small>
+                    </b-row>
+                    <b-row>
+                      <b-col>
+                        <b-button variant="success" v-bind:key="item.id" v-on:click="editListing(item._id)"
+                          style="max-width: 4rem; font-size: 0.6rem">Edit Item
+                        </b-button>
+                      </b-col>
+                      <b-col>
+                        <b-button variant="primary" v-bind:key="item._id" v-on:click="viewListing(item._id)"
+                          style="max-width: 4rem; font-size: 0.6rem">View Item
+                        </b-button>
+                      </b-col>
+                      <b-col>
+                        <b-button variant="danger" v-bind:key="item._id" v-on:click="deleteListing(item._id)"
+                          style="max-width: 4rem; font-size: 0.6rem">Remove Item
+                        </b-button>
+                      </b-col>
+                    </b-row>
+                  </b-container>
+                </template>
+              </b-card>
+            </b-card-group>
+          </b-col>
+        </b-row>
+      </b-container>
     </div>
-    <div></div>
   </div>
 </template>
 
 <script>
-import myListingsCard from '@/components/myListingsCard.vue'
 import axios from 'axios'
+
 export default {
   name: 'User',
-  components: { 'my-listings-card': myListingsCard },
   async mounted() {
     await this.getUser()
     await this.getItems()
@@ -144,6 +169,24 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    editAccount() {
+      this.$router.push('/edit-account')
+    },
+    editListing(id) {
+      this.$router.push('/edit-item/' + id)
+    },
+    viewListing(id) {
+      this.$router.push('/view-item/' + id)
+    },
+    deleteListing(id) {
+      axios
+        .delete('http://localhost:3000/api/v1/items/' + id)
+        .then((response) => { })
+        .catch((error) => {
+          this.items = []
+          console.log(error)
+        })
     }
   }
 }
@@ -199,6 +242,7 @@ h4 {
   display: inline-block;
   text-align: center;
 }
+
 .first-line {
   color: white;
   background-color: #00428c;

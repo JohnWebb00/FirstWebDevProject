@@ -3,60 +3,45 @@
 
 <template>
   <div class="container">
-    <form @submit.prevent="handleRegistration" action="action_page.php" align-v="center">
+    <form @submit.prevent="editAccount" action="action_page.php" align-v="center">
       <b-container>
         <b-col>
-          <h1 class="first-line">Create A New Account</h1>
-          <p class="large-text"><b>Please enter your information below:</b></p>
+          <h1 class="first-line">Edit your account</h1>
+          <p class="large-text">
+            <b>You may update your information below:</b>
+          </p>
         </b-col>
         <hr />
         <b-col>
           <label for="FullName" class="mobile-text">Full name:</label>
-          <input v-model="fullName" type="text" placeholder="Enter full name" name="FullName" id="FullName" required />
+          <input v-model="formData.fullName" type="text" name="FullName" id="FullName" required />
           <br />
           <label for="UserName" class="mobile-text">Username:</label>
-          <input v-model="userName" type="text" placeholder="Enter username" name="UserName" id="UserName" required />
+          <input v-model="formData.userName" type="text" name="UserName" id="UserName" required />
           <br />
           <label for="UserPassword" class="mobile-text">Password:</label>
-          <input v-model="userPass" type="password" placeholder="Enter password" name="UserPassword" id="UserPassword"
-            required />
+          <input v-model="userPass" type="password" name="UserPassword" id="UserPassword" required />
           <br />
           <label for="Email" class="mobile-text">Email:</label>
-          <input v-model="email" type="email" placeholder="Enter email" name="Email" id="Email" required />
+          <input v-model="formData.email" type="email" name="Email" id="Email" required />
           <br />
           <label for="PhoneNumber" class="mobile-text">Phone number:</label>
-          <input v-model="phoneNumber" type="text" placeholder="Enter phone number" name="PhoneNumber" id="PhoneNumber"
-            required />
+          <input v-model="formData.phoneNumber" type="text" name="PhoneNumber" id="PhoneNumber" required />
           <br />
           <label for="City" class="mobile-text">City:</label>
-          <input v-model="city" type="text" placeholder="Enter city" name="City" id="City" required />
+          <input v-model="formData.location.city" type="text" name="City" id="City" required />
           <br />
           <label for="PostNr" class="mobile-text">Postal code:</label>
-          <input v-model="postNr" type="text" placeholder="Enter postal code" name="PostNr" id="PostNr" required />
+          <input v-model="formData.location.postNr" type="text" name="PostNr" id="PostNr" required />
           <br />
           <label for="Address" class="mobile-text">Street address:</label>
-          <input v-model="streetAddress" type="text" placeholder="Enter street address" name="Address" id="Address"
-            required />
+          <input v-model="formData.location.streetAddress" type="text" name="Address" id="Address" required />
         </b-col>
         <br />
         <b-col>
-          <p class="large-text mobile-text">
-            <b>By creating an account you agree to follow our Site Rules: </b> <br>
-            1. Don't post illegal items. <br>
-            2. Only post items you actually have. <br>
-            3. Item reviews must be constructive and respectful.<br>
-            4. If you do not follow the rules, your account will be deleted.<br>
-            5. Don't buy or sell items. <b>RENT-IT™</b>!<br>
-          </p>
           <button type="submit" class="registerbtn">
-            <b>REGISTER NOW!</b>
+            <b>Update account details</b>
           </button>
-          <div class="container signin">
-            <p class="large-text">
-              Already have an account?
-              <a href="http://localhost:8080/login">Sign in instead!</a>
-            </p>
-          </div>
         </b-col>
       </b-container>
     </form>
@@ -65,46 +50,72 @@
 
 <script>
 import axios from 'axios'
+
 export default {
   name: 'Register',
   data() {
     return {
-      fullName: '',
-      userName: '',
-      userPass: '',
-      phoneNumber: '',
-      location: {
-        city: '',
-        postNr: '',
-        streetAddress: ''
+      formData: {
+        fullName: '',
+        userName: '',
+        phoneNumber: '',
+        location: {
+          city: '',
+          postNr: '',
+          streetAddress: ''
+        },
+        email: '',
+        image: ''
       },
-      email: ''
+      userPass: ''
     }
   },
+  mounted() {
+    this.getUser()
+  },
   methods: {
-    async handleRegistration() {
+    async getUser() {
+      const token = localStorage.getItem('token')
+      const config = {
+        headers: {
+          authorization: 'Bearer ' + token
+        }
+      }
       try {
-        const response = await axios.post(
-          'http://localhost:3000/api/v1/users/register',
-          {
-            fullName: this.fullName,
-            userName: this.userName,
-            userPass: this.userPass,
-            phoneNumber: this.phoneNumber,
-            location: {
-              city: this.city,
-              postNr: this.postNr,
-              streetAddress: this.streetAddress
-            },
-            email: this.email
-          }
-        )
-
+        const response = await axios
+          .get('http://localhost:3000/api/v1/users/auth', config)
+          .then((response) => (this.formData = response.data))
         console.log(response)
-        this.$router.push('/home')
       } catch (error) {
         console.log(error)
       }
+    },
+    editAccount() {
+      const token = localStorage.getItem('token')
+      const config = {
+        headers: {
+          authorization: 'Bearer ' + token
+        }
+      }
+      axios
+        .patch(
+          'http://localhost:3000/api/v1/users/id',
+          {
+            fullName: this.formData.fullName,
+            userName: this.formData.userName,
+            userPass: this.userPass,
+            phoneNumber: this.formData.phoneNumber,
+            location: {
+              city: this.formData.location.city,
+              postNr: this.formData.location.postNr,
+              streetAddress: this.formData.location.streetAddress
+            },
+            email: this.formData.email
+          },
+          config
+        )
+        .then((response) => console.log(response))
+      this.$router.push('/login').catch((error) => console.log(error))
     }
   }
 }
