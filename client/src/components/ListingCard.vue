@@ -14,12 +14,5 @@ export default {
 </script>
 
 <style>
-.navCard {
-  font-size: 40px;
-  width: 400px;
-  height: 300px;
-  border-radius: 30px;
-  margin: 10px;
-}
 
 </style>

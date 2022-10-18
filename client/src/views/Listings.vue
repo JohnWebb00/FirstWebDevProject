@@ -1,8 +1,8 @@
 <template>
-  <b-container>
+  <b-div>
     <b-row class="justify-content-md-center">
     <div>
-      <b-button v-b-toggle.sidebar-1>Filter By Categories</b-button>
+      <b-button v-b-toggle.sidebar-1 style="margin:2.5rem">Filter By Categories</b-button>
       <b-sidebar
         id="sidebar-1"
         title="Categories"
@@ -97,7 +97,7 @@
       </b-sidebar>
     </div>
 
-    <b-row align-v="center">
+    <b-row>
       <listing-card
         v-for="item in items"
         :key="item._id"
@@ -105,11 +105,12 @@
         :price="item.rentPrice + '/' + item.duration + ' ' + item.category"
         :image="item.image"
         :link="`http://localhost:8080/view-item/${item._id}`"
+        class="navCard"
       >
       </listing-card>
     </b-row>
   </b-row>
-  </b-container>
+  </b-div>
 </template>
 
 <script>
@@ -277,20 +278,19 @@ export default {
 </script>
 
 <style>
-@media (min-width: 819px) {
+@media (min-width: 825px) {
   .navCard {
-    max-width: 350rem;
+    max-width: 35rem;
     min-width: 25rem;
-    font-size: 1rem;
+    font-size: 100rem;
   }
 }
 
-@media (max-width: 819px) {
-  /* Styling for devices with a width of 767px or SMALLER. */
+@media (max-width: 825px) {
   .navCard {
     max-width: 25rem;
     min-width: 10rem;
-    font-size: 0.6rem;
+    font-size: 0.2rem;
   }
 }
 </style>
