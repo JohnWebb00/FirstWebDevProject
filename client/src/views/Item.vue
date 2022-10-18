@@ -71,10 +71,11 @@
       </div>
     </b-container>
 
-    <b-row>
-      <b-col sm="6" id="reviews">
+    <!-- List of Reviews for this item. -->
+    <b-container>
         <h5>Reviews for {{ item.itemName }}:</h5>
-        <div id="review_section">
+        <b-row>
+          <b-col cols="6" id="review_section">
           <review-card
             v-for="review in reviews"
             :key="review._id"
@@ -82,20 +83,14 @@
             :rating="review.rating"
             :comment="review.comment"
           ></review-card>
-        </div>
-      </b-col>
-    </b-row>
+        </b-col>
+      </b-row>
+  </b-container>
   </div>
 </template>
 
 <style scoped>
-/*@media (max-width: 767px) {
-  /* Styling for devices with a width of 767px or SMALLER.
-  }*/
 
-@media (min-width: 768px) {
-  /* Styling for devices with a width of 768px or BIGGER. */
-}
 label {
   color: #aaa;
   display: inline-block;
