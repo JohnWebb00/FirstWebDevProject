@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div class="div1">
+  <b-container>
+  <b-row class="justify-content-md-center">
+    <b-col cols="12" md="auto">
       <header id="h1">Admin log-in</header>
-    </div>
     <body>
       <form id="loginForm" @submit.prevent="handleLogin">
         <label>Username:</label>
@@ -13,7 +13,9 @@
         <b-button type="submit" id="login" pill variant="dark">Log-in</b-button>
       </form>
     </body>
-  </div>
+  </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <style scoped>
