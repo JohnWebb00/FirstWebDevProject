@@ -2,10 +2,11 @@
   <div>
     <div class="div1">
       <h2 class="instructions">
-        Enter the details for your item, along with a photo and you're good to
+        Enter the details for your item and you're good to
         go!
       </h2>
     </div>
+    <p>Your item will not be shown under listings until it is approved by an admin.</p>
     <b-row>
       <b-col id="col1">
         <form class="itemDetails" @submit.prevent="createListing">
@@ -311,7 +312,7 @@ export default {
       }
       axios
         .post(
-          'http://localhost:3000/api/v1/items/user_id/items',
+          'http://localhost:3000/api/v1/items',
           this.formData,
           config
         )

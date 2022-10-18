@@ -45,7 +45,7 @@
     <div>
       <h4>My Listings:</h4>
       <p>LIST OF LISTINGS</p>
-      <b-container id="listingsSection">
+      <b-container>
         <b-row class="justify-content-md-center">
         <b-col cols="12" md="auto">
             <b-card-group deck>
@@ -223,17 +223,6 @@ export default {
 </script>
 
 <style>
-#listingsSection {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 50px;
-  flex-wrap: wrap;
-  margin: auto;
-  margin-left: auto;
-  margin-right: auto;
-  row-gap: 20px;
-}
-
 .container {
   padding: 20px;
 }
