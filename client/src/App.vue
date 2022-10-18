@@ -92,13 +92,13 @@ export default {
   flex-direction: wrap;
   align-content: center;
   color: white;
-  background-color: midnightblue;
+  background-color: #3f51b5;
   padding: 10px;
 }
 
 #button {
   color: white;
-  background-color: midnightblue;
+  background-color: #3f51b5;
   border: none;
   margin: 10px;
 }

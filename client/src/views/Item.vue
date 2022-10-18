@@ -25,18 +25,6 @@
                 <p><u>Email:</u>{{ user.email }}</p>
                 </body>
               </div>
-            <h6 class="center">{{ item.rentPrice }} per {{ item.duration }}</h6>
-            <p>{{ item.description }}</p>
-            <div id="userBox">
-              <body>
-                <h5 class="center">
-                  Posted by: <u>{{ user.fullName }}</u>
-                </h5>
-                <p><u>Location:</u> {{ user.location.city }}</p>
-                <p><u>Phone Number:</u> {{ user.phoneNumber }}</p>
-                <p><u>Email:</u> {{ user.email }}</p>
-              </body>
-            </div>
             </body>
         </b-col>
       </b-row>
