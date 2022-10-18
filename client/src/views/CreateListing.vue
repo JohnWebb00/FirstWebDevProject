@@ -90,104 +90,198 @@
 </template>
 
 <style scoped>
-.div1 {
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  max-width: 600px;
+@media (max-width: 767px) {
+  /* Styling for devices with a width of 767px or SMALLER. */
+
+  .div1 {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    max-width: 600px;
+  }
+  .instructions {
+    background-color: #002753;
+    font-size: 2em;
+    color: white;
+    margin: 20px;
+    opacity: 0.9;
+    padding: 30px;
+    max-width: 500px;
+  }
+  #col1 {
+    display: flex;
+    justify-content: center;
+  }
+  .itemDetails {
+    background: #eee;
+    text-align: left;
+    padding: 60px;
+    border-radius: 10px;
+  }
+  #category {
+    display: block;
+    padding: 20px 12px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
+  label {
+    color: #00418b;
+    display: inline-block;
+    margin: 25px 0 15px;
+    font-size: 1.4em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
+  #itemName {
+    /* Doesn't work? */
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
+  #rentPrice {
+    display: block;
+    padding: 10px 6px;
+    width: 75%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
+
+  #duration {
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    height: 10%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
+
+  #description {
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
+  button {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 100%;
+    font-size: 2.3em;
+  }
 }
 
-.instructions {
-  background-color: #00428c;
-  font-size: 20px;
-  color: white;
-  margin: 40px;
-  opacity: 0.9;
-  padding: 15px;
-  max-width: 600px;
-}
+@media (min-width: 768px) {
+  /* Styling for devices with a width of 768px or BIGGER. */
 
-.itemDetails {
-  width: 600px;
-  margin: 30px auto;
-  background: #eee;
-  text-align: left;
-  padding: 40px;
-  border-radius: 10px;
-}
+  .div1 {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    max-width: 600px;
+  }
 
-label {
-  color: #aaa;
-  display: inline-block;
-  margin: 25px 0 15px;
-  font-size: 0.6em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: bold;
-}
+  .instructions {
+    background-color: #00428c;
+    font-size: 20px;
+    color: white;
+    margin: 40px;
+    opacity: 0.9;
+    padding: 15px;
+    max-width: 600px;
+  }
 
-header {
-  margin-top: 30px;
-}
+  .itemDetails {
+    width: 600px;
+    margin: 30px auto;
+    background: #eee;
+    text-align: left;
+    padding: 40px;
+    border-radius: 10px;
+  }
 
-#col1 {
-  width: 1200px;
-  display: flex;
-  justify-content: center;
-}
+  label {
+    color: #aaa;
+    display: inline-block;
+    margin: 25px 0 15px;
+    font-size: 0.6em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
 
-#itemName {
-  display: block;
-  padding: 10px 6px;
-  width: 100%;
-  box-sizing: border-box;
-  border: black;
-  border-bottom: 1px solid #ddd;
-  color: #555;
-}
+  #col1 {
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+  }
 
-#rentPrice {
-  display: block;
-  padding: 10px 6px;
-  width: 75%;
-  box-sizing: border-box;
-  border: black;
-  border-bottom: 1px solid #ddd;
-  color: #555;
-}
+  #itemName {
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
 
-#duration {
-  display: block;
-  padding: 10px 6px;
-  width: 100%;
-  box-sizing: border-box;
-  border: black;
-  border-bottom: 1px solid #ddd;
-  color: #555;
-}
+  #rentPrice {
+    display: block;
+    padding: 10px 6px;
+    width: 75%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
 
-#description {
-  display: block;
-  padding: 10px 6px;
-  width: 100%;
-  box-sizing: border-box;
-  border: black;
-  border-bottom: 1px solid #ddd;
-  color: #555;
-}
+  #duration {
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
 
-#category {
-  display: block;
-  padding: 10px 6px;
-  width: 100%;
-  box-sizing: border-box;
-  border: black;
-  border-bottom: 1px solid #ddd;
-  color: #555;
-}
+  #description {
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
 
-button {
-  margin-top: 25px;
+  #category {
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    border: black;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
+
+  button {
+    margin-top: 25px;
+  }
 }
 </style>
 
