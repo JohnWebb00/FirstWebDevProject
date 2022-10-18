@@ -1,4 +1,5 @@
 <template>
+  <div>
   <b-card-group deck>
     <b-card
       class="list"
@@ -43,6 +44,7 @@
       </template>
     </b-card>
   </b-card-group>
+  </div>
 </template>
 
 <script>
@@ -99,7 +101,5 @@ export default {
 </script>
 
 <style>
-#list {
-  font: small;
-}
+
 </style>
